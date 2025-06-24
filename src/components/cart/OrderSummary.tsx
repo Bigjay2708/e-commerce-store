@@ -8,7 +8,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ className = '' }) => {
   const summary = useOrderSummary();
   
   return (
-    <div className={`space-y-3 ${className}`}>
+    <div className={`space-y-3 text-gray-800 ${className}`}>
       <div className="flex justify-between">
         <span className="text-gray-600">Subtotal</span>
         <span className="font-medium">${summary.subtotal.toFixed(2)}</span>
