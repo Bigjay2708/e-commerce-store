@@ -15,14 +15,11 @@ const authOptions: AuthOptions = {
         if (!credentials?.username || !credentials?.password) {
           return null;
         }        try {
-          // Call the Fake Store API login endpoint
+          // API login
           await login(
             credentials.username,
             credentials.password
-          );
-
-          // In a real app, you would validate the token and fetch user data
-          // For this demo, we'll create a simple user object
+          );          // Create user
           return {
             id: "1",
             name: credentials.username,
@@ -47,7 +44,7 @@ const authOptions: AuthOptions = {
       return token;
     },    async session({ session, token }) {
       if (session.user) {
-        // Extend the session user type
+        // Set type
         interface ExtendedUser {
           id?: string;
           name?: string | null;

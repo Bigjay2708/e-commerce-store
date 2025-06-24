@@ -14,7 +14,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-  // If cart is empty and checkout not complete, redirect to cart
+  // Check cart
   useEffect(() => {
     if (cart.items.length === 0 && !isComplete) {
       router.push('/cart');
@@ -25,7 +25,7 @@ export default function CheckoutPage() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
+    // Process order
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     // Clear cart and show success
