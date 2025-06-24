@@ -29,8 +29,7 @@ export const login = async (username: string, password: string) => {
       username,
       password,
     });
-    return response.data;
-  } catch (error) {
+    return response.data;  } catch {
     throw new Error('Invalid credentials');
   }
 };

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { fetchProducts, fetchCategories } from '@/lib/api';
 import { Product } from '@/types';
 import ProductGrid from '@/components/products/ProductGrid';
-import Button from '@/components/ui/Button';
 import { FaSpinner } from 'react-icons/fa';
 
 export default function ProductsPage() {

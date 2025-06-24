@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCartStore } from '@/store/cart';
 import Button from '@/components/ui/Button';
 import OrderSummary from '@/components/cart/OrderSummary';
@@ -14,12 +14,12 @@ export default function CheckoutPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-
   // If cart is empty and checkout not complete, redirect to cart
-  if (cart.items.length === 0 && !isComplete) {
-    router.push('/cart');
-    return null;
-  }
+  useEffect(() => {
+    if (cart.items.length === 0 && !isComplete) {
+      router.push('/cart');
+    }
+  }, [cart.items.length, isComplete, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
