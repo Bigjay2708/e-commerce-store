@@ -2,6 +2,7 @@ import { useCartStore } from '@/store/cart';
 import { useEffect, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface CartFlyoutProps {
   open: boolean;
@@ -42,7 +43,9 @@ const CartFlyout: React.FC<CartFlyoutProps> = ({ open, onClose }) => {
           <ul className="space-y-3">
             {cart.items.map(item => (
               <li key={item.id} className="flex items-center gap-3">
-                <img src={item.image} alt={item.title} className="h-12 w-12 object-contain rounded bg-gray-100" />
+                <div className="relative h-12 w-12">
+                  <Image src={item.image} alt={item.title} fill className="object-contain rounded bg-gray-100" sizes="48px" />
+                </div>
                 <div className="flex-1">
                   <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 line-clamp-1">{item.title}</div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">Qty: {item.quantity}</div>
