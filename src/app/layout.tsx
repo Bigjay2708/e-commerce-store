@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { SessionProvider } from "@/components/SessionProvider";
 import Navbar from "@/components/ui/Navbar";
+import { useThemeStore } from '@/store/theme';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +26,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { theme } = useThemeStore();
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-gray-800 to-gray-900 min-h-screen`}>
+    <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-gray-800 to-gray-900 min-h-screen transition-colors duration-300`}>
         <SessionProvider>
           <Toaster position="top-center" />
           <Navbar />

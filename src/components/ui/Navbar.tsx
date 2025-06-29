@@ -4,15 +4,17 @@ import Link from 'next/link';
 import { useCartStore } from '@/store/cart';
 import { useWishlistStore } from '@/store/wishlist';
 import { useSession, signOut } from 'next-auth/react';
-import { FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaHeart } from 'react-icons/fa';
+import { FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaHeart, FaMoon, FaSun } from 'react-icons/fa';
+import { useThemeStore } from '@/store/theme';
 
 const Navbar = () => {
   const { cart } = useCartStore();
   const { items: wishlistItems } = useWishlistStore();
   const { data: session } = useSession();
+  const { theme, toggleTheme } = useThemeStore();
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
+    <header className={`sticky top-0 z-50 shadow-md ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-blue-600">
@@ -21,16 +23,24 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-6">
             <nav className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors">
+              <Link href="/" className="text-gray-700 dark:text-gray-200 hover:text-blue-600 transition-colors">
                 Home
               </Link>
-              <Link href="/products" className="text-gray-700 hover:text-blue-600 transition-colors">
+              <Link href="/products" className="text-gray-700 dark:text-gray-200 hover:text-blue-600 transition-colors">
                 Products
               </Link>
-              <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">
+              <Link href="/about" className="text-gray-700 dark:text-gray-200 hover:text-blue-600 transition-colors">
                 About
               </Link>
-            </nav>            <div className="flex items-center space-x-4">
+            </nav>
+            <button
+              aria-label="Toggle theme"
+              onClick={toggleTheme}
+              className="p-2 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-yellow-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              {theme === 'dark' ? <FaSun size={18} /> : <FaMoon size={18} />}
+            </button>
+            <div className="flex items-center space-x-4">
               <Link 
                 href="/wishlist" 
                 className="relative p-2 text-gray-700 hover:text-blue-600 transition-colors"
