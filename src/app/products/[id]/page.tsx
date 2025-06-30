@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button';
 import { FaArrowLeft, FaStar, FaSpinner } from 'react-icons/fa';
 import { useCartStore } from '@/store/cart';
 import { toast } from 'react-hot-toast';
+import ProductReviews from '@/components/products/ProductReviews';
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
@@ -56,57 +57,60 @@ export default function ProductDetailsPage() {
         <div className="flex justify-center items-center h-64">
           <FaSpinner className="animate-spin text-blue-600 text-4xl" />
         </div>      ) : product ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gray-100">
-            <div className="relative h-[400px] w-full">
-              <Image
-                src={product.image}
-                alt={product.title}
-                fill
-                className="object-contain hover:scale-110 transition-transform duration-300"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gray-100">
+              <div className="relative h-[400px] w-full">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  fill
+                  className="object-contain hover:scale-110 transition-transform duration-300"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="space-y-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              {product.title}
-            </h1>
-            
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center">
-                <FaStar className="text-yellow-500 w-5 h-5" />
-                <span className="ml-1 text-gray-600">
-                  {product.rating.rate}
+            <div className="space-y-6">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                {product.title}
+              </h1>
+              
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center">
+                  <FaStar className="text-yellow-500 w-5 h-5" />
+                  <span className="ml-1 text-gray-600">
+                    {product.rating.rate}
+                  </span>
+                </div>
+                <span className="text-gray-500">
+                  ({product.rating.count} reviews)
                 </span>
               </div>
-              <span className="text-gray-500">
-                ({product.rating.count} reviews)
-              </span>
+              
+              <p className="text-gray-600 mb-6">{product.description}</p>
+              
+              <div className="flex items-center justify-between mb-8">
+                <span className="text-3xl font-bold text-gray-900">
+                  ${product.price.toFixed(2)}
+                </span>
+                <span className="text-sm text-green-600 font-medium">
+                  In Stock
+                </span>
+              </div>
+              
+              <Button 
+                variant="primary" 
+                size="lg" 
+                fullWidth 
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </Button>
             </div>
-            
-            <p className="text-gray-600 mb-6">{product.description}</p>
-            
-            <div className="flex items-center justify-between mb-8">
-              <span className="text-3xl font-bold text-gray-900">
-                ${product.price.toFixed(2)}
-              </span>
-              <span className="text-sm text-green-600 font-medium">
-                In Stock
-              </span>
-            </div>
-            
-            <Button 
-              variant="primary" 
-              size="lg" 
-              fullWidth 
-              onClick={handleAddToCart}
-            >
-              Add to Cart
-            </Button>
           </div>
-        </div>
+          <ProductReviews productId={product.id} />
+        </>
       ) : (
         <div className="text-center py-12">
           <h2 className="text-2xl font-semibold text-gray-700">
