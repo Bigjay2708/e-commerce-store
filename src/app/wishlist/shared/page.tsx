@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { fetchProductById } from '@/lib/api';
 import ProductGrid from '@/components/products/ProductGrid';
 import Button from '@/components/ui/Button';
 
-export default function SharedWishlistPage() {
+function SharedWishlistContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [products, setProducts] = useState<import('@/types').Product[]>([]);
@@ -45,5 +45,13 @@ export default function SharedWishlistPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function SharedWishlistPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SharedWishlistContent />
+    </Suspense>
   );
 }
