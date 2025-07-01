@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button';
 export default function SharedWishlistPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<import('@/types').Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
