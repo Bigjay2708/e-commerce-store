@@ -5,6 +5,7 @@ import "./globals.css";
 import { SessionProvider } from "@/components/SessionProvider";
 import Navbar from "@/components/ui/Navbar";
 import ThemeProvider from '@/components/ThemeProvider';
+import PageTransition from '@/components/ui/PageTransition';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,9 +34,11 @@ export default function RootLayout({
           <SessionProvider>
             <Toaster position="top-center" />
             <Navbar />
-            <main className="min-h-screen pt-4 pb-12">
-              {children}
-            </main>
+            <PageTransition>
+              <main className="min-h-screen pt-4 pb-12">
+                {children}
+              </main>
+            </PageTransition>
           </SessionProvider>
         </ThemeProvider>
       </body>
