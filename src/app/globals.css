@@ -21,6 +21,11 @@ html.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
   --card: #18181b;
+  --border: #374151;
+  --muted: #374151;
+  --primary: #3b82f6;
+  --primary-dark: #60a5fa;
+  color-scheme: dark;
 }
 
 body {
@@ -56,9 +61,14 @@ input, select, textarea {
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
-  background: white;
+  background: var(--card);
   color: var(--foreground);
   transition: border-color 0.2s, box-shadow 0.2s;
+}
+html.dark input, html.dark select, html.dark textarea {
+  background: var(--card-dark);
+  border-color: var(--border);
+  color: var(--foreground);
 }
 input:focus, select:focus, textarea:focus {
   border-color: var(--primary);
@@ -71,6 +81,70 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
   padding: 1.5rem;
   border: 1px solid var(--border);
+  color: var(--foreground);
+}
+html.dark .card {
+  background: var(--card-dark);
+  border-color: var(--border);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.2);
+}
+
+/* Dark mode text visibility fixes */
+html.dark p,
+html.dark span,
+html.dark div,
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: var(--foreground);
+}
+
+html.dark .text-gray-700,
+html.dark .text-gray-800,
+html.dark .text-gray-900 {
+  color: #e5e7eb !important;
+}
+
+html.dark .text-gray-600 {
+  color: #d1d5db !important;
+}
+
+html.dark .text-gray-500 {
+  color: #9ca3af !important;
+}
+
+html.dark .bg-white {
+  background-color: var(--card-dark) !important;
+}
+
+html.dark .bg-gray-50,
+html.dark .bg-gray-100 {
+  background-color: #374151 !important;
+}
+
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: var(--border) !important;
+}
+
+/* Ensure buttons have proper contrast */
+html.dark button {
+  color: var(--foreground);
+}
+
+html.dark button[class*="bg-blue"] {
+  color: white;
+}
+
+html.dark button[class*="bg-red"] {
+  color: white;
+}
+
+html.dark button[class*="bg-green"] {
+  color: white;
 }
 
 .shadow-navbar {
