@@ -46,20 +46,20 @@ export default function LoginPage() {
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
+      <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-            <FaSignInAlt className="text-blue-600 text-2xl" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full mb-4">
+            <FaSignInAlt className="text-blue-600 dark:text-blue-400 text-2xl" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Sign In</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Sign In</h1>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">
             Sign in to your account to continue shopping
           </p>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Username
             </label>
             <input
@@ -70,13 +70,13 @@ export default function LoginPage() {
               className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               For demo, try: johnd or mor_2314
             </p>
           </div>
           
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Password
             </label>
             <input
@@ -87,7 +87,7 @@ export default function LoginPage() {
               className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               For demo, try: m38rmF$ or 83r5^_
             </p>
           </div>
@@ -104,7 +104,7 @@ export default function LoginPage() {
         </form>
         
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             This is a demo application. No real authentication is performed.
           </p>
         </div>

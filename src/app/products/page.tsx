@@ -38,17 +38,17 @@ export default function ProductsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">All Products</h1>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">All Products</h1>
       
       <div className="flex flex-col md:flex-row gap-8 mb-8">
         <div className="w-full md:w-64 space-y-4">
-          <h2 className="text-xl font-semibold">Categories</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Categories</h2>
           <div className="flex flex-col space-y-2">
             <button
               className={`text-left px-4 py-2 rounded-lg transition-colors ${
                 selectedCategory === '' 
                   ? 'bg-blue-600 text-white' 
-                  : 'hover:bg-gray-100'
+                  : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100'
               }`}
               onClick={() => setSelectedCategory('')}
             >
@@ -61,7 +61,7 @@ export default function ProductsPage() {
                 className={`text-left px-4 py-2 rounded-lg transition-colors ${
                   selectedCategory === category 
                     ? 'bg-blue-600 text-white' 
-                    : 'hover:bg-gray-100'
+                    : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100'
                 }`}
                 onClick={() => setSelectedCategory(category)}
               >
@@ -78,7 +78,7 @@ export default function ProductsPage() {
             </div>
           ) : (
             <>
-              <h2 className="text-xl font-semibold mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                 {selectedCategory 
                   ? `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)} (${filteredProducts.length})`
                   : `All Products (${products.length})`}

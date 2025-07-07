@@ -39,12 +39,12 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4">
-      <section className="py-12 md:py-20 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg mb-12">
+      <section className="py-12 md:py-20 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg mb-12">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Welcome to ShopEase
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
             Discover our wide range of quality products at unbeatable prices.
           </p>
           <Button 
@@ -59,7 +59,7 @@ export default function Home() {
 
       <section className="mb-12">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Featured Products</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Featured Products</h2>
           
           <div className="flex flex-wrap gap-2">
             <Button
