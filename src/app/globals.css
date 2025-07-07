@@ -110,31 +110,20 @@ html:not(.dark) .text-gray-500 {
   color: #6b7280 !important;
 }
 
-/* Dark mode text visibility fixes */
-html.dark p,
-html.dark span,
-html.dark div,
-html.dark h1,
-html.dark h2,
-html.dark h3,
-html.dark h4,
-html.dark h5,
-html.dark h6 {
-  color: var(--foreground);
-}
+/* Specific dark mode text overrides for common Tailwind classes */
 
 html.dark .text-gray-700,
 html.dark .text-gray-800,
 html.dark .text-gray-900 {
-  color: #e5e7eb !important;
+  color: #e5e7eb;
 }
 
 html.dark .text-gray-600 {
-  color: #d1d5db !important;
+  color: #d1d5db;
 }
 
 html.dark .text-gray-500 {
-  color: #9ca3af !important;
+  color: #9ca3af;
 }
 
 html.dark .bg-white {
@@ -178,6 +167,23 @@ html:not(.dark) .bg-gray-50 {
 
 html:not(.dark) .bg-gray-100 {
   background-color: #f3f4f6 !important;
+}
+
+/* Force hero section text visibility */
+.hero-section h1 {
+  color: #111827 !important; /* Force dark text in light mode */
+}
+
+.hero-section p {
+  color: #4b5563 !important; /* Force medium gray text in light mode */
+}
+
+html.dark .hero-section h1 {
+  color: #ffffff !important; /* Force white text in dark mode */
+}
+
+html.dark .hero-section p {
+  color: #d1d5db !important; /* Force light gray text in dark mode */
 }
 
 .shadow-navbar {
