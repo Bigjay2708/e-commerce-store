@@ -54,38 +54,39 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105 hover:shadow-xl border border-gray-100">
+    <div className="card group relative overflow-hidden transition-transform hover:scale-[1.03] hover:shadow-xl">
       <div ref={imgRef}>
-        <Link href={`/products/${product.id}`} className="block relative h-48 overflow-hidden bg-white">
+        <Link href={`/products/${product.id}`} className="block relative h-48 overflow-hidden bg-card">
           <Image
             src={product.image}
             alt={product.title}
             fill
-            className="object-contain p-4 hover:scale-110 transition-transform duration-300"
+            className="object-contain p-4 group-hover:scale-110 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={false}
           />
         </Link>
       </div>
-      <div className="p-5">
+      <div className="p-6 flex flex-col gap-2">
         <div className="flex justify-between items-start gap-2">
           <Link href={`/products/${product.id}`} className="group">
-            <h3 className="text-lg font-semibold text-gray-800 line-clamp-1 group-hover:text-blue-600 transition-colors">
+            <h3 className="text-lg font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
               {product.title}
             </h3>
           </Link>
           <WishlistButton product={product} />
         </div>
-        <p className="mt-2 text-sm text-gray-600 line-clamp-2 font-medium">
+        <p className="text-sm text-muted line-clamp-2 font-medium">
           {product.description}
         </p>
-        <div className="mt-3 flex items-center">
+        <div className="flex items-center gap-2 mt-1">
           <FaStar className="text-yellow-500" />
-          <span className="ml-1.5 text-sm font-medium text-gray-700">
-            {product.rating.rate} ({product.rating.count} reviews)
+          <span className="text-sm font-medium text-foreground">
+            {product.rating.rate} <span className="text-muted">({product.rating.count} reviews)</span>
           </span>
         </div>
-        <div className="mt-4 flex items-center justify-between">
-          <span className="text-xl font-bold text-blue-600">
+        <div className="mt-3 flex items-center justify-between">
+          <span className="text-xl font-extrabold text-primary">
             ${product.price.toFixed(2)}
           </span>
           <Button 

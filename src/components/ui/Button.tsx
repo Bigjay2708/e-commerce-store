@@ -20,16 +20,16 @@ const Button: React.FC<ButtonProps> = ({
 }) => {  const baseStyles = 'inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none shadow-sm hover:shadow-md active:transform active:scale-95';
   
   const variants = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500 border border-blue-700',
-    secondary: 'bg-gray-50 text-gray-900 hover:bg-gray-100 focus-visible:ring-gray-500 border border-gray-200',
-    outline: 'border-2 border-gray-300 bg-transparent hover:bg-gray-50 focus-visible:ring-gray-500 text-gray-700',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-500 border border-red-700',
+    primary: 'bg-primary text-white hover:bg-primary-dark focus-visible:ring-primary border border-primary',
+    secondary: 'bg-muted text-foreground hover:bg-accent/20 focus-visible:ring-secondary border border-border',
+    outline: 'border-2 border-border bg-transparent hover:bg-muted focus-visible:ring-primary text-foreground',
+    danger: 'bg-error text-white hover:bg-error/80 focus-visible:ring-error border border-error',
   };
   
   const sizes = {
-    sm: 'h-9 px-3 text-sm',
-    md: 'h-10 px-4 py-2',
-    lg: 'h-12 px-6 text-lg',
+    sm: 'h-9 px-4 text-sm',
+    md: 'h-11 px-6 text-base',
+    lg: 'h-14 px-8 text-lg',
   };
   
   const widthClass = fullWidth ? 'w-full' : '';

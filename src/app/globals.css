@@ -1,18 +1,57 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #18181b;
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --secondary: #f59e42;
+  --accent: #10b981;
+  --muted: #f3f4f6;
+  --border: #e5e7eb;
+  --card: #fff;
+  --card-dark: #18181b;
+  --error: #ef4444;
+  --success: #22c55e;
 }
 
 html.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --card: #18181b;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Geist', 'Inter', Arial, Helvetica, sans-serif;
   transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--primary-dark);
+}
+
+button, .btn {
+  @apply px-5 py-2 rounded-xl font-semibold transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+}
+
+input, select, textarea {
+  @apply border border-border rounded-lg px-4 py-2 bg-white dark:bg-card-dark text-foreground focus:border-primary focus:ring-1 focus:ring-primary transition;
+}
+
+.card {
+  @apply bg-card dark:bg-card-dark rounded-2xl shadow-card p-6 border border-border;
+}
+
+.shadow-navbar {
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
 }
