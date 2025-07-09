@@ -4,27 +4,27 @@
 
 :root {
   --background: #f8fafc;
-  --foreground: #18181b;
-  --primary: #2563eb;
-  --primary-dark: #1e40af;
-  --secondary: #f59e42;
+  --foreground: #22c55e;
+  --primary: #22c55e;
+  --primary-dark: #16a34a;
+  --secondary: #22c55e;
   --accent: #10b981;
   --muted: #f3f4f6;
   --border: #e5e7eb;
   --card: #fff;
   --card-dark: #18181b;
-  --error: #ef4444;
+  --error: #22c55e;
   --success: #22c55e;
 }
 
 html.dark {
   --background: #0a0a0a;
-  --foreground: #ededed;
+  --foreground: #22c55e;
   --card: #18181b;
   --border: #374151;
   --muted: #374151;
-  --primary: #3b82f6;
-  --primary-dark: #60a5fa;
+  --primary: #22c55e;
+  --primary-dark: #16a34a;
   color-scheme: dark;
 }
 
@@ -91,23 +91,23 @@ html.dark .card {
 
 /* Light mode text visibility fixes */
 html:not(.dark) .text-gray-900 {
-  color: #111827 !important;
+  color: #22c55e !important;
 }
 
 html:not(.dark) .text-gray-800 {
-  color: #1f2937 !important;
+  color: #22c55e !important;
 }
 
 html:not(.dark) .text-gray-700 {
-  color: #374151 !important;
+  color: #22c55e !important;
 }
 
 html:not(.dark) .text-gray-600 {
-  color: #4b5563 !important;
+  color: #22c55e !important;
 }
 
 html:not(.dark) .text-gray-500 {
-  color: #6b7280 !important;
+  color: #22c55e !important;
 }
 
 /* Specific dark mode text overrides for common Tailwind classes */
@@ -115,15 +115,15 @@ html:not(.dark) .text-gray-500 {
 html.dark .text-gray-700,
 html.dark .text-gray-800,
 html.dark .text-gray-900 {
-  color: #e5e7eb;
+  color: #22c55e;
 }
 
 html.dark .text-gray-600 {
-  color: #d1d5db;
+  color: #22c55e;
 }
 
 html.dark .text-gray-500 {
-  color: #9ca3af;
+  color: #22c55e;
 }
 
 html.dark .bg-white {
@@ -142,19 +142,19 @@ html.dark .border-gray-300 {
 
 /* Ensure buttons have proper contrast */
 html.dark button {
-  color: var(--foreground);
+  color: #22c55e;
 }
 
 html.dark button[class*="bg-blue"] {
-  color: white;
+  color: #22c55e;
 }
 
 html.dark button[class*="bg-red"] {
-  color: white;
+  color: #22c55e;
 }
 
 html.dark button[class*="bg-green"] {
-  color: white;
+  color: #22c55e;
 }
 
 html:not(.dark) .bg-white {
@@ -169,21 +169,50 @@ html:not(.dark) .bg-gray-100 {
   background-color: #f3f4f6 !important;
 }
 
+/* Global green text override */
+* {
+  color: #22c55e !important;
+}
+
+/* Specific overrides for all text elements */
+h1, h2, h3, h4, h5, h6,
+p, span, div, a, button,
+label, input, select, textarea,
+.text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500,
+.text-white, .text-black {
+  color: #22c55e !important;
+}
+
+/* Navigation and brand text */
+nav, nav a, nav button {
+  color: #22c55e !important;
+}
+
+/* Card text */
+.card, .card * {
+  color: #22c55e !important;
+}
+
+/* Button text */
+button, .btn, button * {
+  color: #22c55e !important;
+}
+
 /* Force hero section text visibility */
 .hero-section h1 {
-  color: #111827 !important; /* Force dark text in light mode */
+  color: #22c55e !important; /* Force green text */
 }
 
 .hero-section p {
-  color: #4b5563 !important; /* Force medium gray text in light mode */
+  color: #22c55e !important; /* Force green text */
 }
 
 html.dark .hero-section h1 {
-  color: #ffffff !important; /* Force white text in dark mode */
+  color: #22c55e !important; /* Force green text in dark mode */
 }
 
 html.dark .hero-section p {
-  color: #d1d5db !important; /* Force light gray text in dark mode */
+  color: #22c55e !important; /* Force green text in dark mode */
 }
 
 .shadow-navbar {
