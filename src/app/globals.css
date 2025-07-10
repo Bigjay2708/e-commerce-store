@@ -78,15 +78,25 @@ input:focus, select:focus, textarea:focus {
 .card {
   background: var(--card);
   border-radius: 1rem;
-  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
   border: 1px solid var(--border);
   color: var(--foreground);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+.card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
 html.dark .card {
   background: var(--card-dark);
   border-color: var(--border);
-  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+html.dark .card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 /* Light mode text visibility fixes */

@@ -55,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="card group relative overflow-hidden transition-transform hover:scale-[1.03] hover:shadow-xl">
+    <div className="card group relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
       <div ref={imgRef}>
         <Link href={`/products/${product.id}`} className="block relative h-48 overflow-hidden bg-card">
           <Image
