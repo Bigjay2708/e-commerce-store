@@ -22,6 +22,7 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center gap-8 text-base font-medium">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
           <Link href="/products" className="hover:text-primary transition-colors">Products</Link>
+          <Link href="/comparison" className="hover:text-primary transition-colors">Compare</Link>
           <Link href="/about" className="hover:text-primary transition-colors">About</Link>
         </nav>
         <div className="flex items-center gap-3">

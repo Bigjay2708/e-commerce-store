@@ -5,6 +5,7 @@ import { FaStar } from 'react-icons/fa';
 import Button from '@/components/ui/Button';
 import { useCartStore } from '@/store/cart';
 import WishlistButton from './WishlistButton';
+import ComparisonButton from './ComparisonButton';
 import { toast } from 'react-hot-toast';
 import { useRef, useState } from 'react';
 import CartFlyout from '@/components/cart/CartFlyout';
@@ -96,6 +97,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           >
             Add to cart
           </Button>
+        </div>
+        <div className="mt-3 flex gap-2">
+          <ComparisonButton product={product} className="flex-1" />
         </div>
       </div>
       <CartFlyout open={flyoutOpen} onClose={() => setFlyoutOpen(false)} />

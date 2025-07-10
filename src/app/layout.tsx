@@ -6,6 +6,7 @@ import { SessionProvider } from "@/components/SessionProvider";
 import Navbar from "@/components/ui/Navbar";
 import ThemeProvider from '@/components/ThemeProvider';
 import PageTransition from '@/components/ui/PageTransition';
+import ComparisonFloatingButton from '@/components/products/ComparisonFloatingButton';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
                 {children}
               </main>
             </PageTransition>
+            <ComparisonFloatingButton />
           </SessionProvider>
         </ThemeProvider>
       </body>
