@@ -55,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="card group relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg border border-gray-200 dark:border-gray-700 p-6 group relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
       <div ref={imgRef}>
         <Link href={`/products/${product.id}`} className="block relative h-48 overflow-hidden bg-card">
           <Image
@@ -68,7 +68,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           />
         </Link>
       </div>
-      <div className="p-6 flex flex-col gap-2">
+      <div className="flex flex-col gap-2">
         <div className="flex justify-between items-start gap-2">
           <Link href={`/products/${product.id}`} className="group">
             <h3 className="text-lg font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
