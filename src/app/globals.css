@@ -74,18 +74,7 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 1px var(--primary);
 }
 
-.card {
-  background: var(--card);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  border: 1px solid var(--border);
-  color: var(--foreground);
-}
-
-html.dark .card {
-  background: var(--card-dark);
-  border-color: var(--border);
-}
+/* Removed .card class to prevent conflicts */
 
 /* Light mode text visibility fixes */
 html:not(.dark) .text-gray-900 {
@@ -211,6 +200,33 @@ html.dark .hero-section h1 {
 
 html.dark .hero-section p {
   color: #22c55e !important; /* Force green text in dark mode */
+}
+
+/* Clean product card with no conflicts */
+.product-card-clean {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.product-card-clean:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .product-card-clean {
+  background-color: #1f2937;
+  border-color: #374151;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .product-card-clean:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
 }
 
 .shadow-navbar {
