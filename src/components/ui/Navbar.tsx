@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useCartStore } from '@/store/cart';
 import { useWishlistStore } from '@/store/wishlist';
 import { useSession, signOut } from 'next-auth/react';
-import { FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaHeart, FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa';
+import { FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaHeart, FaMoon, FaSun, FaTimes } from 'react-icons/fa';
 import { useThemeStore } from '@/store/theme';
 import { useState, useEffect, useRef } from 'react';
 
