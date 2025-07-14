@@ -50,7 +50,6 @@ button, .btn {
   border-radius: 0.75rem;
   font-weight: 600;
   transition: colors 0.2s;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   outline: none;
 }
 button:focus, .btn:focus {
@@ -86,11 +85,6 @@ input:focus, select:focus, textarea:focus {
 html.dark .card {
   background: var(--card-dark);
   border-color: var(--border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-}
-
-html.dark .card:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 /* Light mode text visibility fixes */
