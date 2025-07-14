@@ -323,3 +323,172 @@ html.dark .product-card-clean:hover {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Enhanced mobile menu animations */
+.mobile-menu-enter {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.mobile-menu-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 300ms ease-out, opacity 300ms ease-out;
+}
+
+.mobile-menu-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-menu-exit-active {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 300ms ease-in, opacity 300ms ease-in;
+}
+
+/* Mobile menu item animations */
+.mobile-menu-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-menu-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.mobile-menu-item:hover::before {
+  left: 100%;
+}
+
+/* Hamburger icon enhancements */
+.hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+/* Enhanced focus styles for accessibility */
+.mobile-menu-item:focus {
+  outline: 2px solid #22c55e;
+  outline-offset: 2px;
+  background-color: rgba(34, 197, 94, 0.1);
+}
+
+/* Backdrop blur animation */
+.mobile-backdrop {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: backdrop-filter 0.3s ease;
+}
+
+/* Cart badge pulse animation */
+@keyframes cart-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.cart-badge-pulse {
+  animation: cart-pulse 2s infinite;
+}
+
+/* Mobile menu scroll improvements */
+.mobile-menu-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 197, 94, 0.3) transparent;
+}
+
+.mobile-menu-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-menu-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-menu-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 197, 94, 0.3);
+  border-radius: 2px;
+}
+
+.mobile-menu-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(34, 197, 94, 0.5);
+}
+
+/* Dropdown window specific styles */
+.mobile-dropdown-menu {
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 24px;
+  width: 16px;
+  height: 16px;
+  background: inherit;
+  border: inherit;
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* Enhanced dropdown animations */
+@keyframes dropdown-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(8px);
+  }
+}
+
+@keyframes dropdown-exit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(8px);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+}
+
+.dropdown-enter {
+  animation: dropdown-enter 0.2s ease-out forwards;
+}
+
+.dropdown-exit {
+  animation: dropdown-exit 0.15s ease-in forwards;
+}
+
+/* Dark mode dropdown styles */
+@media (prefers-color-scheme: dark) {
+  .mobile-dropdown-menu {
+    box-shadow: 
+      0 20px 25px -5px rgba(0, 0, 0, 0.3),
+      0 10px 10px -5px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+}
