@@ -37,19 +37,20 @@ export default function CheckoutPage() {
 
   if (isComplete) {
     return (
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-lg mx-auto text-center bg-white rounded-lg shadow-md p-8">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <FaCheck className="text-green-600 text-2xl" />
+      <div className="container mx-auto px-4 py-8 sm:py-16">
+        <div className="max-w-lg mx-auto text-center bg-white rounded-lg shadow-md p-6 sm:p-8">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+            <FaCheck className="text-green-600 text-xl sm:text-2xl" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Order Confirmed!</h1>
-          <p className="text-gray-600 mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Order Confirmed!</h1>
+          <p className="text-gray-600 mb-6 sm:mb-8 text-sm sm:text-base">
             Thank you for your order. This is a demo application, so no actual purchase has been made.
           </p>
           <Button 
             variant="primary" 
             size="lg"
             onClick={() => router.push('/')}
+            className="w-full sm:w-auto"
           >
             Continue Shopping
           </Button>
@@ -59,15 +60,15 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+    <div className="container mx-auto px-4 py-6 sm:py-8">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center sm:text-left">Checkout</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-2">
-          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-6">Shipping Information</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="lg:col-span-2">
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Shipping Information</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
                   First Name
@@ -75,7 +76,7 @@ export default function CheckoutPage() {
                 <input
                   type="text"
                   id="firstName"
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-base"
                   required
                 />
               </div>
@@ -86,40 +87,40 @@ export default function CheckoutPage() {
                 <input
                   type="text"
                   id="lastName"
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-base"
                   required
                 />
               </div>
-              <div>
+              <div className="sm:col-span-2">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                   Email
                 </label>
                 <input
                   type="email"
                   id="email"
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-base"
                   required
                 />
               </div>
-              <div>
+              <div className="sm:col-span-2">
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                   Phone
                 </label>
                 <input
                   type="tel"
                   id="phone"
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-base"
                   required
                 />
               </div>
-              <div className="md:col-span-2">
+              <div className="sm:col-span-2">
                 <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
                   Address
                 </label>
                 <input
                   type="text"
                   id="address"
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-base"
                   required
                 />
               </div>
@@ -130,7 +131,7 @@ export default function CheckoutPage() {
                 <input
                   type="text"
                   id="city"
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-base"
                   required
                 />
               </div>
@@ -141,13 +142,13 @@ export default function CheckoutPage() {
                 <input
                   type="text"
                   id="postalCode"
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-3 text-base"
                   required
                 />
               </div>
             </div>
 
-            <h2 className="text-xl font-semibold mb-6">Payment Information</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Payment Information</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="md:col-span-2">

@@ -12,42 +12,44 @@ export default function CartPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 flex flex-col items-center py-12 px-2 md:px-0 transition-colors duration-500">
-      <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-10 tracking-tight animate-fade-in">
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 flex flex-col items-center py-6 sm:py-12 px-2 sm:px-4 md:px-0 transition-colors duration-500">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-lg mb-6 sm:mb-10 tracking-tight animate-fade-in text-center">
         Your Cart
       </h1>
 
       <div className="w-full max-w-6xl">
         {cart.items.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 animate-fade-in">
-            <div className="md:col-span-2">
-              <div className="bg-white/90 rounded-2xl shadow-2xl p-8 backdrop-blur-md border border-white/30 transition-all duration-300">
-                {cart.items.map(item => (
-                  <CartItem key={item.id} item={item} />
-                ))}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10 animate-fade-in">
+            <div className="lg:col-span-2">
+              <div className="bg-white/90 rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 backdrop-blur-md border border-white/30 transition-all duration-300">
+                <div className="space-y-4">
+                  {cart.items.map(item => (
+                    <CartItem key={item.id} item={item} />
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="md:col-span-1">
-              <div className="bg-white/60 rounded-2xl shadow-xl p-8 sticky top-24 backdrop-blur-lg border border-white/30">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+            <div className="lg:col-span-1">
+              <div className="bg-white/60 rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 lg:sticky lg:top-24 backdrop-blur-lg border border-white/30">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight text-center lg:text-left">
                   Order Summary
                 </h2>
-                <div className="mb-8">
+                <div className="mb-6 sm:mb-8">
                   <div className="flex justify-between mb-2">
-                    <span className="text-gray-700 font-medium">Items</span>
-                    <span className="font-semibold text-gray-900">
+                    <span className="text-gray-700 font-medium text-sm sm:text-base">Items</span>
+                    <span className="font-semibold text-gray-900 text-sm sm:text-base">
                       {cart.totalItems}
                     </span>
                   </div>
                   <OrderSummary />
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   <Button
                     variant="primary"
                     size="lg"
                     fullWidth
-                    className="transition-transform duration-200 hover:scale-105 shadow-md"
+                    className="transition-transform duration-200 hover:scale-105 shadow-md text-sm sm:text-base"
                     onClick={() => router.push('/checkout')}
                   >
                     Checkout

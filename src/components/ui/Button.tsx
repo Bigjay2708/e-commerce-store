@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   isLoading = false,
   disabled,
   ...props
-}) => {  const baseStyles = 'inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none shadow-sm hover:shadow-md active:transform active:scale-95';
+}) => {  const baseStyles = 'inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none shadow-sm hover:shadow-md active:transform active:scale-95 touch-manipulation';
   
   const variants = {
     primary: 'bg-primary text-white hover:bg-primary-dark focus-visible:ring-primary border border-primary',
@@ -27,9 +27,9 @@ const Button: React.FC<ButtonProps> = ({
   };
   
   const sizes = {
-    sm: 'h-9 px-4 text-sm',
-    md: 'h-11 px-6 text-base',
-    lg: 'h-14 px-8 text-lg',
+    sm: 'h-10 px-4 text-sm min-h-[44px] sm:h-9 sm:min-h-0',
+    md: 'h-12 px-6 text-base min-h-[44px] sm:h-11 sm:min-h-0',
+    lg: 'h-14 px-8 text-lg min-h-[44px]',
   };
   
   const widthClass = fullWidth ? 'w-full' : '';

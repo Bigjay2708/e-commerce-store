@@ -237,9 +237,89 @@ html.dark .product-card-clean {
 }
 
 html.dark .product-card-clean:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
 .shadow-navbar {
   box-shadow: none !important;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Better touch targets for mobile */
+  button, .btn, a[role="button"] {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  /* Improved text readability on mobile */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Better scrolling on mobile */
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Improved hover states for touch devices */
+  @media (hover: none) {
+    .hover\:scale-105:hover {
+      transform: none !important;
+    }
+    
+    .hover\:shadow-lg:hover {
+      box-shadow: none !important;
+    }
+  }
+  
+  /* Mobile-specific product card optimizations */
+  .product-card-clean {
+    padding: 12px !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Mobile navigation improvements */
+  .mobile-menu-item {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero-section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .min-h-screen {
+    min-height: 100vh !important;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Focus improvements for accessibility */
+*:focus {
+  outline: 2px solid #22c55e !important;
+  outline-offset: 2px !important;
+}
+
+/* Mobile-specific animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

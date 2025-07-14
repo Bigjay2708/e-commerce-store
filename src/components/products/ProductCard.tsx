@@ -57,49 +57,50 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="product-card-clean group">
       <div ref={imgRef}>
-        <Link href={`/products/${product.id}`} className="block relative h-48 overflow-hidden bg-gray-50 dark:bg-gray-700">
+        <Link href={`/products/${product.id}`} className="block relative h-40 sm:h-48 overflow-hidden bg-gray-50 dark:bg-gray-700">
           <Image
             src={product.image}
             alt={product.title}
             fill
-            className="object-contain p-4 group-hover:scale-110 transition-transform duration-300"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-contain p-2 sm:p-4 group-hover:scale-110 transition-transform duration-300"
+            sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
             priority={false}
           />
         </Link>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 p-2 sm:p-3">
         <div className="flex justify-between items-start gap-2">
-          <Link href={`/products/${product.id}`} className="group">
-            <h3 className="text-lg font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
+          <Link href={`/products/${product.id}`} className="group flex-1">
+            <h3 className="text-sm sm:text-lg font-bold text-foreground line-clamp-2 sm:line-clamp-1 group-hover:text-primary transition-colors">
               {product.title}
             </h3>
           </Link>
           <WishlistButton product={product} />
         </div>
-        <p className="text-sm text-muted line-clamp-2 font-medium">
+        <p className="text-xs sm:text-sm text-muted line-clamp-2 font-medium">
           {product.description}
         </p>
-        <div className="flex items-center gap-2 mt-1">
-          <FaStar className="text-yellow-500" />
-          <span className="text-sm font-medium text-foreground">
-            {product.rating.rate} <span className="text-muted">({product.rating.count} reviews)</span>
+        <div className="flex items-center gap-1 sm:gap-2 mt-1">
+          <FaStar className="text-yellow-500 text-xs sm:text-sm" />
+          <span className="text-xs sm:text-sm font-medium text-foreground">
+            {product.rating.rate} <span className="text-muted">({product.rating.count})</span>
           </span>
         </div>
-        <div className="mt-3 flex items-center justify-between">
-          <span className="text-xl font-extrabold text-primary">
+        <div className="mt-2 sm:mt-3 flex items-center justify-between gap-2">
+          <span className="text-lg sm:text-xl font-extrabold text-primary">
             ${product.price.toFixed(2)}
           </span>
           <Button 
             variant="primary" 
             size="sm" 
             onClick={handleAddToCart}
+            className="text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
           >
             Add to cart
           </Button>
         </div>
-        <div className="mt-3 flex gap-2">
-          <ComparisonButton product={product} className="flex-1" />
+        <div className="mt-2 sm:mt-3">
+          <ComparisonButton product={product} className="w-full text-xs sm:text-sm" />
         </div>
       </div>
       <CartFlyout open={flyoutOpen} onClose={() => setFlyoutOpen(false)} />
