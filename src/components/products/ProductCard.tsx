@@ -55,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="product-card-clean">
+    <div className="product-card-clean group">
       <div ref={imgRef}>
         <Link href={`/products/${product.id}`} className="block relative h-48 overflow-hidden bg-gray-50 dark:bg-gray-700">
           <Image
