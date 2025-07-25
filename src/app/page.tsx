@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetchProducts, fetchCategories } from '@/lib/api';
 import { Product } from '@/types';
 import ProductGrid from '@/components/products/ProductGrid';
+import SocialCommerceDashboard from '@/components/social/SocialCommerceDashboard';
 import Button from '@/components/ui/Button';
 import { FaSpinner } from 'react-icons/fa';
 
@@ -107,7 +108,12 @@ export default function Home() {
             <FaSpinner className="animate-spin text-blue-600 text-3xl sm:text-4xl" />
           </div>
         ) : (
-          <ProductGrid products={filteredProducts} />
+          <>
+            <SocialCommerceDashboard />
+            <div className="mt-8">
+              <ProductGrid products={filteredProducts} />
+            </div>
+          </>
         )}
       </section>
     </div>

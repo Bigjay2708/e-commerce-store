@@ -8,6 +8,7 @@ import WishlistButton from './WishlistButton';
 import ComparisonButton from './ComparisonButton';
 import { toast } from 'react-hot-toast';
 import { useRef, useState } from 'react';
+import SocialSharing from './SocialSharing';
 import CartFlyout from '@/components/cart/CartFlyout';
 
 interface ProductCardProps {
@@ -99,8 +100,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             Add to cart
           </Button>
         </div>
-        <div className="mt-2 sm:mt-3">
-          <ComparisonButton product={product} className="w-full text-xs sm:text-sm" />
+        <div className="mt-2 sm:mt-3 flex items-center justify-between gap-2">
+          <ComparisonButton product={product} className="text-xs sm:text-sm" />
+          <SocialSharing product={product} />
         </div>
       </div>
       <CartFlyout open={flyoutOpen} onClose={() => setFlyoutOpen(false)} />

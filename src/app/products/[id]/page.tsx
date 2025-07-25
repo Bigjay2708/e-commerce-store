@@ -10,6 +10,9 @@ import { FaArrowLeft, FaStar, FaSpinner } from 'react-icons/fa';
 import { useCartStore } from '@/store/cart';
 import { toast } from 'react-hot-toast';
 import ProductReviews from '@/components/products/ProductReviews';
+import ProductQA from '@/components/products/ProductQA';
+import SocialSharing from '@/components/products/SocialSharing';
+import InfluencerShowcase from '@/components/products/InfluencerShowcase';
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
@@ -94,9 +97,12 @@ export default function ProductDetailsPage() {
                 <span className="text-3xl font-bold text-gray-900">
                   ${product.price.toFixed(2)}
                 </span>
-                <span className="text-sm text-green-600 font-medium">
-                  In Stock
-                </span>
+                <div className="flex items-center space-x-3">
+                  <SocialSharing product={product} />
+                  <span className="text-sm text-green-600 font-medium">
+                    In Stock
+                  </span>
+                </div>
               </div>
               
               <Button 
@@ -109,7 +115,11 @@ export default function ProductDetailsPage() {
               </Button>
             </div>
           </div>
+          
+          {/* Social Commerce Features */}
+          <InfluencerShowcase productId={product.id} />
           <ProductReviews productId={product.id} />
+          <ProductQA productId={product.id} />
         </>
       ) : (
         <div className="text-center py-12">
