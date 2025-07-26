@@ -1,6 +1,9 @@
+import Image from "next/image";
 "use client";
 import { useState } from "react";
 import { FaQuestionCircle, FaThumbsUp, FaUser, FaCheckCircle, FaUserShield } from "react-icons/fa";
+import Link from "next/link";
+import UserAvatar from "@/components/user/UserAvatar";
 import { useSocialStore } from "@/store/social";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
@@ -25,7 +28,7 @@ export default function ProductQA({ productId }: ProductQAProps) {
   const [answerForms, setAnswerForms] = useState<{ [key: string]: string }>({});
 
   const questions = getProductQuestions(productId);
-  const userId = session?.user?.email || 'anonymous';
+  const userId = session?.user?.email ?? 'anonymous';
 
   const handleSubmitQuestion = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,9 +39,9 @@ export default function ProductQA({ productId }: ProductQAProps) {
 
     addQuestion({
       productId,
-      userId,
+      userId: userId ?? 'anonymous',
       userName: session?.user?.name || 'Anonymous User',
-      userAvatar: session?.user?.image,
+      userAvatar: session?.user?.image ?? undefined,
       question: questionText
     });
 
@@ -53,9 +56,9 @@ export default function ProductQA({ productId }: ProductQAProps) {
 
     addAnswer(questionId, {
       questionId,
-      userId,
+      userId: userId ?? 'anonymous',
       userName: session?.user?.name || 'Anonymous User',
-      userAvatar: session?.user?.image,
+      userAvatar: session?.user?.image ?? undefined,
       answer: answerText,
       isExpert: Math.random() > 0.7, // Simulate expert answers
       isSeller: Math.random() > 0.8   // Simulate seller answers
@@ -140,31 +143,25 @@ export default function ProductQA({ productId }: ProductQAProps) {
               {/* Question */}
               <div className="mb-4">
                 <div className="flex items-start space-x-3 mb-3">
-                  {question.userAvatar ? (
-                    <img
-                      src={question.userAvatar}
-                      alt={question.userName}
-                      className="w-8 h-8 rounded-full"
-                    />
-                  ) : (
-                    <FaUser className="w-8 h-8 text-gray-400 p-1" />
-                  )}
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-2 mb-1">
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {question.userName}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        asked {new Date(question.date).toLocaleDateString()}
-                      </span>
+                  <Link href={`/users/${question.userId || ''}`} className="flex items-center space-x-3 group">
+                    <UserAvatar src={question.userAvatar} alt={question.userName} size={32} />
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <span className="font-medium text-gray-900 dark:text-white group-hover:underline">
+                          {question.userName}
+                        </span>
+                        <span className="text-sm text-gray-500">
+                          asked {new Date(question.date).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <FaQuestionCircle className="text-blue-500 mt-1 flex-shrink-0" />
+                        <p className="text-gray-700 dark:text-gray-300">
+                          {question.question}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex items-start space-x-2">
-                      <FaQuestionCircle className="text-blue-500 mt-1 flex-shrink-0" />
-                      <p className="text-gray-700 dark:text-gray-300">
-                        {question.question}
-                      </p>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
                 
                 <div className="flex items-center justify-between ml-11">
@@ -195,9 +192,11 @@ export default function ProductQA({ productId }: ProductQAProps) {
                     >
                       <div className="flex items-start space-x-3">
                         {answer.userAvatar ? (
-                          <img
+                          <Image
                             src={answer.userAvatar}
                             alt={answer.userName}
+                            width={24}
+                            height={24}
                             className="w-6 h-6 rounded-full"
                           />
                         ) : (

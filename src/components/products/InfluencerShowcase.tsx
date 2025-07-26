@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
 import { FaHeart, FaComment, FaCheckCircle, FaInstagram, FaTiktok, FaYoutube, FaTwitter, FaCopy } from "react-icons/fa";
+import Link from "next/link";
+import UserAvatar from "@/components/user/UserAvatar";
+import FollowButton from "@/components/user/FollowButton";
 import { useSocialStore } from "@/store/social";
 import { toast } from "react-hot-toast";
 import Button from "@/components/ui/Button";
@@ -84,29 +87,24 @@ export default function InfluencerShowcase({ productId }: InfluencerShowcaseProp
               {/* Influencer Info */}
               <div className="p-4">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="relative">
-                    <Image
-                      src={influencer.avatar}
-                      alt={influencer.name}
-                      width={40}
-                      height={40}
-                      className="rounded-full"
-                    />
+                  <Link href={`/users/${influencer.id}`} className="flex items-center space-x-2 group">
+                    <UserAvatar src={influencer.avatar} alt={influencer.name} size={40} />
                     {influencer.verified && (
-                      <FaCheckCircle className="absolute -bottom-1 -right-1 text-blue-500 bg-white rounded-full text-sm" />
+                      <FaCheckCircle className="-ml-2 text-blue-500 bg-white rounded-full text-sm" />
                     )}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-2">
-                      <h4 className="font-semibold text-gray-900 dark:text-white">
-                        {influencer.name}
-                      </h4>
-                      {getPlatformIcon(influencer.platform)}
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2">
+                        <h4 className="font-semibold text-gray-900 dark:text-white group-hover:underline">
+                          {influencer.name}
+                        </h4>
+                        {getPlatformIcon(influencer.platform)}
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {influencer.handle} • {formatFollowers(influencer.followers)} followers
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {influencer.handle} • {formatFollowers(influencer.followers)} followers
-                    </p>
-                  </div>
+                  </Link>
+                  <FollowButton userId={influencer.id.toString()} />
                 </div>
 
                 {/* Post Content */}
@@ -172,7 +170,7 @@ export default function InfluencerShowcase({ productId }: InfluencerShowcaseProp
           Love what you see?
         </h4>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Join thousands of satisfied customers who trust our influencers' recommendations
+          Join thousands of satisfied customers who trust our influencers&apos; recommendations
         </p>
         <div className="flex justify-center space-x-4">
           <Button variant="primary" size="lg">

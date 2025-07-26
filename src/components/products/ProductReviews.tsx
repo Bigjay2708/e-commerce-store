@@ -1,11 +1,14 @@
+import Image from "next/image";
 "use client";
 import { useState } from "react";
-import { FaStar, FaThumbsUp, FaReply, FaCamera, FaCheckCircle, FaUserCircle } from "react-icons/fa";
+import { FaStar, FaThumbsUp, FaReply, FaCheckCircle, FaUserCircle } from "react-icons/fa";
+import Link from "next/link";
+import UserAvatar from "@/components/user/UserAvatar";
 import { useSocialStore } from "@/store/social";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import Button from "@/components/ui/Button";
-import { Review, ReviewReply } from "@/types";
+// import { Review, ReviewReply } from "@/types";
 
 interface ProductReviewsProps {
   productId: number;
@@ -33,7 +36,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
 
   const reviews = getProductReviews(productId);
   const averageRating = getAverageRating(productId);
-  const userId = session?.user?.email || 'anonymous';
+  const userId = session?.user?.email ?? 'anonymous';
 
   const handleSubmitReview = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,9 +47,9 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
 
     addReview({
       productId,
-      userId,
+      userId: userId ?? 'anonymous',
       userName: session?.user?.name || 'Anonymous User',
-      userAvatar: session?.user?.image,
+      userAvatar: session?.user?.image ?? undefined,
       rating: reviewForm.rating,
       title: reviewForm.title,
       comment: reviewForm.comment,
@@ -68,9 +71,9 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
     if (!reply?.trim()) return;
 
     addReviewReply(reviewId, {
-      userId,
+      userId: userId ?? 'anonymous',
       userName: session?.user?.name || 'Anonymous User',
-      userAvatar: session?.user?.image,
+      userAvatar: session?.user?.image ?? undefined,
       comment: reply
     });
 
@@ -226,34 +229,28 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  {review.userAvatar ? (
-                    <img
-                      src={review.userAvatar}
-                      alt={review.userName}
-                      className="w-10 h-10 rounded-full"
-                    />
-                  ) : (
-                    <FaUserCircle className="w-10 h-10 text-gray-400" />
-                  )}
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {review.userName}
-                      </span>
-                      {review.verifiedPurchase && (
-                        <div className="flex items-center space-x-1 text-green-600">
-                          <FaCheckCircle className="text-xs" />
-                          <span className="text-xs">Verified Purchase</span>
-                        </div>
-                      )}
+                  <Link href={`/users/${review.userId || ''}`} className="flex items-center space-x-3 group">
+                    <UserAvatar src={review.userAvatar} alt={review.userName} size={40} />
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="font-medium text-gray-900 dark:text-white group-hover:underline">
+                          {review.userName}
+                        </span>
+                        {review.verifiedPurchase && (
+                          <div className="flex items-center space-x-1 text-green-600">
+                            <FaCheckCircle className="text-xs" />
+                            <span className="text-xs">Verified Purchase</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex items-center space-x-2 mt-1">
+                        {renderStars(review.rating)}
+                        <span className="text-sm text-gray-500">
+                          {new Date(review.date).toLocaleDateString()}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2 mt-1">
-                      {renderStars(review.rating)}
-                      <span className="text-sm text-gray-500">
-                        {new Date(review.date).toLocaleDateString()}
-                      </span>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
 
@@ -264,18 +261,20 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
                 {review.comment}
               </p>
 
-              {review.images && review.images.length > 0 && (
-                <div className="flex space-x-2 mb-4">
-                  {review.images.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt={`Review image ${index + 1}`}
-                      className="w-20 h-20 object-cover rounded-lg"
-                    />
-                  ))}
-                </div>
-              )}
+                  {review.images && review.images.length > 0 && (
+                    <div className="flex space-x-2 mb-4">
+                      {review.images.map((image, index) => (
+                        <Image
+                          key={index}
+                          src={image}
+                          alt={`Review image ${index + 1}`}
+                          width={80}
+                          height={80}
+                          className="w-20 h-20 object-cover rounded-lg"
+                        />
+                      ))}
+                    </div>
+                  )}
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
@@ -307,9 +306,11 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
                     <div key={reply.id} className="py-3 border-b border-gray-100 dark:border-gray-700 last:border-b-0">
                       <div className="flex items-center space-x-2 mb-2">
                         {reply.userAvatar ? (
-                          <img
+                          <Image
                             src={reply.userAvatar}
                             alt={reply.userName}
+                            width={24}
+                            height={24}
                             className="w-6 h-6 rounded-full"
                           />
                         ) : (

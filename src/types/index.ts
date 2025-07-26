@@ -19,6 +19,8 @@ export interface User {
     firstname: string;
     lastname: string;
   };
+  avatar?: string;
+  bio?: string;
   address: {
     city: string;
     street: string;
@@ -30,6 +32,10 @@ export interface User {
     };
   };
   phone: string;
+  followers: string[]; // userIds
+  following: string[]; // userIds
+  joined: string;
+  isInfluencer?: boolean;
 }
 
 export interface CartItem extends Product {
