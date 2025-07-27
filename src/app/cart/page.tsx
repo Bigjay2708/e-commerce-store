@@ -3,6 +3,7 @@
 import { useCartStore } from '@/store/cart';
 import CartItem from '@/components/cart/CartItem';
 import OrderSummary from '@/components/cart/OrderSummary';
+import SavedItemsQuickAccess from '@/components/ui/SavedItemsQuickAccess';
 import Button from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -31,47 +32,50 @@ export default function CartPage() {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="bg-white/60 rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 lg:sticky lg:top-24 backdrop-blur-lg border border-white/30">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight text-center lg:text-left">
-                  Order Summary
-                </h2>
-                <div className="mb-6 sm:mb-8">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-gray-700 font-medium text-sm sm:text-base">Items</span>
-                    <span className="font-semibold text-gray-900 text-sm sm:text-base">
-                      {cart.totalItems}
-                    </span>
+              <div className="space-y-6">
+                <SavedItemsQuickAccess />
+                <div className="bg-white/60 rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 lg:sticky lg:top-24 backdrop-blur-lg border border-white/30">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight text-center lg:text-left">
+                    Order Summary
+                  </h2>
+                  <div className="mb-6 sm:mb-8">
+                    <div className="flex justify-between mb-2">
+                      <span className="text-gray-700 font-medium text-sm sm:text-base">Items</span>
+                      <span className="font-semibold text-gray-900 text-sm sm:text-base">
+                        {cart.totalItems}
+                      </span>
+                    </div>
+                    <OrderSummary />
                   </div>
-                  <OrderSummary />
-                </div>
-                <div className="space-y-3 sm:space-y-4">
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                    className="transition-transform duration-200 hover:scale-105 shadow-md text-sm sm:text-base"
-                    onClick={() => router.push('/checkout')}
-                  >
-                    Checkout
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    fullWidth
-                    className="transition-transform duration-200 hover:scale-105"
-                    onClick={() => router.push('/products')}
-                  >
-                    Continue Shopping
-                  </Button>
-                  <Button
-                    variant="danger"
-                    size="lg"
-                    fullWidth
-                    className="transition-transform duration-200 hover:scale-105"
-                    onClick={clearCart}
-                  >
-                    Clear Cart
-                  </Button>
+                  <div className="space-y-3 sm:space-y-4">
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      fullWidth
+                      className="transition-transform duration-200 hover:scale-105 shadow-md text-sm sm:text-base"
+                      onClick={() => router.push('/checkout')}
+                    >
+                      Checkout
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      fullWidth
+                      className="transition-transform duration-200 hover:scale-105"
+                      onClick={() => router.push('/products')}
+                    >
+                      Continue Shopping
+                    </Button>
+                    <Button
+                      variant="danger"
+                      size="lg"
+                      fullWidth
+                      className="transition-transform duration-200 hover:scale-105"
+                      onClick={clearCart}
+                    >
+                      Clear Cart
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -13,6 +13,8 @@ import ProductReviews from '@/components/products/ProductReviews';
 import ProductQA from '@/components/products/ProductQA';
 import SocialSharing from '@/components/products/SocialSharing';
 import InfluencerShowcase from '@/components/products/InfluencerShowcase';
+import SaveForLaterButton from '@/components/ui/SaveForLaterButton';
+import WishlistButton from '@/components/products/WishlistButton';
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
@@ -113,6 +115,17 @@ export default function ProductDetailsPage() {
               >
                 Add to Cart
               </Button>
+              
+              <div className="flex space-x-3 mt-4">
+                <SaveForLaterButton 
+                  product={product} 
+                  variant="button" 
+                  size="md" 
+                  showDropdown={true}
+                  className="flex-1"
+                />
+                <WishlistButton product={product} />
+              </div>
             </div>
           </div>
           

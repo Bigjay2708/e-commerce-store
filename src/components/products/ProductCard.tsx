@@ -6,6 +6,7 @@ import Button from '@/components/ui/Button';
 import { useCartStore } from '@/store/cart';
 import WishlistButton from './WishlistButton';
 import ComparisonButton from './ComparisonButton';
+import SaveForLaterButton from '@/components/ui/SaveForLaterButton';
 import { toast } from 'react-hot-toast';
 import { useRef, useState } from 'react';
 import SocialSharing from './SocialSharing';
@@ -76,7 +77,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {product.title}
             </h3>
           </Link>
-          <WishlistButton product={product} />
+          <div className="flex items-center space-x-1">
+            <SaveForLaterButton product={product} variant="icon" size="sm" />
+            <WishlistButton product={product} />
+          </div>
         </div>
         <p className="text-xs sm:text-sm text-muted line-clamp-2 font-medium">
           {product.description}

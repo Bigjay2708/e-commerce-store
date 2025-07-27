@@ -3,14 +3,16 @@
 import Link from 'next/link';
 import { useCartStore } from '@/store/cart';
 import { useWishlistStore } from '@/store/wishlist';
+import { useSavedForLaterStore } from '@/store/savedForLater';
 import { useSession, signOut } from 'next-auth/react';
-import { FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaHeart, FaMoon, FaSun, FaTimes } from 'react-icons/fa';
+import { FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaHeart, FaMoon, FaSun, FaTimes, FaBookmark } from 'react-icons/fa';
 import { useThemeStore } from '@/store/theme';
 import { useState, useEffect, useRef } from 'react';
 
 const Navbar = () => {
   const { cart } = useCartStore();
   const { items: wishlistItems } = useWishlistStore();
+  const { items: savedItems } = useSavedForLaterStore();
   const { data: session } = useSession();
   const { theme, toggleTheme } = useThemeStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -89,6 +91,7 @@ const Navbar = () => {
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
           <Link href="/products" className="hover:text-primary transition-colors">Products</Link>
           <Link href="/comparison" className="hover:text-primary transition-colors">Compare</Link>
+          <Link href="/saved" className="hover:text-primary transition-colors">Saved</Link>
           <Link href="/about" className="hover:text-primary transition-colors">About</Link>
         </nav>
 
@@ -106,6 +109,14 @@ const Navbar = () => {
             {wishlistItems.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center border-2 border-background">
                 {wishlistItems.length}
+              </span>
+            )}
+          </Link>
+          <Link href="/saved" className="relative group p-2 text-primary hover:bg-accent/10 rounded-full transition">
+            <FaBookmark size={20} />
+            {savedItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center border-2 border-background">
+                {savedItems.length}
               </span>
             )}
           </Link>
@@ -223,6 +234,19 @@ const Navbar = () => {
               {wishlistItems.length > 0 && (
                 <span className="bg-pink-500 text-white text-xs px-2 py-1 rounded-full">
                   {wishlistItems.length}
+                </span>
+              )}
+            </Link>
+            <Link 
+              href="/saved" 
+              className="mobile-menu-item flex items-center gap-3 text-base font-medium hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 py-2.5 px-3 rounded-lg"
+              onClick={closeMobileMenu}
+            >
+              <FaBookmark size={16} className="w-5 text-center" />
+              <span className="flex-1">Saved for Later</span>
+              {savedItems.length > 0 && (
+                <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                  {savedItems.length}
                 </span>
               )}
             </Link>
