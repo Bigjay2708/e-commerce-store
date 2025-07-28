@@ -215,13 +215,13 @@ export default function ReferralPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Friend's Email Address
+                  Friend&apos;s Email Address
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your friend's email"
+                  placeholder="Enter your friend&apos;s email"
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700"
                 />
               </div>

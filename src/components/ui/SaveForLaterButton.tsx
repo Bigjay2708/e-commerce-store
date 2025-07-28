@@ -28,7 +28,7 @@ export default function SaveForLaterButton({
   showDropdown = false,
   className = ''
 }: SaveForLaterButtonProps) {
-  const { addToSaved, removeFromSaved, isInSaved, getSavedItem } = useSavedForLaterStore();
+  const { addToSaved, removeFromSaved, isInSaved } = useSavedForLaterStore();
   const [showReasonSelector, setShowReasonSelector] = useState(false);
   const [customReason, setCustomReason] = useState('');
   const [notes, setNotes] = useState('');

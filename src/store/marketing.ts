@@ -26,17 +26,20 @@ interface MarketingStore {
   
   // Email actions
   createEmailCampaign: (campaign: Omit<EmailCampaign, 'id'>) => string;
+  deleteEmailCampaign: (campaignId: string) => void;
   sendEmailCampaign: (campaignId: string) => void;
   subscribeToEmail: (userId: string, email: string, preferences?: Partial<EmailSubscription['preferences']>) => void;
   unsubscribeFromEmail: (userId: string) => void;
   
   // Push notification actions
   createPushNotification: (notification: Omit<PushNotification, 'id' | 'sentDate' | 'clickCount'>) => string;
+  deletePushNotification: (notificationId: string) => void;
   sendPushNotification: (notificationId: string) => void;
   updateNotificationSettings: (userId: string, settings: Partial<UserNotificationSettings>) => void;
   
   // Banner actions
   createBanner: (banner: Omit<PromotionalBanner, 'id' | 'analytics'>) => string;
+  deleteBanner: (bannerId: string) => void;
   getActiveBanners: (page: string, userTier?: string) => PromotionalBanner[];
   trackBannerView: (bannerId: string) => void;
   trackBannerClick: (bannerId: string) => void;
@@ -167,6 +170,12 @@ export const useMarketingStore = create<MarketingStore>()(
         }));
       },
 
+      deleteEmailCampaign: (campaignId) => {
+        set((state) => ({
+          emailCampaigns: state.emailCampaigns.filter(campaign => campaign.id !== campaignId)
+        }));
+      },
+
       subscribeToEmail: (userId, email, preferences = {}) => {
         const subscription: EmailSubscription = {
           userId,
@@ -222,6 +231,12 @@ export const useMarketingStore = create<MarketingStore>()(
               ? { ...notification, sentDate: new Date().toISOString() }
               : notification
           )
+        }));
+      },
+
+      deletePushNotification: (notificationId) => {
+        set((state) => ({
+          pushNotifications: state.pushNotifications.filter(notification => notification.id !== notificationId)
         }));
       },
 
@@ -307,6 +322,12 @@ export const useMarketingStore = create<MarketingStore>()(
               ? { ...banner, analytics: { ...banner.analytics, clicks: banner.analytics.clicks + 1 } }
               : banner
           )
+        }));
+      },
+
+      deleteBanner: (bannerId) => {
+        set((state) => ({
+          banners: state.banners.filter(banner => banner.id !== bannerId)
         }));
       },
 

@@ -1,5 +1,6 @@
-import Image from "next/image";
 "use client";
+
+import Image from "next/image";
 import { useState } from "react";
 import { FaStar, FaThumbsUp, FaReply, FaCheckCircle, FaUserCircle } from "react-icons/fa";
 import Link from "next/link";

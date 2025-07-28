@@ -296,7 +296,7 @@ export interface PushNotification {
   scheduledDate?: string;
   sentDate?: string;
   clickCount: number;
-  data?: Record<string, any>; // additional data for deep linking
+  data?: Record<string, string | number | boolean>; // additional data for deep linking
   isActive: boolean;
 }
 

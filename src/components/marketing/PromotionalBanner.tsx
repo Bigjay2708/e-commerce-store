@@ -12,11 +12,11 @@ interface PromotionalBannerProps {
 }
 
 export default function PromotionalBanner({ location, className = '' }: PromotionalBannerProps) {
-  const { promotionalBanners, incrementBannerViews, incrementBannerClicks } = useMarketingStore()
+  const { banners, trackBannerView, trackBannerClick } = useMarketingStore()
   const [dismissedBanners, setDismissedBanners] = useState<Set<string>>(new Set())
 
   // Get active banners for this location
-  const activeBanners = promotionalBanners.filter(banner => 
+  const activeBanners = banners.filter(banner => 
     banner.location === location && 
     banner.isActive &&
     new Date() >= banner.startDate &&
@@ -27,12 +27,12 @@ export default function PromotionalBanner({ location, className = '' }: Promotio
   // Track banner views on mount
   useEffect(() => {
     activeBanners.forEach(banner => {
-      incrementBannerViews(banner.id)
+      trackBannerView(banner.id)
     })
-  }, [activeBanners, incrementBannerViews])
+  }, [activeBanners, trackBannerView])
 
   const handleBannerClick = (bannerId: string) => {
-    incrementBannerClicks(bannerId)
+    trackBannerClick(bannerId)
   }
 
   const handleDismiss = (bannerId: string) => {

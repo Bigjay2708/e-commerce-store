@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { 
   FaFacebook, 
   FaTwitter, 
@@ -124,9 +125,11 @@ export default function SocialSharing({ product }: SocialSharingProps) {
 
             {/* Product Preview */}
             <div className="flex items-center space-x-3 mb-6 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <img
+              <Image
                 src={product.image}
                 alt={product.title}
+                width={48}
+                height={48}
                 className="w-12 h-12 object-contain rounded"
               />
               <div className="flex-1 min-w-0">

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FaBookmark, FaShoppingCart, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useSavedForLaterStore } from '@/store/savedForLater';
 import { useCartStore } from '@/store/cart';
+import { Product } from '@/types';
 import { toast } from 'react-hot-toast';
 import Button from './Button';
 import Image from 'next/image';
@@ -15,7 +16,7 @@ export default function SavedItemsQuickAccess() {
 
   if (items.length === 0) return null;
 
-  const handleMoveToCart = (item: any) => {
+  const handleMoveToCart = (item: Product) => {
     addToCart(item);
     removeFromSaved(item.id);
     toast.success(`${item.title} moved to cart`);

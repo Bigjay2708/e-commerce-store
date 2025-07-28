@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { 
   FaStar, 
   FaUsers, 
@@ -11,13 +10,9 @@ import {
   FaFire
 } from "react-icons/fa";
 import { useSocialStore } from "@/store/social";
-import { useCartStore } from "@/store/cart";
-import { useWishlistStore } from "@/store/wishlist";
 
 export default function SocialCommerceDashboard() {
   const { reviews, questions, influencers, influencerPosts } = useSocialStore();
-  const { cart } = useCartStore();
-  const { items: wishlistItems } = useWishlistStore();
 
   // Calculate social commerce metrics
   const totalReviews = reviews.length;
@@ -189,7 +184,7 @@ export default function SocialCommerceDashboard() {
                     New 5-star review
                   </p>
                   <p className="text-xs text-gray-600 dark:text-gray-400">
-                    "Amazing quality!" - Alex Chen
+                    &quot;Amazing quality!&quot; - Alex Chen
                   </p>
                 </div>
                 <span className="text-xs text-gray-500">2h ago</span>

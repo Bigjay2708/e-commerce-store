@@ -14,14 +14,17 @@ export default function MarketingPage() {
     name: '',
     subject: '',
     content: '',
-    targetAudience: 'all' as 'all' | 'new' | 'returning' | 'vip',
+    type: 'promotional' as 'promotional' | 'newsletter' | 'abandoned_cart' | 'welcome' | 'order_confirmation',
+    recipients: [] as string[],
+    tags: [] as string[],
     scheduledDate: ''
   })
   const [newNotification, setNewNotification] = useState({
     title: '',
     message: '',
-    scheduledDate: '',
-    targetAudience: 'all' as 'all' | 'new' | 'returning' | 'vip'
+    type: 'promotional' as 'promotional' | 'order_update' | 'reminder' | 'general',
+    targetUsers: [] as string[],
+    scheduledDate: ''
   })
   const [newBanner, setNewBanner] = useState({
     title: '',
@@ -38,13 +41,13 @@ export default function MarketingPage() {
   const { 
     emailCampaigns, 
     pushNotifications, 
-    promotionalBanners,
+    banners,
     createEmailCampaign,
     createPushNotification,
-    createPromotionalBanner,
+    createBanner,
     deleteEmailCampaign,
     deletePushNotification,
-    deletePromotionalBanner
+    deleteBanner
   } = useMarketingStore()
 
   const handleCreateCampaign = () => {
@@ -52,10 +55,21 @@ export default function MarketingPage() {
       name: newCampaign.name,
       subject: newCampaign.subject,
       content: newCampaign.content,
-      targetAudience: newCampaign.targetAudience,
-      scheduledDate: new Date(newCampaign.scheduledDate)
+      type: newCampaign.type,
+      status: 'draft' as const,
+      recipients: newCampaign.recipients,
+      tags: newCampaign.tags,
+      scheduledDate: newCampaign.scheduledDate
     })
-    setNewCampaign({ name: '', subject: '', content: '', targetAudience: 'all', scheduledDate: '' })
+    setNewCampaign({ 
+      name: '', 
+      subject: '', 
+      content: '', 
+      type: 'promotional', 
+      recipients: [], 
+      tags: [], 
+      scheduledDate: '' 
+    })
     setShowCreateForm(false)
   }
 
@@ -63,15 +77,23 @@ export default function MarketingPage() {
     createPushNotification({
       title: newNotification.title,
       message: newNotification.message,
-      scheduledDate: new Date(newNotification.scheduledDate),
-      targetAudience: newNotification.targetAudience
+      type: newNotification.type,
+      targetUsers: newNotification.targetUsers,
+      scheduledDate: newNotification.scheduledDate,
+      isActive: true
     })
-    setNewNotification({ title: '', message: '', scheduledDate: '', targetAudience: 'all' })
+    setNewNotification({ 
+      title: '', 
+      message: '', 
+      type: 'promotional', 
+      targetUsers: [], 
+      scheduledDate: '' 
+    })
     setShowCreateForm(false)
   }
 
   const handleCreateBanner = () => {
-    createPromotionalBanner({
+    createBanner({
       title: newBanner.title,
       description: newBanner.description,
       imageUrl: newBanner.imageUrl,
@@ -79,8 +101,8 @@ export default function MarketingPage() {
       ctaUrl: newBanner.ctaUrl,
       targetAudience: newBanner.targetAudience,
       location: newBanner.location,
-      startDate: new Date(newBanner.startDate),
-      endDate: new Date(newBanner.endDate)
+      startDate: newBanner.startDate,
+      endDate: newBanner.endDate
     })
     setNewBanner({
       title: '', description: '', imageUrl: '', ctaText: '', ctaUrl: '',
@@ -92,7 +114,7 @@ export default function MarketingPage() {
   const tabs = [
     { id: 'campaigns', label: 'Email Campaigns', count: emailCampaigns.length },
     { id: 'notifications', label: 'Push Notifications', count: pushNotifications.length },
-    { id: 'banners', label: 'Promotional Banners', count: promotionalBanners.length }
+    { id: 'banners', label: 'Promotional Banners', count: banners.length }
   ]
 
   return (
@@ -391,11 +413,11 @@ export default function MarketingPage() {
             {activeTab === 'banners' && (
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-gray-900">Promotional Banners</h3>
-                {promotionalBanners.length === 0 ? (
+                {banners.length === 0 ? (
                   <p className="text-gray-500">No promotional banners created yet.</p>
                 ) : (
                   <div className="grid gap-4">
-                    {promotionalBanners.map((banner) => (
+                    {banners.map((banner) => (
                       <div key={banner.id} className="border border-gray-200 rounded-lg p-4">
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
@@ -423,7 +445,7 @@ export default function MarketingPage() {
                             </div>
                           </div>
                           <Button
-                            onClick={() => deletePromotionalBanner(banner.id)}
+                            onClick={() => deleteBanner(banner.id)}
                             className="bg-red-600 hover:bg-red-700 text-sm ml-4"
                           >
                             Delete
