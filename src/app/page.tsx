@@ -5,6 +5,8 @@ import { fetchProducts, fetchCategories } from '@/lib/api';
 import { Product } from '@/types';
 import ProductGrid from '@/components/products/ProductGrid';
 import SocialCommerceDashboard from '@/components/social/SocialCommerceDashboard';
+import PromotionalBanner from '@/components/marketing/PromotionalBanner';
+import PushNotificationDisplay from '@/components/marketing/PushNotificationDisplay';
 import Button from '@/components/ui/Button';
 import { FaSpinner } from 'react-icons/fa';
 
@@ -40,6 +42,12 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-2 sm:px-4">
+      {/* Push Notifications */}
+      <PushNotificationDisplay className="mb-6" />
+      
+      {/* Promotional Banners */}
+      <PromotionalBanner location="homepage" className="mb-6" />
+      
       <section className="hero-section py-8 sm:py-12 md:py-20 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg mb-8 sm:mb-12 mx-2 sm:mx-0">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">

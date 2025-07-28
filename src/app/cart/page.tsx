@@ -4,6 +4,7 @@ import { useCartStore } from '@/store/cart';
 import CartItem from '@/components/cart/CartItem';
 import OrderSummary from '@/components/cart/OrderSummary';
 import SavedItemsQuickAccess from '@/components/ui/SavedItemsQuickAccess';
+import PromotionalBanner from '@/components/marketing/PromotionalBanner';
 import Button from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -19,6 +20,9 @@ export default function CartPage() {
       </h1>
 
       <div className="w-full max-w-6xl">
+        {/* Promotional Banners */}
+        <PromotionalBanner location="cart" className="mb-6" />
+        
         {cart.items.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10 animate-fade-in">
             <div className="lg:col-span-2">

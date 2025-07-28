@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useCartStore } from '@/store/cart';
 import Button from '@/components/ui/Button';
 import OrderSummary from '@/components/cart/OrderSummary';
+import PromotionalBanner from '@/components/marketing/PromotionalBanner';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { FaCheck } from 'react-icons/fa';
@@ -61,6 +62,9 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
+      {/* Promotional Banners */}
+      <PromotionalBanner location="checkout" className="mb-6" />
+      
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center sm:text-left">Checkout</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">

@@ -92,6 +92,9 @@ const Navbar = () => {
           <Link href="/products" className="hover:text-primary transition-colors">Products</Link>
           <Link href="/comparison" className="hover:text-primary transition-colors">Compare</Link>
           <Link href="/saved" className="hover:text-primary transition-colors">Saved</Link>
+          <Link href="/loyalty" className="hover:text-primary transition-colors">Loyalty</Link>
+          <Link href="/referral" className="hover:text-primary transition-colors">Referral</Link>
+          <Link href="/marketing" className="hover:text-primary transition-colors">Marketing</Link>
           <Link href="/about" className="hover:text-primary transition-colors">About</Link>
         </nav>
 
@@ -257,6 +260,30 @@ const Navbar = () => {
             >
               <span className="w-5 text-center">ℹ️</span>
               About
+            </Link>
+            <Link 
+              href="/loyalty" 
+              className="mobile-menu-item flex items-center gap-3 text-base font-medium hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 py-2.5 px-3 rounded-lg"
+              onClick={closeMobileMenu}
+            >
+              <span className="w-5 text-center">🏆</span>
+              Loyalty
+            </Link>
+            <Link 
+              href="/referral" 
+              className="mobile-menu-item flex items-center gap-3 text-base font-medium hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 py-2.5 px-3 rounded-lg"
+              onClick={closeMobileMenu}
+            >
+              <span className="w-5 text-center">🤝</span>
+              Referral
+            </Link>
+            <Link 
+              href="/marketing" 
+              className="mobile-menu-item flex items-center gap-3 text-base font-medium hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 py-2.5 px-3 rounded-lg"
+              onClick={closeMobileMenu}
+            >
+              <span className="w-5 text-center">📢</span>
+              Marketing
             </Link>
           </div>
 

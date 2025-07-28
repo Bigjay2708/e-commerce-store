@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetchProducts, fetchCategories } from '@/lib/api';
 import { Product } from '@/types';
 import ProductGrid from '@/components/products/ProductGrid';
+import PromotionalBanner from '@/components/marketing/PromotionalBanner';
 import { FaSpinner } from 'react-icons/fa';
 
 export default function ProductsPage() {
@@ -38,6 +39,9 @@ export default function ProductsPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
+      {/* Promotional Banners */}
+      <PromotionalBanner location="product" className="mb-6" />
+      
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center sm:text-left">All Products</h1>
       
       <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 mb-6 sm:mb-8">
