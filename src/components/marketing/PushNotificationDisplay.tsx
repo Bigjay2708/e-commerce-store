@@ -10,7 +10,7 @@ interface PushNotificationProps {
 }
 
 export default function PushNotificationDisplay({ className = '' }: PushNotificationProps) {
-  const { pushNotifications, incrementNotificationClicks } = useMarketingStore()
+  const { pushNotifications } = useMarketingStore()
   const [notifications, setNotifications] = useState<PushNotification[]>([])
   const [permission, setPermission] = useState<NotificationPermission>('default')
 
@@ -22,8 +22,9 @@ export default function PushNotificationDisplay({ className = '' }: PushNotifica
 
     // Get active notifications that should be displayed now
     const activeNotifications = pushNotifications.filter(notification =>
-      notification.status === 'sent' &&
-      new Date() >= notification.scheduledDate
+      notification.sentDate &&
+      notification.isActive &&
+      (!notification.scheduledDate || new Date() >= new Date(notification.scheduledDate))
     )
 
     setNotifications(activeNotifications.slice(0, 3)) // Show max 3 notifications
@@ -39,7 +40,7 @@ export default function PushNotificationDisplay({ className = '' }: PushNotifica
   const showNotification = (notification: PushNotification) => {
     if (permission === 'granted') {
       new Notification(notification.title, {
-        body: notification.message,
+        body: notification.body,
         icon: '/favicon.ico',
         badge: '/favicon.ico'
       })
@@ -47,7 +48,6 @@ export default function PushNotificationDisplay({ className = '' }: PushNotifica
   }
 
   const handleNotificationClick = (notificationId: string) => {
-    incrementNotificationClicks(notificationId)
     // Remove notification from display after click
     setNotifications(prev => prev.filter(n => n.id !== notificationId))
   }
@@ -95,7 +95,7 @@ export default function PushNotificationDisplay({ className = '' }: PushNotifica
                 <Bell className="w-4 h-4 text-blue-600" />
                 <h4 className="font-semibold text-gray-900">{notification.title}</h4>
               </div>
-              <p className="text-gray-600 text-sm">{notification.message}</p>
+              <p className="text-gray-600 text-sm">{notification.body}</p>
               <div className="mt-2 flex items-center space-x-4">
                 <button
                   onClick={() => handleNotificationClick(notification.id)}

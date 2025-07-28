@@ -67,10 +67,10 @@ const sampleEmailTemplates: EmailTemplate[] = [
   {
     id: 'welcome_template',
     name: 'Welcome Email',
-    subject: 'Welcome to ShopEase, {{name}}!',
+    subject: 'Welcome to ShopEase, \{\{name\}\}!',
     content: `
       <h1>Welcome to ShopEase!</h1>
-      <p>Hi {{name}},</p>
+      <p>Hi \{\{name\}\},</p>
       <p>Thank you for joining ShopEase! We're excited to have you as part of our community.</p>
       <p>As a welcome gift, here's a 10% discount code for your first order: <strong>WELCOME10</strong></p>
       <p>Happy shopping!</p>
@@ -82,14 +82,14 @@ const sampleEmailTemplates: EmailTemplate[] = [
   {
     id: 'abandoned_cart_template',
     name: 'Abandoned Cart Reminder',
-    subject: 'Don\'t forget your items, {{name}}!',
+    subject: 'Don\'t forget your items, \{\{name\}\}!',
     content: `
       <h1>Your cart is waiting for you!</h1>
-      <p>Hi {{name}},</p>
+      <p>Hi \{\{name\}\},</p>
       <p>You left some amazing items in your cart. Complete your purchase now before they're gone!</p>
-      <p>Items in your cart: {{cartItems}}</p>
-      <p>Total: ${{cartTotal}}</p>
-      <a href="{{cartLink}}">Complete Your Purchase</a>
+      <p>Items in your cart: \{\{cartItems\}\}</p>
+      <p>Total: $\{\{cartTotal\}\}</p>
+      <a href="\{\{cartLink\}\}">Complete Your Purchase</a>
     `,
     type: 'abandoned_cart',
     variables: ['name', 'cartItems', 'cartTotal', 'cartLink'],
@@ -246,16 +246,15 @@ export const useMarketingStore = create<MarketingStore>()(
             ...state.userNotificationSettings,
             [userId]: {
               userId,
-              pushEnabled: true,
-              emailEnabled: true,
+              pushEnabled: state.userNotificationSettings[userId]?.pushEnabled ?? true,
+              emailEnabled: state.userNotificationSettings[userId]?.emailEnabled ?? true,
               preferences: {
-                orderUpdates: true,
-                promotions: true,
-                recommendations: true,
-                reminders: true,
-                social: true
+                orderUpdates: state.userNotificationSettings[userId]?.preferences?.orderUpdates ?? true,
+                promotions: state.userNotificationSettings[userId]?.preferences?.promotions ?? true,
+                recommendations: state.userNotificationSettings[userId]?.preferences?.recommendations ?? true,
+                reminders: state.userNotificationSettings[userId]?.preferences?.reminders ?? true,
+                social: state.userNotificationSettings[userId]?.preferences?.social ?? true
               },
-              ...state.userNotificationSettings[userId],
               ...settings
             }
           }

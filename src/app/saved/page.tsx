@@ -9,7 +9,7 @@ import Button from '@/components/ui/Button';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const reasonLabels: Record<SavedItem['reason'], string> = {
+const reasonLabels: Record<NonNullable<SavedItem['reason']>, string> = {
   price_check: 'Price Check',
   out_of_stock: 'Out of Stock',
   consider_later: 'Consider Later',
@@ -17,7 +17,7 @@ const reasonLabels: Record<SavedItem['reason'], string> = {
   custom: 'Custom'
 };
 
-const reasonColors: Record<SavedItem['reason'], string> = {
+const reasonColors: Record<NonNullable<SavedItem['reason']>, string> = {
   price_check: 'bg-yellow-100 text-yellow-800 border-yellow-300',
   out_of_stock: 'bg-red-100 text-red-800 border-red-300',
   consider_later: 'bg-blue-100 text-blue-800 border-blue-300',
@@ -166,7 +166,7 @@ export default function SavedForLaterPage() {
                     onClick={() => setSelectedReason(key as SavedItem['reason'])}
                     className={`px-3 py-1 text-sm rounded-full border transition-colors ${
                       selectedReason === key
-                        ? reasonColors[key as SavedItem['reason']]
+                        ? reasonColors[key as NonNullable<SavedItem['reason']>]
                         : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'
                     }`}
                   >
@@ -184,7 +184,7 @@ export default function SavedForLaterPage() {
         <div className="text-center py-16 bg-gray-50 dark:bg-gray-800 rounded-lg">
           <FaBookmark className="mx-auto text-6xl text-gray-300 mb-6" />
           <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">
-            {selectedReason === 'all' ? 'No saved items' : `No items saved for ${reasonLabels[selectedReason as SavedItem['reason']]}`}
+            {selectedReason === 'all' ? 'No saved items' : `No items saved for ${reasonLabels[selectedReason as NonNullable<SavedItem['reason']>]}`}
           </h3>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             Save items while browsing to review them later

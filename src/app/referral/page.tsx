@@ -28,7 +28,9 @@ export default function ReferralPage() {
   const stats = getReferralStats(userId);
   const program = getActiveProgram();
 
-  const referralLink = `${window.location.origin}/register?ref=${referralCode}`;
+  const referralLink = typeof window !== 'undefined' 
+    ? `${window.location.origin}/register?ref=${referralCode}`
+    : `https://yourstore.com/register?ref=${referralCode}`;
 
   useEffect(() => {
     // Demo: Add some sample referrals for demonstration
@@ -40,10 +42,14 @@ export default function ReferralPage() {
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(referralLink);
-      setCopied(true);
-      toast.success('Referral link copied to clipboard!');
-      setTimeout(() => setCopied(false), 2000);
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        await navigator.clipboard.writeText(referralLink);
+        setCopied(true);
+        toast.success('Referral link copied to clipboard!');
+        setTimeout(() => setCopied(false), 2000);
+      } else {
+        toast.error('Clipboard not available');
+      }
     } catch {
       toast.error('Failed to copy link');
     }
@@ -70,7 +76,9 @@ export default function ReferralPage() {
       whatsapp: `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`
     };
 
-    window.open(shareUrls[platform as keyof typeof shareUrls], '_blank');
+    if (typeof window !== 'undefined') {
+      window.open(shareUrls[platform as keyof typeof shareUrls], '_blank');
+    }
   };
 
   const formatDate = (dateString: string) => {

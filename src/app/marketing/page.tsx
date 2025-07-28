@@ -21,7 +21,7 @@ export default function MarketingPage() {
   })
   const [newNotification, setNewNotification] = useState({
     title: '',
-    message: '',
+    body: '',
     type: 'promotional' as 'promotional' | 'order_update' | 'reminder' | 'general',
     targetUsers: [] as string[],
     scheduledDate: ''
@@ -76,7 +76,7 @@ export default function MarketingPage() {
   const handleCreateNotification = () => {
     createPushNotification({
       title: newNotification.title,
-      message: newNotification.message,
+      body: newNotification.body,
       type: newNotification.type,
       targetUsers: newNotification.targetUsers,
       scheduledDate: newNotification.scheduledDate,
@@ -84,7 +84,7 @@ export default function MarketingPage() {
     })
     setNewNotification({ 
       title: '', 
-      message: '', 
+      body: '', 
       type: 'promotional', 
       targetUsers: [], 
       scheduledDate: '' 
@@ -93,14 +93,32 @@ export default function MarketingPage() {
   }
 
   const handleCreateBanner = () => {
+    // Convert simple targetAudience to complex object structure
+    const targetAudienceObj = {
+      all: newBanner.targetAudience === 'all',
+      newUsers: newBanner.targetAudience === 'new',
+      returningUsers: newBanner.targetAudience === 'returning',
+      tierLevels: newBanner.targetAudience === 'vip' ? ['gold', 'platinum'] : [],
+      categories: []
+    };
+
     createBanner({
       title: newBanner.title,
       description: newBanner.description,
       imageUrl: newBanner.imageUrl,
       ctaText: newBanner.ctaText,
-      ctaUrl: newBanner.ctaUrl,
-      targetAudience: newBanner.targetAudience,
-      location: newBanner.location,
+      ctaLink: newBanner.ctaUrl,
+      type: 'hero',
+      position: 'top',
+      priority: 1,
+      isActive: true,
+      targetAudience: targetAudienceObj,
+      displayRules: {
+        maxViews: 1000,
+        maxClicksPerUser: 5,
+        showOnPages: [newBanner.location],
+        deviceTypes: ['desktop', 'mobile', 'tablet']
+      },
       startDate: newBanner.startDate,
       endDate: newBanner.endDate
     })
@@ -184,15 +202,23 @@ export default function MarketingPage() {
                         onChange={(e) => setNewCampaign({ ...newCampaign, subject: e.target.value })}
                         className="border border-gray-300 rounded-lg px-3 py-2"
                       />
+                      <input
+                        type="text"
+                        placeholder="Campaign Tags (comma-separated)"
+                        value={Array.isArray(newCampaign.tags) ? newCampaign.tags.join(', ') : ''}
+                        onChange={(e) => setNewCampaign({ ...newCampaign, tags: e.target.value.split(',').map(tag => tag.trim()) })}
+                        className="border border-gray-300 rounded-lg px-3 py-2"
+                      />
                       <select
-                        value={newCampaign.targetAudience}
-                        onChange={(e) => setNewCampaign({ ...newCampaign, targetAudience: e.target.value as 'all' | 'new' | 'returning' | 'vip' })}
+                        value={newCampaign.type}
+                        onChange={(e) => setNewCampaign({ ...newCampaign, type: e.target.value as 'promotional' | 'newsletter' | 'abandoned_cart' | 'welcome' | 'order_confirmation' })}
                         className="border border-gray-300 rounded-lg px-3 py-2"
                       >
-                        <option value="all">All Users</option>
-                        <option value="new">New Users</option>
-                        <option value="returning">Returning Users</option>
-                        <option value="vip">VIP Users</option>
+                        <option value="newsletter">Newsletter</option>
+                        <option value="promotional">Promotional</option>
+                        <option value="abandoned_cart">Abandoned Cart</option>
+                        <option value="welcome">Welcome</option>
+                        <option value="order_confirmation">Order Confirmation</option>
                       </select>
                       <input
                         type="datetime-local"
@@ -225,16 +251,13 @@ export default function MarketingPage() {
                         onChange={(e) => setNewNotification({ ...newNotification, title: e.target.value })}
                         className="border border-gray-300 rounded-lg px-3 py-2"
                       />
-                      <select
-                        value={newNotification.targetAudience}
-                        onChange={(e) => setNewNotification({ ...newNotification, targetAudience: e.target.value as 'all' | 'new' | 'returning' | 'vip' })}
+                      <input
+                        type="text"
+                        placeholder="Target Users (comma-separated user IDs or 'all')"
+                        value={Array.isArray(newNotification.targetUsers) ? newNotification.targetUsers.join(', ') : newNotification.targetUsers}
+                        onChange={(e) => setNewNotification({ ...newNotification, targetUsers: e.target.value === 'all' ? ['all'] : e.target.value.split(',').map(id => id.trim()) })}
                         className="border border-gray-300 rounded-lg px-3 py-2"
-                      >
-                        <option value="all">All Users</option>
-                        <option value="new">New Users</option>
-                        <option value="returning">Returning Users</option>
-                        <option value="vip">VIP Users</option>
-                      </select>
+                      />
                       <input
                         type="datetime-local"
                         value={newNotification.scheduledDate}
@@ -244,8 +267,8 @@ export default function MarketingPage() {
                     </div>
                     <textarea
                       placeholder="Notification Message"
-                      value={newNotification.message}
-                      onChange={(e) => setNewNotification({ ...newNotification, message: e.target.value })}
+                      value={newNotification.body}
+                      onChange={(e) => setNewNotification({ ...newNotification, body: e.target.value })}
                       rows={3}
                       className="w-full border border-gray-300 rounded-lg px-3 py-2"
                     />
@@ -353,12 +376,12 @@ export default function MarketingPage() {
                             <p className="text-sm text-gray-600 mb-2">Subject: {campaign.subject}</p>
                             <p className="text-sm text-gray-600 mb-2">Content: {campaign.content}</p>
                             <div className="flex items-center space-x-4 text-sm text-gray-500">
-                              <span>Target: {campaign.targetAudience}</span>
+                              <span>Type: {campaign.type}</span>
                               <span>Status: {campaign.status}</span>
-                              <span>Scheduled: {campaign.scheduledDate.toLocaleDateString()}</span>
-                              <span>Sent: {campaign.sentCount}</span>
-                              <span>Opened: {campaign.openCount}</span>
-                              <span>Clicked: {campaign.clickCount}</span>
+                              <span>Recipients: {campaign.recipients.length}</span>
+                              <span>Tags: {campaign.tags.join(', ')}</span>
+                              {campaign.scheduledDate && <span>Scheduled: {new Date(campaign.scheduledDate).toLocaleDateString()}</span>}
+                              {campaign.openRate && <span>Open Rate: {(campaign.openRate * 100).toFixed(1)}%</span>}
                             </div>
                           </div>
                           <Button
@@ -387,13 +410,13 @@ export default function MarketingPage() {
                         <div className="flex justify-between items-start">
                           <div>
                             <h4 className="font-semibold text-gray-900">{notification.title}</h4>
-                            <p className="text-sm text-gray-600 mb-2">{notification.message}</p>
+                            <p className="text-sm text-gray-600 mb-2">{notification.body}</p>
                             <div className="flex items-center space-x-4 text-sm text-gray-500">
-                              <span>Target: {notification.targetAudience}</span>
-                              <span>Status: {notification.status}</span>
-                              <span>Scheduled: {notification.scheduledDate.toLocaleDateString()}</span>
-                              <span>Sent: {notification.sentCount}</span>
-                              <span>Clicked: {notification.clickCount}</span>
+                              <span>Target: {notification.targetUsers.join(', ')}</span>
+                              <span>Type: {notification.type}</span>
+                              <span>Clicks: {notification.clickCount}</span>
+                              <span>Active: {notification.isActive ? 'Yes' : 'No'}</span>
+                              {notification.scheduledDate && <span>Scheduled: {new Date(notification.scheduledDate).toLocaleDateString()}</span>}
                             </div>
                           </div>
                           <Button
@@ -433,15 +456,21 @@ export default function MarketingPage() {
                               />
                             )}
                             <div className="flex items-center space-x-4 text-sm text-gray-500">
-                              <span>Target: {banner.targetAudience}</span>
-                              <span>Location: {banner.location}</span>
+                              <span>Target: {
+                                banner.targetAudience.all ? 'All Users' :
+                                banner.targetAudience.newUsers ? 'New Users' :
+                                banner.targetAudience.returningUsers ? 'Returning Users' :
+                                banner.targetAudience.tierLevels.length > 0 ? `Tier: ${banner.targetAudience.tierLevels.join(', ')}` :
+                                'Custom'
+                              }</span>
+                              <span>Location: {banner.displayRules.showOnPages.join(', ')}</span>
                               <span>Status: {banner.isActive ? 'Active' : 'Inactive'}</span>
-                              <span>Views: {banner.viewCount}</span>
-                              <span>Clicks: {banner.clickCount}</span>
+                              <span>Views: {banner.analytics.views}</span>
+                              <span>Clicks: {banner.analytics.clicks}</span>
                             </div>
                             <div className="flex items-center space-x-4 text-sm text-gray-500 mt-1">
-                              <span>Start: {banner.startDate.toLocaleDateString()}</span>
-                              <span>End: {banner.endDate.toLocaleDateString()}</span>
+                              <span>Start: {new Date(banner.startDate).toLocaleDateString()}</span>
+                              <span>End: {new Date(banner.endDate).toLocaleDateString()}</span>
                             </div>
                           </div>
                           <Button

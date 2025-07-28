@@ -13,7 +13,7 @@ interface SaveForLaterButtonProps {
   className?: string;
 }
 
-const reasonLabels: Record<SavedItem['reason'], string> = {
+const reasonLabels: Record<NonNullable<SavedItem['reason']>, string> = {
   price_check: 'Price Check',
   out_of_stock: 'Out of Stock',
   consider_later: 'Consider Later',

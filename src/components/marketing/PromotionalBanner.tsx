@@ -17,10 +17,10 @@ export default function PromotionalBanner({ location, className = '' }: Promotio
 
   // Get active banners for this location
   const activeBanners = banners.filter(banner => 
-    banner.location === location && 
+    banner.displayRules.showOnPages.includes(location) && 
     banner.isActive &&
-    new Date() >= banner.startDate &&
-    new Date() <= banner.endDate &&
+    new Date() >= new Date(banner.startDate) &&
+    new Date() <= new Date(banner.endDate) &&
     !dismissedBanners.has(banner.id)
   )
 
@@ -67,9 +67,9 @@ export default function PromotionalBanner({ location, className = '' }: Promotio
                   <p className="text-blue-100 text-sm mt-1">{banner.description}</p>
                 )}
               </div>
-              {banner.ctaText && banner.ctaUrl && (
+              {banner.ctaText && banner.ctaLink && (
                 <Link
-                  href={banner.ctaUrl}
+                  href={banner.ctaLink}
                   onClick={() => handleBannerClick(banner.id)}
                   className="bg-white text-blue-600 px-6 py-2 rounded-full font-semibold hover:bg-blue-50 transition-colors"
                 >
