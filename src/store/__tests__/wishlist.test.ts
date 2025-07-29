@@ -102,19 +102,19 @@ describe('Wishlist Store', () => {
     })
   })
 
-  describe('getItemCount', () => {
+  describe('item count', () => {
     it('should return correct item count', () => {
       const product1 = createMockProduct({ id: 1 })
       const product2 = createMockProduct({ id: 2 })
-      const { addToWishlist, getItemCount } = useWishlistStore.getState()
+      const { addToWishlist } = useWishlistStore.getState()
 
-      expect(getItemCount()).toBe(0)
+      expect(useWishlistStore.getState().items).toHaveLength(0)
 
       addToWishlist(product1)
-      expect(getItemCount()).toBe(1)
+      expect(useWishlistStore.getState().items).toHaveLength(1)
 
       addToWishlist(product2)
-      expect(getItemCount()).toBe(2)
+      expect(useWishlistStore.getState().items).toHaveLength(2)
     })
   })
 })

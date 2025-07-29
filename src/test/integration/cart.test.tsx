@@ -40,7 +40,7 @@ describe('Shopping Cart Integration', () => {
     const user = userEvent.setup()
     
     // Click add to cart button
-    const addToCartButton = screen.getByText('Add to Cart')
+    const addToCartButton = screen.getByText('Add to cart')
     await user.click(addToCartButton)
     
     // Check cart state
@@ -64,12 +64,12 @@ describe('Shopping Cart Integration', () => {
     const user = userEvent.setup()
     
     // Add first product
-    const addToCartButton1 = screen.getByText('Add to Cart')
+    const addToCartButton1 = screen.getByText('Add to cart')
     await user.click(addToCartButton1)
     
     // Render second product and add to cart
     rerender(<ProductCard product={product2} />)
-    const addToCartButton2 = screen.getByText('Add to Cart')
+    const addToCartButton2 = screen.getByText('Add to cart')
     await user.click(addToCartButton2)
     
     // Check cart state
@@ -87,7 +87,7 @@ describe('Shopping Cart Integration', () => {
     const { userEvent } = await import('@testing-library/user-event')
     const user = userEvent.setup()
     
-    const addToCartButton = screen.getByText('Add to Cart')
+    const addToCartButton = screen.getByText('Add to cart')
     
     // Add product multiple times
     await user.click(addToCartButton)
@@ -120,7 +120,7 @@ describe('Shopping Cart Integration', () => {
     expect(wishlistState.items[0]).toEqual(product)
     
     // Then add to cart
-    const addToCartButton = screen.getByText('Add to Cart')
+    const addToCartButton = screen.getByText('Add to cart')
     await user.click(addToCartButton)
     
     // Check both states

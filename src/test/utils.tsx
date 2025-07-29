@@ -1,10 +1,11 @@
 import { render, RenderOptions } from '@testing-library/react'
 import { ReactElement, ReactNode } from 'react'
+import { vi } from 'vitest'
 import { Product, User, CartItem } from '@/types'
 
 // Custom render function that includes providers
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
-  // Add any custom options here
+  initialProps?: Record<string, unknown>;
 }
 
 export const customRender = (
@@ -32,6 +33,14 @@ export const createMockProduct = (overrides?: Partial<Product>): Product => ({
   },
   ...overrides,
 })
+
+export const mockProducts: Product[] = [
+  createMockProduct({ id: 1, title: 'Product 1', price: 10.99 }),
+  createMockProduct({ id: 2, title: 'Product 2', price: 15.50 }),
+  createMockProduct({ id: 3, title: 'Product 3', price: 20.00 }),
+  createMockProduct({ id: 4, title: 'Product 4', price: 25.99 }),
+  createMockProduct({ id: 5, title: 'Product 5', price: 30.00 }),
+]
 
 export const createMockUser = (overrides?: Partial<User>): User => ({
   id: 1,

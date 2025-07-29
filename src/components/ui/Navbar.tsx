@@ -108,7 +108,7 @@ const Navbar = () => {
             {theme === 'dark' ? <FaSun size={18} /> : <FaMoon size={18} />}
           </button>
           <Link href="/wishlist" className="relative group p-2 text-primary hover:bg-accent/10 rounded-full transition">
-            <FaHeart size={20} />
+            <FaHeart size={20} data-testid="wishlist-icon" aria-label={`Wishlist (${wishlistItems.length} items)`} />
             {wishlistItems.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-error text-white text-xs rounded-full h-5 w-5 flex items-center justify-center border-2 border-background">
                 {wishlistItems.length}
@@ -124,7 +124,7 @@ const Navbar = () => {
             )}
           </Link>
           <Link href="/cart" className="relative group p-2 text-primary hover:bg-accent/10 rounded-full transition">
-            <FaShoppingCart size={20} />
+            <FaShoppingCart size={20} data-testid="cart-icon" aria-label={`Cart (${cart.totalItems} items)`} />
             {cart.totalItems > 0 && (
               <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center border-2 border-background">
                 {cart.totalItems}
@@ -160,7 +160,7 @@ const Navbar = () => {
             {theme === 'dark' ? <FaSun size={16} /> : <FaMoon size={16} />}
           </button>
           <Link href="/cart" className="relative p-2 text-primary hover:bg-accent/10 rounded-full transition">
-            <FaShoppingCart size={18} />
+            <FaShoppingCart size={18} data-testid="cart-icon" aria-label={`Cart (${cart.totalItems} items)`} />
             {cart.totalItems > 0 && (
               <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-4 w-4 flex items-center justify-center border border-background">
                 {cart.totalItems}

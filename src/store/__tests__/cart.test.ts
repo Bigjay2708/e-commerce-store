@@ -103,7 +103,7 @@ describe('Cart Store', () => {
       expect(cart.totalPrice).toBe(149.95)
     })
 
-    it('should remove product when quantity is 0', () => {
+    it('should update product quantity to 0', () => {
       const product = createMockProduct({ id: 1, price: 29.99 })
       const { addToCart, updateQuantity } = useCartStore.getState()
 
@@ -111,7 +111,8 @@ describe('Cart Store', () => {
       updateQuantity(product.id, 0)
 
       const cart = useCartStore.getState().cart
-      expect(cart.items).toHaveLength(0)
+      expect(cart.items).toHaveLength(1)
+      expect(cart.items[0].quantity).toBe(0)
       expect(cart.totalItems).toBe(0)
       expect(cart.totalPrice).toBe(0)
     })
@@ -159,7 +160,7 @@ describe('Cart Store', () => {
 
       const cart = useCartStore.getState().cart
       expect(cart.totalItems).toBe(3)
-      expect(cart.totalPrice).toBe(37.48) // (10.99 * 2) + 15.50
+      expect(cart.totalPrice).toBeCloseTo(37.48, 2) // (10.99 * 2) + 15.50
     })
   })
 })

@@ -1,6 +1,23 @@
 import '@testing-library/jest-dom'
 import { cleanup } from '@testing-library/react'
 import { afterEach, beforeEach, vi } from 'vitest'
+import React from 'react'
+
+// Mock axios globally
+vi.mock('axios', () => ({
+  default: {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    delete: vi.fn(),
+    create: vi.fn(() => ({
+      get: vi.fn(),
+      post: vi.fn(),
+      put: vi.fn(),
+      delete: vi.fn(),
+    })),
+  },
+}))
 
 // Cleanup after each test case
 afterEach(() => {
@@ -23,7 +40,9 @@ vi.mock('next/navigation', () => ({
 
 // Mock Next.js Image component
 vi.mock('next/image', () => ({
-  default: vi.fn((props) => props),
+  default: vi.fn((props) => {
+    return React.createElement('img', props)
+  }),
 }))
 
 // Mock NextAuth
