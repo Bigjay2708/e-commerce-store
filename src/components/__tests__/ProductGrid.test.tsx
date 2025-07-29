@@ -22,8 +22,7 @@ describe('ProductGrid Component', () => {
     
     render(<ProductGrid products={products} />);
     
-    // Use class name instead of data-testid for now
-    const grid = document.querySelector('.grid.grid-cols-1');
+    const grid = screen.getByTestId('product-grid');
     expect(grid).toBeInTheDocument();
     
     const productCards = screen.getAllByTestId('product-card');
@@ -43,7 +42,7 @@ describe('ProductGrid Component', () => {
   it('renders empty grid when no products provided', () => {
     render(<ProductGrid products={[]} />);
     
-    const grid = document.querySelector('.grid');
+    const grid = screen.getByTestId('product-grid');
     expect(grid).toBeInTheDocument();
     
     const productCards = screen.queryAllByTestId('product-card');
@@ -120,7 +119,8 @@ describe('ProductGrid Component', () => {
     render(<ProductGrid products={products} />);
     
     const grid = screen.getByTestId('product-grid');
-    expect(grid).toHaveAttribute('role', 'grid');
+    expect(grid).toHaveAttribute('role', 'region');
+    expect(grid).toHaveAttribute('aria-label', 'Product grid');
   });
 
   it('handles responsive grid layout', () => {

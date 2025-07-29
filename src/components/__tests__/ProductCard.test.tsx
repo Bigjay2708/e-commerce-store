@@ -122,6 +122,19 @@ describe('ProductCard Component', () => {
     expect(mockAddToWishlist).toHaveBeenCalledWith(mockProduct)
   })
 
+  it('should call removeFromWishlist when product is already in wishlist', async () => {
+    mockIsInWishlist.mockReturnValue(true)
+    const { userEvent } = await import('@testing-library/user-event')
+    const user = userEvent.setup()
+    
+    customRender(<ProductCard product={mockProduct} />)
+    
+    const wishlistButton = screen.getByLabelText(/remove from wishlist/i)
+    await user.click(wishlistButton)
+    
+    expect(mockRemoveFromWishlist).toHaveBeenCalledWith(mockProduct.id)
+  })
+
   it('should render wishlist button', async () => {
     customRender(<ProductCard product={mockProduct} />)
     

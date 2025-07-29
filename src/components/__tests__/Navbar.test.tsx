@@ -72,8 +72,9 @@ describe('Navbar Component', () => {
   it('renders navigation logo', () => {
     render(<Navbar />);
     
-    const logo = screen.getByAltText(/logo/i);
-    expect(logo).toBeInTheDocument();
+    const logoLink = screen.getByRole('link', { name: /shopease/i });
+    expect(logoLink).toBeInTheDocument();
+    expect(logoLink).toHaveAttribute('href', '/');
   });
 
   it('renders main navigation links', () => {
