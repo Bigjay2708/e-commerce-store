@@ -1,0 +1,87 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - link "ShopEase":
+    - /url: /
+  - navigation:
+    - link "Home":
+      - /url: /
+    - link "Products":
+      - /url: /products
+    - link "Compare":
+      - /url: /comparison
+    - link "Saved":
+      - /url: /saved
+    - link "Loyalty":
+      - /url: /loyalty
+    - link "Referral":
+      - /url: /referral
+    - link "Marketing":
+      - /url: /marketing
+    - link "About":
+      - /url: /about
+  - button "Toggle theme":
+    - img
+  - link "Wishlist (0 items)":
+    - /url: /wishlist
+    - img "Wishlist (0 items)"
+  - link:
+    - /url: /saved
+    - img
+  - link "Cart (0 items)":
+    - /url: /cart
+    - img "Cart (0 items)"
+  - link:
+    - /url: /login
+    - img
+  - button "Toggle theme":
+    - img
+  - link "Cart (0 items)":
+    - /url: /cart
+    - img "Cart (0 items)"
+  - button "Open menu"
+  - heading "Menu" [level=3]
+  - button "Close menu":
+    - img
+  - navigation:
+    - link "🏠Home":
+      - /url: /
+    - link "🛍️Products":
+      - /url: /products
+    - link "⚖️Compare":
+      - /url: /comparison
+    - link "Wishlist":
+      - /url: /wishlist
+      - img
+      - text: Wishlist
+    - link "Saved for Later":
+      - /url: /saved
+      - img
+      - text: Saved for Later
+    - link "ℹ️About":
+      - /url: /about
+    - link "🏆Loyalty":
+      - /url: /loyalty
+    - link "🤝Referral":
+      - /url: /referral
+    - link "📢Marketing":
+      - /url: /marketing
+    - link "Sign In":
+      - /url: /login
+      - img
+      - text: Sign In
+  - text: ShopEasev1.0
+- main:
+  - heading "Enable Notifications" [level=4]
+  - paragraph: Get notified about special offers and updates
+  - button "Enable"
+  - heading "Welcome to ShopEase" [level=1]
+  - paragraph: Discover our wide range of quality products at unbeatable prices.
+  - button "Shop Now"
+  - heading "Featured Products" [level=2]
+  - button "All"
+  - combobox:
+    - option "All Categories" [selected]
+  - img
+```

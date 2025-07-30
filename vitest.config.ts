@@ -11,6 +11,7 @@ export default defineConfig({
     include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     exclude: ['src/test/e2e/**/*'],
     cache: false,
+    pool: 'forks',
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
