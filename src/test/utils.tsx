@@ -46,7 +46,6 @@ export const createMockUser = (overrides?: Partial<User>): User => ({
   id: 1,
   email: 'test@example.com',
   username: 'testuser',
-  password: 'password123',
   name: {
     firstname: 'John',
     lastname: 'Doe',
@@ -62,6 +61,9 @@ export const createMockUser = (overrides?: Partial<User>): User => ({
     },
   },
   phone: '555-1234',
+  followers: [],
+  following: [],
+  joined: '2024-01-01',
   ...overrides,
 })
 
