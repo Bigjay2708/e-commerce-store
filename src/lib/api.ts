@@ -1,31 +1,64 @@
 import axios from 'axios';
 import { Product, User } from '@/types';
 
-const API_URL = 'https://fakestoreapi.com';
+const API_URL = process.env.FAKE_STORE_API_URL || 'https://fakestoreapi.com';
+
+// Configure axios with security defaults
+const apiClient = axios.create({
+  baseURL: API_URL,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Request interceptor for logging
+apiClient.interceptors.request.use(
+  (config) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`API Request: ${config.method?.toUpperCase()} ${config.url}`);
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor for error handling
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('API Error:', error.response?.status, error.message);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const fetchProducts = async (): Promise<Product[]> => {
-  const response = await axios.get(`${API_URL}/products`);
+  const response = await apiClient.get('/products');
   return response.data;
 };
 
 export const fetchProductById = async (id: number): Promise<Product> => {
-  const response = await axios.get(`${API_URL}/products/${id}`);
+  const response = await apiClient.get(`/products/${id}`);
   return response.data;
 };
 
 export const fetchProductsByCategory = async (category: string): Promise<Product[]> => {
-  const response = await axios.get(`${API_URL}/products/category/${category}`);
+  const response = await apiClient.get(`/products/category/${category}`);
   return response.data;
 };
 
 export const fetchCategories = async (): Promise<string[]> => {
-  const response = await axios.get(`${API_URL}/products/categories`);
+  const response = await apiClient.get('/products/categories');
   return response.data;
 };
 
 export const login = async (username: string, password: string) => {
   try {
-    const response = await axios.post(`${API_URL}/auth/login`, {
+    const response = await apiClient.post('/auth/login', {
       username,
       password,
     });
@@ -35,6 +68,6 @@ export const login = async (username: string, password: string) => {
 };
 
 export const fetchUserById = async (id: number): Promise<User> => {
-  const response = await axios.get(`${API_URL}/users/${id}`);
+  const response = await apiClient.get(`/users/${id}`);
   return response.data;
 };

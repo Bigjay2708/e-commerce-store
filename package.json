@@ -13,13 +13,19 @@
     "test:watch": "vitest --watch",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:setup": "playwright install"
+    "test:e2e:setup": "playwright install",
+    "validate-env": "node scripts/validate-env.mjs",
+    "security-audit": "npm audit && npm run validate-env",
+    "prebuild": "npm run validate-env"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/bcryptjs": "^2.4.6",
     "axios": "^1.10.0",
+    "bcryptjs": "^3.0.2",
     "framer-motion": "^12.23.0",
+    "helmet": "^8.1.0",
     "lucide-react": "^0.526.0",
     "next": "15.3.4",
     "next-auth": "^4.24.11",
