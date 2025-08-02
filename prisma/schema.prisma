@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -24,7 +24,7 @@ model User {
 
 model Product {
   id          Int      @id @default(autoincrement())
-  name        String
+  name        String   @unique
   description String
   price       Float
   imageUrl    String
@@ -63,6 +63,8 @@ model Wishlist {
   product   Product  @relation(fields: [productId], references: [id])
   productId Int
   createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
 }
 
 model Review {

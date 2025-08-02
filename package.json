@@ -16,7 +16,12 @@
     "test:e2e:setup": "playwright install",
     "validate-env": "node scripts/validate-env.mjs",
     "security-audit": "npm audit && npm run validate-env",
-    "prebuild": "npm run validate-env"
+    "prebuild": "npm run validate-env",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset"
   },
   "dependencies": {
     "@prisma/client": "^6.13.0",
@@ -35,6 +40,7 @@
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
+    "stripe": "^17.7.0",
     "tailwind-merge": "^3.3.1",
     "uuid": "^11.1.0",
     "zustand": "^5.0.5"
@@ -59,7 +65,11 @@
     "jsdom": "^26.1.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
     "typescript": "^5",
     "vitest": "^3.2.4"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
