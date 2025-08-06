@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
+import { sendOrderConfirmationEmail } from '@/lib/email';
+import { getServerSession } from 'next-auth';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-06-20',
@@ -8,7 +10,23 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { paymentIntentId, userId, items } = await request.json();
+    const session = await getServerSession();
+    
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    const { paymentIntentId } = await request.json();
+
+    if (!paymentIntentId) {
+      return NextResponse.json(
+        { error: 'Payment intent ID is required' },
+        { status: 400 }
+      );
+    }
 
     // Verify payment intent with Stripe
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
@@ -20,15 +38,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Calculate total from items
-    const total = items.reduce((sum: number, item: { price: number; quantity: number }) => {
-      return sum + (item.price * item.quantity);
-    }, 0);
+    // Get user from database
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: 'User not found' },
+        { status: 404 }
+      );
+    }
+
+    // Parse items from payment intent metadata
+    const items = JSON.parse(paymentIntent.metadata.items || '[]');
+    const total = parseFloat((paymentIntent.amount / 100).toFixed(2));
 
     // Create order in database
     const order = await prisma.order.create({
       data: {
-        userId: parseInt(userId),
+        userId: user.id,
         total,
         status: 'completed',
         items: {
@@ -48,9 +77,33 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Send order confirmation email
+    try {
+      await sendOrderConfirmationEmail(user.email, {
+        orderId: order.id,
+        customerName: user.name || 'Customer',
+        items: order.items.map(item => ({
+          name: item.product.name,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        total: order.total,
+        orderDate: order.createdAt.toLocaleDateString(),
+      });
+    } catch (emailError) {
+      console.error('Order confirmation email failed:', emailError);
+      // Don't fail the order if email fails
+    }
+
     return NextResponse.json({
       success: true,
-      order,
+      order: {
+        id: order.id,
+        total: order.total,
+        status: order.status,
+        createdAt: order.createdAt,
+        items: order.items,
+      },
     });
 
   } catch (error) {

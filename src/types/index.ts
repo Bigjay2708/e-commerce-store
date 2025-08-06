@@ -1,3 +1,16 @@
+// Database Product type (matching Prisma schema)
+export interface DbProduct {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  createdAt?: string;
+  updatedAt?: string;
+  reviews?: DbReview[];
+}
+
+// Legacy Product type for compatibility
 export interface Product {
   id: number;
   title: string;
@@ -9,6 +22,18 @@ export interface Product {
     rate: number;
     count: number;
   };
+}
+
+// Database User type (matching Prisma schema)
+export interface DbUser {
+  id: number;
+  email: string;
+  name?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  orders?: DbOrder[];
+  wishlist?: DbWishlistItem[];
+  reviews?: DbReview[];
 }
 
 export interface User {
@@ -88,6 +113,49 @@ export interface OrderSummary {
   shipping: number;
   tax: number;
   total: number;
+}
+
+// Database types for real backend integration
+export interface DbWishlistItem {
+  id: number;
+  userId: number;
+  productId: number;
+  product?: DbProduct;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface DbOrder {
+  id: number;
+  userId: number;
+  stripeSessionId: string;
+  totalAmount: number;
+  status: string;
+  items: DbOrderItem[];
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface DbOrderItem {
+  id: number;
+  orderId: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  product?: DbProduct;
+}
+
+export interface DbReview {
+  id: number;
+  productId: number;
+  userId: number;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  user?: {
+    name?: string;
+    email: string;
+  };
 }
 
 // Social Commerce Types

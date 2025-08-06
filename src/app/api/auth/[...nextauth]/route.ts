@@ -1,30 +1,50 @@
 import NextAuth from "next-auth";
 import type { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { login } from "@/lib/api";
+import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text" },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.username || !credentials?.password) {
+        if (!credentials?.email || !credentials?.password) {
           return null;
-        }        try {
-          // API login
-          await login(
-            credentials.username,
-            credentials.password
-          );          // Create user
+        }
+
+        try {
+          // Find user in database
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email },
+          });
+
+          if (!user) {
+            return null;
+          }
+
+          // Verify password
+          const isValidPassword = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!isValidPassword) {
+            return null;
+          }
+
+          // Return user data
           return {
-            id: "1",
-            name: credentials.username,
-            email: `${credentials.username}@example.com`,
-          };        } catch {
+            id: user.id.toString(),
+            name: user.name,
+            email: user.email,
+          };
+        } catch (error) {
+          console.error("Authentication error:", error);
           return null;
         }
       },
@@ -44,7 +64,8 @@ const authOptions: AuthOptions = {
         token.id = user.id;
       }
       return token;
-    },    async session({ session, token }) {
+    },
+    async session({ session, token }) {
       if (session.user) {
         // Set type
         interface ExtendedUser {
