@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product } from '@/types';
+import { Product, DbProduct } from '@/types';
 import { FaStar } from 'react-icons/fa';
 import Button from '@/components/ui/Button';
 import { useCartStore } from '@/store/cart';
@@ -13,8 +13,30 @@ import SocialSharing from './SocialSharing';
 import CartFlyout from '@/components/cart/CartFlyout';
 
 interface ProductCardProps {
-  product: Product;
+  product: Product | DbProduct;
 }
+
+// Helper function to normalize product data
+const normalizeProduct = (product: Product | DbProduct): Product => {
+  if ('title' in product) {
+    // It's already a legacy Product
+    return product;
+  }
+  
+  // Convert DbProduct to Product format
+  return {
+    id: product.id,
+    title: product.name,
+    price: product.price,
+    description: product.description,
+    category: 'general', // Default category for database products
+    image: product.imageUrl,
+    rating: {
+      rate: 4.5, // Default rating until we implement review aggregation
+      count: 0
+    }
+  };
+};
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCartStore();

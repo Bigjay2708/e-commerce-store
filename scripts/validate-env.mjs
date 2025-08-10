@@ -11,6 +11,11 @@ function validateRequiredEnvVars() {
     'NEXTAUTH_URL',
   ];
   
+  // For Vercel, also check for DATABASE_URL
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+    requiredVars.push('DATABASE_URL');
+  }
+  
   const missing = requiredVars.filter(varName => !process.env[varName]);
   
   if (missing.length > 0) {

@@ -17,6 +17,13 @@
     "validate-env": "node scripts/validate-env.mjs",
     "security-audit": "npm audit && npm run validate-env",
     "prebuild": "npm run validate-env",
+    "postbuild": "npx prisma generate",
+    "db:deploy": "npx prisma migrate deploy && npx prisma db seed",
+    "setup:vercel": "bash scripts/setup-vercel-env.sh",
+    "setup:vercel-ps": "powershell -ExecutionPolicy Bypass -File scripts/setup-vercel-env.ps1",
+    "vercel:deploy": "vercel --prod",
+    "vercel:logs": "vercel logs",
+    "vercel:env": "vercel env ls"
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
