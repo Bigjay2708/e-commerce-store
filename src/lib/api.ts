@@ -134,14 +134,15 @@ export const uploadFile = async (file: File) => {
 // Email API functions
 export const sendEmail = async (emailData: {
   email: string;
-  orderData: any;
+  orderData: Record<string, unknown>;
 }) => {
   const response = await apiClient.post('/email/send', emailData);
   return response.data;
 };
 
 // Legacy functions for backward compatibility (will be removed)
-export const fetchProductsByCategory = async (category: string): Promise<Product[]> => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const fetchProductsByCategory = async (_category: string): Promise<Product[]> => {
   // This would need to be implemented with category filtering in the database
   const products = await fetchProducts();
   return products; // For now, return all products
@@ -152,12 +153,14 @@ export const fetchCategories = async (): Promise<string[]> => {
   return ['electronics', 'clothing', 'books']; // Mock categories
 };
 
-export const login = async (username: string, password: string) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const login = async (_username: string, _password: string) => {
   // This is handled by NextAuth now, keeping for compatibility
   throw new Error('Use NextAuth signIn instead');
 };
 
-export const fetchUserById = async (id: number): Promise<User> => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const fetchUserById = async (_id: number): Promise<User> => {
   // This would need to be implemented if needed
   throw new Error('Not implemented - use session data instead');
 };

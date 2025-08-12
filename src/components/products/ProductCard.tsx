@@ -28,9 +28,9 @@ const normalizeProduct = (product: Product | DbProduct): Product => {
     id: product.id,
     title: product.name,
     price: product.price,
-    description: product.description,
+    description: product.description || '',
     category: 'general', // Default category for database products
-    image: product.imageUrl,
+    image: product.imageUrl || '/placeholder-image.jpg',
     rating: {
       rate: 4.5, // Default rating until we implement review aggregation
       count: 0
@@ -42,6 +42,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCartStore();
   const [flyoutOpen, setFlyoutOpen] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
+
+  // Normalize the product to ensure consistent structure
+  const normalizedProduct = normalizeProduct(product);
 
   const handleAddToCart = () => {
     // Animation: clone image and animate to cart icon
@@ -72,8 +75,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         }, 800);
       }
     }
-    addToCart(product);
-    toast.success(`${product.title} added to cart!`);
+    addToCart(normalizedProduct);
+    toast.success(`${normalizedProduct.title} added to cart!`);
     setFlyoutOpen(true);
     setTimeout(() => setFlyoutOpen(false), 2200);
   };
@@ -83,8 +86,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div ref={imgRef}>
         <Link href={`/products/${product.id}`} className="block relative h-40 sm:h-48 overflow-hidden bg-gray-50 dark:bg-gray-700">
           <Image
-            src={product.image}
-            alt={product.title}
+            src={normalizedProduct.image}
+            alt={normalizedProduct.title}
             fill
             className="object-contain p-2 sm:p-4 group-hover:scale-110 transition-transform duration-300"
             sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
@@ -96,12 +99,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="flex justify-between items-start gap-2">
           <Link href={`/products/${product.id}`} className="group flex-1">
             <h3 className="text-sm sm:text-lg font-bold text-foreground line-clamp-2 sm:line-clamp-1 group-hover:text-primary transition-colors">
-              {product.title}
+              {normalizedProduct.title}
             </h3>
           </Link>
           <div className="flex items-center space-x-1">
-            <SaveForLaterButton product={product} variant="icon" size="sm" />
-            <WishlistButton product={product} />
+            <SaveForLaterButton product={normalizedProduct} variant="icon" size="sm" />
+            <WishlistButton product={normalizedProduct} />
           </div>
         </div>
         <p className="text-xs sm:text-sm text-muted line-clamp-2 font-medium">
@@ -110,7 +113,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="flex items-center gap-1 sm:gap-2 mt-1">
           <FaStar className="text-yellow-500 text-xs sm:text-sm" />
           <span className="text-xs sm:text-sm font-medium text-foreground">
-            {product.rating.rate} <span className="text-muted">({product.rating.count})</span>
+            {normalizedProduct.rating.rate} <span className="text-muted">({normalizedProduct.rating.count})</span>
           </span>
         </div>
         <div className="mt-2 sm:mt-3 flex items-center justify-between gap-2">
@@ -127,8 +130,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </Button>
         </div>
         <div className="mt-2 sm:mt-3 flex items-center justify-between gap-2">
-          <ComparisonButton product={product} className="text-xs sm:text-sm" />
-          <SocialSharing product={product} />
+          <ComparisonButton product={normalizedProduct} className="text-xs sm:text-sm" />
+          <SocialSharing product={normalizedProduct} />
         </div>
       </div>
       <CartFlyout open={flyoutOpen} onClose={() => setFlyoutOpen(false)} />

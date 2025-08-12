@@ -3,11 +3,6 @@
   "outputDirectory": ".next",
   "framework": "nextjs",
   "installCommand": "npm install",
-  "env": {
-    "NEXTAUTH_SECRET": "@nextauth-secret",
-    "NEXTAUTH_URL": "@nextauth-url",
-    "DATABASE_URL": "@database-url"
-  },
   "functions": {
     "src/app/api/**/*.ts": {
       "maxDuration": 30

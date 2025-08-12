@@ -23,7 +23,7 @@
     "setup:vercel-ps": "powershell -ExecutionPolicy Bypass -File scripts/setup-vercel-env.ps1",
     "vercel:deploy": "vercel --prod",
     "vercel:logs": "vercel logs",
-    "vercel:env": "vercel env ls"
+    "vercel:env": "vercel env ls",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
