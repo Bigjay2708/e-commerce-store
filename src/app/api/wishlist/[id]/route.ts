@@ -4,8 +4,9 @@ import { getServerSession } from 'next-auth';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
+  const { params } = context;
   try {
     const session = await getServerSession();
     
