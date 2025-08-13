@@ -4,9 +4,11 @@ import { getServerSession } from 'next-auth';
 
 export async function POST(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const resolvedParams = await params;
+  const productId = parseInt(resolvedParams.id);
+  
   try {
     const session = await getServerSession();
     
@@ -17,7 +19,6 @@ export async function POST(
       );
     }
 
-    const productId = parseInt(params.id);
     const { rating, comment } = await request.json();
 
     if (isNaN(productId)) {
