@@ -5,7 +5,7 @@ import { sendOrderConfirmationEmail } from '@/lib/email';
 import { getServerSession } from 'next-auth';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
+  apiVersion: '2025-02-24.acacia',
 });
 
 export async function POST(request: NextRequest) {
