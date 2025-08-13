@@ -4,9 +4,9 @@ import { getServerSession } from 'next-auth';
 
 export async function DELETE(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const resolvedParams = await params;
   try {
     const session = await getServerSession();
     
@@ -17,7 +17,7 @@ export async function DELETE(
       );
     }
 
-    const productId = parseInt(params.id);
+    const productId = parseInt(resolvedParams.id);
 
     if (isNaN(productId)) {
       return NextResponse.json(
