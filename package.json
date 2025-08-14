@@ -16,7 +16,7 @@
     "test:e2e:setup": "playwright install",
     "validate-env": "node scripts/validate-env.mjs",
     "security-audit": "npm audit && npm run validate-env",
-    "prebuild": "npm run validate-env",
+    "prebuild": "npm run validate-env && npx prisma generate",
     "postbuild": "npx prisma generate",
     "db:deploy": "npx prisma migrate deploy && npx prisma db seed",
     "setup:vercel": "bash scripts/setup-vercel-env.sh",

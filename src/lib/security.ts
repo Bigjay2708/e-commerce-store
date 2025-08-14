@@ -79,7 +79,7 @@ export function getClientIP(request: NextRequest): string {
   if (forwarded) return forwarded.split(',')[0].trim();
   if (realIp) return realIp;
   
-  return request.ip || 'unknown';
+  return 'unknown';
 }
 
 // Request logging for security monitoring
