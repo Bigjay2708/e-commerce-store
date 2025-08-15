@@ -10,7 +10,7 @@ test.describe('Wishlist E2E', () => {
     await page.goto('/wishlist');
     
     // Verify we're on wishlist page
-    await expect(page).toHaveURL('**/wishlist');
+    await expect(page).toHaveURL(/.*\/wishlist$/);
     await expect(page.locator('h1')).toContainText('Wishlist');
   });
 

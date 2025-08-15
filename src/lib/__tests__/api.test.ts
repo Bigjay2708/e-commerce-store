@@ -1,10 +1,37 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import axios from 'axios';
-import { fetchProducts, fetchProductById } from '@/lib/api';
+import { describe, it, expect, vi, beforeEach, afterEach, type MockedFunction } from 'vitest';
 
-// Mock axios
-vi.mock('axios');
+// Mock axios before any imports
+vi.mock('axios', () => {
+  const mockInstance = {
+    interceptors: {
+      request: { use: vi.fn() },
+      response: { use: vi.fn() }
+    },
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    delete: vi.fn(),
+  };
+
+  return {
+    default: {
+      create: vi.fn(() => mockInstance),
+      get: vi.fn(),
+      post: vi.fn(),
+      put: vi.fn(),
+      delete: vi.fn(),
+    }
+  };
+});
+
+// Import API functions after mocking axios
+import { fetchProducts, fetchProductById } from '@/lib/api';
+import axios from 'axios';
+
+// Get the mocked axios instance
 const mockedAxios = vi.mocked(axios);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mockAxiosInstance = (mockedAxios.create as any)();
 
 describe('API Functions', () => {
   beforeEach(() => {
@@ -22,24 +49,24 @@ describe('API Functions', () => {
         { id: 2, title: 'Product 2', price: 39.99 },
       ];
 
-      mockedAxios.get.mockResolvedValueOnce({
+      mockAxiosInstance.get.mockResolvedValueOnce({
         data: mockProducts,
       });
 
       const result = await fetchProducts();
 
-      expect(mockedAxios.get).toHaveBeenCalledWith('https://fakestoreapi.com/products');
+      expect(mockAxiosInstance.get).toHaveBeenCalledWith('/products');
       expect(result).toEqual(mockProducts);
     });
 
     it('throws error when request fails', async () => {
-      mockedAxios.get.mockRejectedValueOnce(new Error('Network error'));
+      mockAxiosInstance.get.mockRejectedValueOnce(new Error('Network error'));
 
       await expect(fetchProducts()).rejects.toThrow('Network error');
     });
 
     it('handles server errors', async () => {
-      mockedAxios.get.mockRejectedValueOnce({
+      mockAxiosInstance.get.mockRejectedValueOnce({
         response: { status: 500, statusText: 'Internal Server Error' },
       });
 
@@ -47,7 +74,7 @@ describe('API Functions', () => {
     });
 
     it('handles empty response', async () => {
-      mockedAxios.get.mockResolvedValueOnce({
+      mockAxiosInstance.get.mockResolvedValueOnce({
         data: [],
       });
 
@@ -56,11 +83,11 @@ describe('API Functions', () => {
     });
 
     it('makes request to correct URL', async () => {
-      mockedAxios.get.mockResolvedValueOnce({ data: [] });
+      mockAxiosInstance.get.mockResolvedValueOnce({ data: [] });
 
       await fetchProducts();
 
-      expect(mockedAxios.get).toHaveBeenCalledWith('https://fakestoreapi.com/products');
+      expect(mockAxiosInstance.get).toHaveBeenCalledWith('/products');
     });
   });
 
@@ -76,18 +103,18 @@ describe('API Functions', () => {
         rating: { rate: 4.5, count: 100 },
       };
 
-      mockedAxios.get.mockResolvedValueOnce({
+      mockAxiosInstance.get.mockResolvedValueOnce({
         data: mockProduct,
       });
 
       const result = await fetchProductById(1);
 
-      expect(mockedAxios.get).toHaveBeenCalledWith('https://fakestoreapi.com/products/1');
+      expect(mockAxiosInstance.get).toHaveBeenCalledWith('/products/1');
       expect(result).toEqual(mockProduct);
     });
 
     it('throws error when product not found', async () => {
-      mockedAxios.get.mockRejectedValueOnce({
+      mockAxiosInstance.get.mockRejectedValueOnce({
         response: { status: 404, statusText: 'Not Found' },
       });
 
@@ -95,7 +122,7 @@ describe('API Functions', () => {
     });
 
     it('handles network errors for product fetch', async () => {
-      mockedAxios.get.mockRejectedValueOnce(new Error('Network error'));
+      mockAxiosInstance.get.mockRejectedValueOnce(new Error('Network error'));
 
       await expect(fetchProductById(1)).rejects.toThrow('Network error');
     });
@@ -111,13 +138,13 @@ describe('API Functions', () => {
         rating: { rate: 3.8, count: 50 },
       };
 
-      mockedAxios.get.mockResolvedValueOnce({
+      mockAxiosInstance.get.mockResolvedValueOnce({
         data: mockProduct,
       });
 
       const result = await fetchProductById(5);
 
-      expect(mockedAxios.get).toHaveBeenCalledWith('https://fakestoreapi.com/products/5');
+      expect(mockAxiosInstance.get).toHaveBeenCalledWith('/products/5');
       expect(result).toEqual(mockProduct);
       expect(result.id).toBe(5);
     });
@@ -133,7 +160,7 @@ describe('API Functions', () => {
         rating: { rate: 4.5, count: 100 },
       };
 
-      mockedAxios.get.mockResolvedValueOnce({
+      mockAxiosInstance.get.mockResolvedValueOnce({
         data: mockProduct,
       });
 
@@ -154,11 +181,11 @@ describe('API Functions', () => {
   describe('Error Handling', () => {
     it('handles different types of errors', async () => {
       // Network error
-      mockedAxios.get.mockRejectedValueOnce(new Error('Network error'));
+      mockAxiosInstance.get.mockRejectedValueOnce(new Error('Network error'));
       await expect(fetchProducts()).rejects.toThrow('Network error');
 
       // Server error
-      mockedAxios.get.mockRejectedValueOnce({
+      mockAxiosInstance.get.mockRejectedValueOnce({
         response: { status: 500, statusText: 'Server Error' },
       });
       await expect(fetchProducts()).rejects.toBeTruthy();
@@ -168,7 +195,7 @@ describe('API Functions', () => {
       const mockProduct1 = { id: 1, title: 'Product 1', price: 29.99 };
       const mockProduct2 = { id: 2, title: 'Product 2', price: 39.99 };
 
-      mockedAxios.get
+      mockAxiosInstance.get
         .mockResolvedValueOnce({ data: mockProduct1 })
         .mockResolvedValueOnce({ data: mockProduct2 });
 
@@ -179,7 +206,7 @@ describe('API Functions', () => {
 
       expect(result1).toEqual(mockProduct1);
       expect(result2).toEqual(mockProduct2);
-      expect(mockedAxios.get).toHaveBeenCalledTimes(2);
+      expect(mockAxiosInstance.get).toHaveBeenCalledTimes(2);
     });
   });
 });
