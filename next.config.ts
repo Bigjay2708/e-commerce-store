@@ -19,7 +19,6 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   
-  // Security headers
   async headers() {
     return [
       {
@@ -42,7 +41,6 @@ const nextConfig: NextConfig = {
     ];
   },
   
-  // Redirect HTTP to HTTPS in production
   async redirects() {
     return process.env.NODE_ENV === 'production' ? [
       {
@@ -60,18 +58,15 @@ const nextConfig: NextConfig = {
     ] : [];
   },
   
-  // Environment variables validation
   env: {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   },
   
-  // Production optimizations
   swcMinify: true,
   compress: true,
   poweredByHeader: false,
   
-  // Experimental features
   experimental: {
     optimizePackageImports: ['lucide-react', 'react-icons'],
   },
