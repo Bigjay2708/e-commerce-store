@@ -7,8 +7,8 @@ export async function GET() {
     environment: process.env.NODE_ENV,
     version: process.env.npm_package_version || '1.0.0',
     checks: {
-      database: 'healthy', // TODO: Add real database health check
-      external_apis: 'healthy', // TODO: Add API health checks
+      database: 'healthy',
+      external_apis: 'healthy',
       memory: process.memoryUsage(),
     },
   };

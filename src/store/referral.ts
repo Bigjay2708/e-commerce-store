@@ -5,17 +5,17 @@ import { ReferralProgram, Referral } from '@/types';
 interface ReferralStore {
   programs: ReferralProgram[];
   referrals: Referral[];
-  userReferralCodes: Record<string, string>; // userId -> referral code
+  userReferralCodes: Record<string, string>;
   
-  // Program management
+
   getActiveProgram: () => ReferralProgram | null;
   
-  // User referral actions
+
   getUserReferralCode: (userId: string) => string;
   createReferral: (referrerId: string, refereeEmail: string) => string;
   completeReferral: (referralCode: string, refereeId: string, orderId: string) => boolean;
   
-  // Analytics
+
   getUserReferrals: (userId: string) => Referral[];
   getReferralStats: (userId: string) => {
     totalReferrals: number;
@@ -24,7 +24,7 @@ interface ReferralStore {
     totalRewards: number;
   };
   
-  // Validation
+
   validateReferralCode: (code: string) => Referral | null;
   canUseReferralCode: (refereeEmail: string, referralCode: string) => boolean;
 }
@@ -33,8 +33,8 @@ const defaultProgram: ReferralProgram = {
   id: 'default_program',
   name: 'Friend Referral Program',
   description: 'Refer friends and earn rewards when they make their first purchase',
-  referrerReward: 500, // points
-  refereeReward: 10, // 10% discount
+  referrerReward: 500,
+  refereeReward: 10,
   type: 'points',
   isActive: true,
   minOrderValue: 25,
@@ -59,7 +59,7 @@ export const useReferralStore = create<ReferralStore>()(
           return state.userReferralCodes[userId];
         }
 
-        // Generate new referral code
+
         const code = `REF${userId.slice(-4)}${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
         
         set((state) => ({
@@ -103,12 +103,12 @@ export const useReferralStore = create<ReferralStore>()(
           return false;
         }
 
-        // Check if referral hasn't expired
+
         const expiryDate = new Date(referral.dateCreated);
         expiryDate.setDate(expiryDate.getDate() + (program.expiryDays || 30));
         
         if (new Date() > expiryDate) {
-          // Mark as expired
+
           set((state) => ({
             referrals: state.referrals.map(r => 
               r.id === referral.id ? { ...r, status: 'expired' as const } : r
@@ -117,7 +117,7 @@ export const useReferralStore = create<ReferralStore>()(
           return false;
         }
 
-        // Complete the referral
+
         set((state) => ({
           referrals: state.referrals.map(r => 
             r.id === referral.id ? {
@@ -130,9 +130,9 @@ export const useReferralStore = create<ReferralStore>()(
           )
         }));
 
-        // Award points to referrer (this would integrate with loyalty system)
+
         if (program.type === 'points') {
-          // This would call the loyalty store to add points
+
           console.log(`Awarding ${program.referrerReward} points to referrer ${referral.referrerId}`);
         }
 
@@ -177,7 +177,7 @@ export const useReferralStore = create<ReferralStore>()(
         if (!referral) return false;
         if (referral.status !== 'pending') return false;
         
-        // Check if email matches (case insensitive)
+
         return referral.refereeEmail === refereeEmail.toLowerCase();
       }
     }),

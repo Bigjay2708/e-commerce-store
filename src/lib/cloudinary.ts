@@ -1,6 +1,6 @@
-// Cloudinary integration utilities
-// This provides a mock implementation for development
-// Replace with actual Cloudinary SDK integration for production
+
+
+
 
 interface UploadResult {
   success: boolean;
@@ -9,14 +9,14 @@ interface UploadResult {
   error?: string;
 }
 
-// Mock upload function for development
+
 async function mockUpload(file: File): Promise<UploadResult> {
-  // Simulate upload delay
+
   await new Promise(resolve => setTimeout(resolve, 1000));
   
-  // Generate mock URL
+
   const timestamp = Date.now();
-  const mockUrl = `https://res.cloudinary.com/demo/image/upload/v${timestamp}/sample_${file.name}`;
+  const mockUrl = `https:
   const mockPublicId = `sample_${timestamp}`;
   
   console.log('🔄 Mock file upload:', {
@@ -33,14 +33,14 @@ async function mockUpload(file: File): Promise<UploadResult> {
   };
 }
 
-// Production Cloudinary upload (implement with actual SDK)
+
 async function productionUpload(file: File): Promise<UploadResult> {
   try {
-    // Convert File to buffer for Cloudinary
+
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     
-    // Example Cloudinary upload (uncomment and configure when ready):
+
     /*
     const cloudinary = require('cloudinary').v2;
     
@@ -74,7 +74,7 @@ async function productionUpload(file: File): Promise<UploadResult> {
     });
     */
 
-    // For now, use mock upload (buffer will be used in actual implementation)
+
     console.log('Buffer prepared for upload:', buffer.length, 'bytes');
     return await mockUpload(file);
 
@@ -87,7 +87,7 @@ async function productionUpload(file: File): Promise<UploadResult> {
   }
 }
 
-// Main upload function
+
 export async function uploadToCloudinary(file: File): Promise<UploadResult> {
   if (process.env.NODE_ENV === 'development') {
     return await mockUpload(file);
@@ -96,7 +96,7 @@ export async function uploadToCloudinary(file: File): Promise<UploadResult> {
   return await productionUpload(file);
 }
 
-// Delete image from Cloudinary
+
 export async function deleteFromCloudinary(publicId: string): Promise<{ success: boolean; error?: string }> {
   if (process.env.NODE_ENV === 'development') {
     console.log('🗑️ Mock file deletion:', publicId);
@@ -104,7 +104,7 @@ export async function deleteFromCloudinary(publicId: string): Promise<{ success:
   }
 
   try {
-    // Example Cloudinary deletion (uncomment when ready):
+
     /*
     const cloudinary = require('cloudinary').v2;
     const result = await cloudinary.uploader.destroy(publicId);
@@ -115,7 +115,7 @@ export async function deleteFromCloudinary(publicId: string): Promise<{ success:
     };
     */
 
-    // Mock success for now
+
     return { success: true };
 
   } catch (error) {
@@ -127,7 +127,7 @@ export async function deleteFromCloudinary(publicId: string): Promise<{ success:
   }
 }
 
-// Generate optimized image URL
+
 export function getOptimizedImageUrl(publicId: string, options: {
   width?: number;
   height?: number;
@@ -142,10 +142,10 @@ export function getOptimizedImageUrl(publicId: string, options: {
   } = options;
 
   if (process.env.NODE_ENV === 'development') {
-    return `https://res.cloudinary.com/demo/image/upload/w_${width},h_${height},q_${quality},f_${format}/${publicId}`;
+    return `https:
   }
 
-  // Use your actual cloud name in production
+
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME || 'demo';
-  return `https://res.cloudinary.com/${cloudName}/image/upload/w_${width},h_${height},q_${quality},f_${format}/${publicId}`;
+  return `https:
 }

@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate file type
+
     if (!file.type.startsWith('image/')) {
       return NextResponse.json(
         { error: 'Only image files are allowed' },
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate file size (5MB limit)
+
     if (file.size > 5 * 1024 * 1024) {
       return NextResponse.json(
         { error: 'File size must be less than 5MB' },

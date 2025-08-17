@@ -15,19 +15,19 @@ export default function PushNotificationDisplay({ className = '' }: PushNotifica
   const [permission, setPermission] = useState<NotificationPermission>('default')
 
   useEffect(() => {
-    // Check notification permission
+
     if ('Notification' in window) {
       setPermission(Notification.permission)
     }
 
-    // Get active notifications that should be displayed now
+
     const activeNotifications = pushNotifications.filter(notification =>
       notification.sentDate &&
       notification.isActive &&
       (!notification.scheduledDate || new Date() >= new Date(notification.scheduledDate))
     )
 
-    setNotifications(activeNotifications.slice(0, 3)) // Show max 3 notifications
+    setNotifications(activeNotifications.slice(0, 3))
   }, [pushNotifications])
 
   const requestPermission = async () => {
@@ -48,7 +48,7 @@ export default function PushNotificationDisplay({ className = '' }: PushNotifica
   }
 
   const handleNotificationClick = (notificationId: string) => {
-    // Remove notification from display after click
+
     setNotifications(prev => prev.filter(n => n.id !== notificationId))
   }
 
@@ -62,7 +62,7 @@ export default function PushNotificationDisplay({ className = '' }: PushNotifica
 
   return (
     <div className={`space-y-2 ${className}`}>
-      {/* Permission Request */}
+      
       {permission === 'default' && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
@@ -83,7 +83,7 @@ export default function PushNotificationDisplay({ className = '' }: PushNotifica
         </div>
       )}
 
-      {/* Active Notifications */}
+      
       {notifications.map((notification) => (
         <div
           key={notification.id}

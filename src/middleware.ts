@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// Rate limiting store (in production, use Redis or similar)
+
 const rateLimit = new Map<string, { count: number; resetTime: number }>();
 
 function getRateLimitKey(request: NextRequest): string {
@@ -13,7 +13,7 @@ function getRateLimitKey(request: NextRequest): string {
 
 function isRateLimited(key: string): boolean {
   const now = Date.now();
-  const windowMs = parseInt(process.env.RATE_LIMIT_WINDOW || '900000'); // 15 min default
+  const windowMs = parseInt(process.env.RATE_LIMIT_WINDOW || '900000');
   const maxRequests = parseInt(process.env.RATE_LIMIT_MAX || '100');
   
   const record = rateLimit.get(key);
@@ -34,27 +34,27 @@ function isRateLimited(key: string): boolean {
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
   
-  // Security Headers
+
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-XSS-Protection', '1; mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   
-  // Strict Transport Security (HTTPS only)
+
   if (process.env.NODE_ENV === 'production') {
     response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   }
   
-  // Content Security Policy
+
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://www.googletagmanager.com",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' https://fonts.gstatic.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:
+    "style-src 'self' 'unsafe-inline' https:
+    "font-src 'self' https:
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' https://api.stripe.com https://fakestoreapi.com https://www.google-analytics.com",
-    "frame-src https://js.stripe.com",
+    "connect-src 'self' https:
+    "frame-src https:
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
@@ -62,7 +62,7 @@ export function middleware(request: NextRequest) {
   
   response.headers.set('Content-Security-Policy', csp);
   
-  // Rate Limiting
+
   const rateLimitKey = getRateLimitKey(request);
   if (isRateLimited(rateLimitKey)) {
     return new NextResponse(
@@ -77,8 +77,8 @@ export function middleware(request: NextRequest) {
     );
   }
   
-  // CORS Headers
-  const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'];
+
+  const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http:
   const origin = request.headers.get('origin');
   
   if (origin && allowedOrigins.includes(origin)) {
@@ -89,7 +89,7 @@ export function middleware(request: NextRequest) {
   response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   response.headers.set('Access-Control-Max-Age', '86400');
   
-  // Handle preflight requests
+
   if (request.method === 'OPTIONS') {
     return new NextResponse(null, { status: 200, headers: response.headers });
   }

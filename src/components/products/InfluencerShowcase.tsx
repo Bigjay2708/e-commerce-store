@@ -66,7 +66,7 @@ export default function InfluencerShowcase({ productId }: InfluencerShowcaseProp
               key={post.id}
               className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
             >
-              {/* Post Media */}
+              
               <div className="relative aspect-square">
                 <Image
                   src={post.mediaUrl}
@@ -84,7 +84,7 @@ export default function InfluencerShowcase({ productId }: InfluencerShowcaseProp
                 )}
               </div>
 
-              {/* Influencer Info */}
+              
               <div className="p-4">
                 <div className="flex items-center space-x-3 mb-3">
                   <Link href={`/users/${influencer.id}`} className="flex items-center space-x-2 group">
@@ -107,12 +107,12 @@ export default function InfluencerShowcase({ productId }: InfluencerShowcaseProp
                   <FollowButton userId={influencer.id.toString()} />
                 </div>
 
-                {/* Post Content */}
+                
                 <p className="text-gray-700 dark:text-gray-300 mb-4 text-sm leading-relaxed">
                   {post.content}
                 </p>
 
-                {/* Post Stats */}
+                
                 <div className="flex items-center space-x-4 mb-4 text-sm text-gray-500">
                   <div className="flex items-center space-x-1">
                     <FaHeart className="text-red-500" />
@@ -127,7 +127,7 @@ export default function InfluencerShowcase({ productId }: InfluencerShowcaseProp
                   </span>
                 </div>
 
-                {/* Discount Code */}
+                
                 {post.discount && (
                   <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-4 text-white">
                     <div className="flex items-center justify-between">
@@ -164,7 +164,7 @@ export default function InfluencerShowcase({ productId }: InfluencerShowcaseProp
         })}
       </div>
 
-      {/* Call to Action */}
+      
       <div className="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 text-center">
         <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
           Love what you see?

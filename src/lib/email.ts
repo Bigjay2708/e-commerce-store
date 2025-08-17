@@ -1,5 +1,5 @@
-// Email service utilities
-// This example uses Resend, but you can easily switch to SendGrid or other providers
+
+
 
 interface EmailOptions {
   to: string;
@@ -20,10 +20,10 @@ interface OrderData {
   orderDate: string;
 }
 
-// Mock email sending function for development
-// Replace with actual email service integration
+
+
 async function sendEmail(options: EmailOptions) {
-  // For development, just log the email
+
   if (process.env.NODE_ENV === 'development') {
     console.log('📧 Mock Email Sent:');
     console.log(`To: ${options.to}`);
@@ -36,17 +36,17 @@ async function sendEmail(options: EmailOptions) {
     };
   }
 
-  // Production email sending (implement with your preferred service)
+
   try {
-    // Example for SendGrid:
-    // const response = await sgMail.send(options);
-    // return { success: true, messageId: response[0].headers['x-message-id'] };
 
-    // Example for Resend:
-    // const response = await resend.emails.send(options);
-    // return { success: true, messageId: response.id };
 
-    // For now, return mock success
+
+
+
+
+
+
+
     return {
       success: true,
       messageId: `dev-${Date.now()}`,
@@ -61,7 +61,7 @@ async function sendEmail(options: EmailOptions) {
   }
 }
 
-// Generate order confirmation email HTML
+
 function generateOrderConfirmationHTML(orderData: OrderData): string {
   const itemsHTML = orderData.items.map(item => `
     <tr>
@@ -120,7 +120,7 @@ function generateOrderConfirmationHTML(orderData: OrderData): string {
   `;
 }
 
-// Send order confirmation email
+
 export async function sendOrderConfirmationEmail(email: string, orderData: OrderData) {
   const html = generateOrderConfirmationHTML(orderData);
   
@@ -132,7 +132,7 @@ export async function sendOrderConfirmationEmail(email: string, orderData: Order
   });
 }
 
-// Send welcome email
+
 export async function sendWelcomeEmail(email: string, name: string) {
   const html = `
     <!DOCTYPE html>
@@ -159,7 +159,7 @@ export async function sendWelcomeEmail(email: string, name: string) {
       </div>
       
       <div style="text-align: center; margin: 30px 0;">
-        <a href="${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/products" 
+        <a href="${process.env.NEXTAUTH_URL || 'http:
            style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">
           Start Shopping
         </a>

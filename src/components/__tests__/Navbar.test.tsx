@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import Navbar from '@/components/ui/Navbar';
 
-// Mock the stores
+
 vi.mock('@/store/cart', () => ({
   useCartStore: vi.fn(),
 }));
@@ -33,7 +33,7 @@ describe('Navbar Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     
-    // Default mock implementations
+
     mockUseCartStore.mockReturnValue({
       cart: {
         items: [],
@@ -80,7 +80,7 @@ describe('Navbar Component', () => {
   it('renders main navigation links', () => {
     render(<Navbar />);
     
-    // Check for navigation links - there may be multiple instances (desktop/mobile)
+
     const homeLinks = screen.getAllByText('Home');
     const productsLinks = screen.getAllByText('Products');
     const aboutLinks = screen.getAllByText('About');
@@ -108,7 +108,7 @@ describe('Navbar Component', () => {
 
     render(<Navbar />);
     
-    // The cart count is displayed in both desktop and mobile views
+
     const cartCounts = screen.getAllByText('3');
     expect(cartCounts.length).toBeGreaterThan(0);
   });
@@ -127,7 +127,7 @@ describe('Navbar Component', () => {
 
     render(<Navbar />);
     
-    // The wishlist count is displayed in multiple places
+
     const wishlistCounts = screen.getAllByText('2');
     expect(wishlistCounts.length).toBeGreaterThan(0);
   });
@@ -135,14 +135,14 @@ describe('Navbar Component', () => {
   it('shows zero count when cart is empty', () => {
     render(<Navbar />);
     
-    // When cart is empty, no count badge is shown
+
     expect(screen.queryByText('0')).not.toBeInTheDocument();
   });
 
   it('shows zero count when wishlist is empty', () => {
     render(<Navbar />);
     
-    // When wishlist is empty, no count badge is shown
+
     expect(screen.queryByText('0')).not.toBeInTheDocument();
   });
 
@@ -182,7 +182,7 @@ describe('Navbar Component', () => {
   it('navigates to cart page when cart icon is clicked', () => {
     render(<Navbar />);
     
-    // Find the desktop cart link
+
     const cartLinks = screen.getAllByRole('link').filter(link => 
       link.getAttribute('href') === '/cart'
     );
@@ -194,7 +194,7 @@ describe('Navbar Component', () => {
   it('navigates to wishlist page when wishlist icon is clicked', () => {
     render(<Navbar />);
     
-    // Find the wishlist links
+
     const wishlistLinks = screen.getAllByRole('link').filter(link => 
       link.getAttribute('href') === '/wishlist'
     );
@@ -206,15 +206,15 @@ describe('Navbar Component', () => {
   it('has proper accessibility attributes', () => {
     render(<Navbar />);
     
-    // Check there are navigation elements
+
     const navElements = screen.getAllByRole('navigation');
     expect(navElements.length).toBeGreaterThan(0);
     
-    // Check for cart aria-label
+
     const cartLabels = screen.getAllByLabelText(/cart/i);
     expect(cartLabels.length).toBeGreaterThan(0);
     
-    // Check for wishlist aria-label
+
     const wishlistLabels = screen.getAllByLabelText(/wishlist/i);
     expect(wishlistLabels.length).toBeGreaterThan(0);
   });
@@ -222,10 +222,10 @@ describe('Navbar Component', () => {
   it('updates counts when store values change', () => {
     const { rerender } = render(<Navbar />);
     
-    // Initially empty - no count badges shown
+
     expect(screen.queryByText('0')).not.toBeInTheDocument();
     
-    // Update cart mock
+
     mockUseCartStore.mockReturnValue({
       cart: {
         items: [{ id: 1, title: 'Test Product', price: 29.99, quantity: 1, description: '', category: '', image: '', rating: { rate: 0, count: 0 } }],
@@ -240,7 +240,7 @@ describe('Navbar Component', () => {
     
     rerender(<Navbar />);
     
-    // Count should appear in both desktop and mobile views
+
     const counts = screen.getAllByText('1');
     expect(counts.length).toBeGreaterThan(0);
   });

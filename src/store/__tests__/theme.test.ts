@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { useThemeStore } from '@/store/theme';
 
-// Mock localStorage
+
 const localStorageMock = {
   getItem: vi.fn(),
   setItem: vi.fn(),
@@ -18,7 +18,7 @@ describe('Theme Store', () => {
     vi.clearAllMocks();
     localStorageMock.getItem.mockReturnValue(null);
     
-    // Reset the store state
+
     useThemeStore.setState({ theme: 'light' });
   });
 
@@ -39,11 +39,11 @@ describe('Theme Store', () => {
   it('should toggle theme from dark to light', () => {
     const { setTheme, toggleTheme } = useThemeStore.getState();
     
-    // Set to dark first
+
     setTheme('dark');
     expect(useThemeStore.getState().theme).toBe('dark');
     
-    // Toggle should switch to light
+
     toggleTheme();
     expect(useThemeStore.getState().theme).toBe('light');
   });
@@ -69,7 +69,7 @@ describe('Theme Store', () => {
   it('should load theme from localStorage on initialization', () => {
     localStorageMock.getItem.mockReturnValue('dark');
     
-    // The theme should be loaded from localStorage in a real implementation
+
     const { theme } = useThemeStore.getState();
     
     expect(theme).toBeDefined();
@@ -107,7 +107,7 @@ describe('Theme Store', () => {
   it('should have consistent state after multiple operations', () => {
     const { setTheme, toggleTheme } = useThemeStore.getState();
     
-    // Perform various operations
+
     setTheme('dark');
     toggleTheme();
     toggleTheme();
@@ -123,9 +123,9 @@ describe('Theme Store', () => {
   it('should handle invalid localStorage data gracefully', () => {
     localStorageMock.getItem.mockReturnValue('invalid json');
     
-    // Should not throw an error and should use default state
+
     const { theme } = useThemeStore.getState();
-    expect(theme).toBe('light'); // Default theme
+    expect(theme).toBe('light');
   });
 
   it('should maintain state immutability', () => {
@@ -171,17 +171,17 @@ describe('Theme Store', () => {
     
     const { setTheme } = useThemeStore.getState();
     
-    // Should not throw an error
+
     expect(() => setTheme('dark')).not.toThrow();
     
-    // State should still be updated
+
     expect(useThemeStore.getState().theme).toBe('dark');
   });
 
   it('should provide correct TypeScript types', () => {
     const state = useThemeStore.getState();
     
-    // These should compile without TypeScript errors
+
     const theme: 'light' | 'dark' = state.theme;
     const setTheme: (theme: 'light' | 'dark') => void = state.setTheme;
     const toggleTheme: () => void = state.toggleTheme;

@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import { FaBookmark, FaTrash, FaShoppingCart, FaHeart, FaEdit, FaClock, FaFilter } from 'react-icons/fa';
 import { useSavedForLaterStore, SavedItem } from '@/store/savedForLater';
-import { useCartStore } from '@/store/cart';
+import { useCartStore } from '@/stor                ) : (
+                  <div className="space-y-2">art';
 import { useWishlistStore } from '@/store/wishlist';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/ui/Button';
@@ -46,7 +47,7 @@ export default function SavedForLaterPage() {
   });
 
   useEffect(() => {
-    // Clear expired items on page load
+
     clearExpiredItems();
   }, [clearExpiredItems]);
 
@@ -140,7 +141,7 @@ export default function SavedForLaterPage() {
         )}
       </div>
 
-      {/* Filter Bar */}
+      
       {items.length > 0 && (
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center space-x-4">
@@ -179,7 +180,7 @@ export default function SavedForLaterPage() {
         </div>
       )}
 
-      {/* Items Grid */}
+      
       {filteredItems.length === 0 ? (
         <div className="text-center py-16 bg-gray-50 dark:bg-gray-800 rounded-lg">
           <FaBookmark className="mx-auto text-6xl text-gray-300 mb-6" />
@@ -200,7 +201,7 @@ export default function SavedForLaterPage() {
               key={item.id}
               className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-shadow"
             >
-              {/* Product Image */}
+              
               <div className="relative aspect-square">
                 <Image
                   src={item.image}
@@ -216,7 +217,7 @@ export default function SavedForLaterPage() {
                 </div>
               </div>
 
-              {/* Product Info */}
+              
               <div className="p-4">
                 <Link href={`/products/${item.id}`}>
                   <h3 className="font-medium text-gray-900 dark:text-white mb-2 hover:text-blue-600 transition-colors line-clamp-2">
@@ -227,20 +228,20 @@ export default function SavedForLaterPage() {
                   ${item.price.toFixed(2)}
                 </p>
                 
-                {/* Saved Info */}
+                
                 <div className="text-xs text-gray-500 mb-3 flex items-center space-x-2">
                   <FaClock />
                   <span>Saved {formatTimeAgo(item.savedAt)}</span>
                 </div>
 
-                {/* Notes */}
+                
                 {item.notes && (
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 bg-gray-50 dark:bg-gray-700 p-2 rounded">
                     {item.notes}
                   </p>
                 )}
 
-                {/* Edit Form */}
+                
                 {editingItem === item.id ? (
                   <div className="space-y-3 mb-4">
                     <select

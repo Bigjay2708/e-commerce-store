@@ -18,12 +18,12 @@ export const useComparisonStore = create<ComparisonStore>()(
       addToComparison: (product) => {
         const { items } = get();
         
-        // Maximum 4 products for comparison
+
         if (items.length >= 4) {
           return;
         }
         
-        // Don't add if already in comparison
+
         if (items.find(item => item.id === product.id)) {
           return;
         }

@@ -129,7 +129,7 @@ export default function ProductDetailsPage() {
             </div>
           </div>
           
-          {/* Social Commerce Features */}
+          
           <InfluencerShowcase productId={product.id} />
           <ProductReviews productId={product.id} />
           <ProductQA productId={product.id} />

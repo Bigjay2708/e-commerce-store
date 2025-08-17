@@ -4,7 +4,7 @@ import { createMockProduct } from '@/test/utils'
 
 describe('Cart Store', () => {
   beforeEach(() => {
-    // Reset the store before each test
+
     useCartStore.setState({
       cart: {
         items: [],
@@ -35,7 +35,7 @@ describe('Cart Store', () => {
       const product = createMockProduct({ id: 1, price: 29.99 })
       const { addToCart } = useCartStore.getState()
 
-      // Add product twice
+
       addToCart(product)
       addToCart(product)
 
@@ -80,7 +80,7 @@ describe('Cart Store', () => {
       const { addToCart, removeFromCart } = useCartStore.getState()
 
       addToCart(product)
-      removeFromCart(999) // Non-existent product
+      removeFromCart(999)
 
       const cart = useCartStore.getState().cart
       expect(cart.items).toHaveLength(1)
@@ -122,7 +122,7 @@ describe('Cart Store', () => {
       const { addToCart, updateQuantity } = useCartStore.getState()
 
       addToCart(product)
-      updateQuantity(999, 5) // Non-existent product
+      updateQuantity(999, 5)
 
       const cart = useCartStore.getState().cart
       expect(cart.items[0].quantity).toBe(1)
@@ -155,12 +155,12 @@ describe('Cart Store', () => {
       const { addToCart } = useCartStore.getState()
 
       addToCart(product1)
-      addToCart(product1) // quantity: 2
+      addToCart(product1)
       addToCart(product2)
 
       const cart = useCartStore.getState().cart
       expect(cart.totalItems).toBe(3)
-      expect(cart.totalPrice).toBeCloseTo(37.48, 2) // (10.99 * 2) + 15.50
+      expect(cart.totalPrice).toBeCloseTo(37.48, 2)
     })
   })
 })

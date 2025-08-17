@@ -26,7 +26,7 @@ export async function DELETE(
       );
     }
 
-    // Get user ID from email
+
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     });

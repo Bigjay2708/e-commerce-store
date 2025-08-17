@@ -34,7 +34,7 @@ export default function SaveForLaterButton({
   const [notes, setNotes] = useState('');
   
   const isSaved = isInSaved(product.id);
-  // const savedItem = getSavedItem(product.id); // Reserved for future use
+
   
   const handleToggleSaved = (reason?: SavedItem['reason']) => {
     if (isSaved) {

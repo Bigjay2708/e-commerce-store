@@ -11,7 +11,7 @@ export default function AboutPage() {
             This project serves as a portfolio piece showcasing modern web development techniques and best practices.
           </p>
           <p className="text-gray-700 dark:text-gray-300 mb-4">
-            The application uses the Fake Store API (https://fakestoreapi.com) to simulate a real e-commerce platform, 
+            The application uses the Fake Store API (https:
             complete with product listings, shopping cart functionality, and a checkout process.
           </p>
         </div>

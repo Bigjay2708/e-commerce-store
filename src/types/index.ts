@@ -1,4 +1,3 @@
-// Database Product type (matching Prisma schema)
 export interface DbProduct {
   id: number;
   name: string;
@@ -10,7 +9,6 @@ export interface DbProduct {
   reviews?: DbReview[];
 }
 
-// Legacy Product type for compatibility
 export interface Product {
   id: number;
   title: string;
@@ -24,7 +22,7 @@ export interface Product {
   };
 }
 
-// Database User type (matching Prisma schema)
+
 export interface DbUser {
   id: number;
   email: string;
@@ -57,8 +55,8 @@ export interface User {
     };
   };
   phone: string;
-  followers: string[]; // userIds
-  following: string[]; // userIds
+  followers: string[];
+  following: string[];
   joined: string;
   isInfluencer?: boolean;
   loyaltyPoints?: number;
@@ -115,7 +113,7 @@ export interface OrderSummary {
   total: number;
 }
 
-// Database types for real backend integration
+
 export interface DbWishlistItem {
   id: number;
   userId: number;
@@ -158,7 +156,7 @@ export interface DbReview {
   };
 }
 
-// Social Commerce Types
+
 export interface Review {
   id: string;
   productId: number;
@@ -245,9 +243,9 @@ export interface InfluencerPost {
   };
 }
 
-// Marketing & Engagement Types
 
-// Loyalty/Rewards Program Types
+
+
 export interface LoyaltyTransaction {
   id: string;
   userId: string;
@@ -265,7 +263,7 @@ export interface LoyaltyReward {
   description: string;
   pointsCost: number;
   type: 'discount' | 'free_shipping' | 'product' | 'experience';
-  value: number; // discount percentage or product value
+  value: number;
   imageUrl?: string;
   category: string;
   isActive: boolean;
@@ -280,18 +278,18 @@ export interface UserLoyalty {
   availablePoints: number;
   lifetimePoints: number;
   tier: 'bronze' | 'silver' | 'gold' | 'platinum';
-  tierProgress: number; // percentage to next tier
+  tierProgress: number;
   nextTierThreshold: number;
   transactions: LoyaltyTransaction[];
-  redeemedRewards: string[]; // reward IDs
+  redeemedRewards: string[];
 }
 
-// Referral System Types
+
 export interface ReferralProgram {
   id: string;
   name: string;
   description: string;
-  referrerReward: number; // points or discount percentage
+  referrerReward: number;
   refereeReward: number;
   type: 'points' | 'discount' | 'cash';
   isActive: boolean;
@@ -312,7 +310,7 @@ export interface Referral {
   orderId?: string;
 }
 
-// Email Marketing Types
+
 export interface EmailCampaign {
   id: string;
   name: string;
@@ -320,7 +318,7 @@ export interface EmailCampaign {
   content: string;
   type: 'promotional' | 'newsletter' | 'abandoned_cart' | 'welcome' | 'order_confirmation';
   status: 'draft' | 'scheduled' | 'sent' | 'paused';
-  recipients: string[]; // user IDs or emails
+  recipients: string[];
   scheduledDate?: string;
   sentDate?: string;
   openRate?: number;
@@ -334,7 +332,7 @@ export interface EmailTemplate {
   subject: string;
   content: string;
   type: EmailCampaign['type'];
-  variables: string[]; // {{name}}, {{product}}, etc.
+  variables: string[];
   isActive: boolean;
 }
 
@@ -352,7 +350,7 @@ export interface EmailSubscription {
   unsubscribedDate?: string;
 }
 
-// Push Notifications Types
+
 export interface PushNotification {
   id: string;
   title: string;
@@ -360,11 +358,11 @@ export interface PushNotification {
   icon?: string;
   image?: string;
   type: 'promotional' | 'order_update' | 'reminder' | 'general';
-  targetUsers: string[]; // user IDs or 'all'
+  targetUsers: string[];
   scheduledDate?: string;
   sentDate?: string;
   clickCount: number;
-  data?: Record<string, string | number | boolean>; // additional data for deep linking
+  data?: Record<string, string | number | boolean>;
   isActive: boolean;
 }
 
@@ -381,7 +379,7 @@ export interface UserNotificationSettings {
   };
 }
 
-// Promotional Banners/Campaigns Types
+
 export interface PromotionalBanner {
   id: string;
   title: string;
@@ -392,7 +390,7 @@ export interface PromotionalBanner {
   ctaLink: string;
   type: 'hero' | 'sidebar' | 'popup' | 'strip' | 'product_page';
   position: 'top' | 'middle' | 'bottom' | 'floating';
-  priority: number; // higher number = higher priority
+  priority: number;
   isActive: boolean;
   startDate: string;
   endDate: string;
@@ -400,14 +398,14 @@ export interface PromotionalBanner {
     all: boolean;
     newUsers: boolean;
     returningUsers: boolean;
-    tierLevels: string[]; // ['bronze', 'silver']
-    categories: string[]; // product categories
+    tierLevels: string[];
+    categories: string[];
   };
   displayRules: {
     maxViews: number;
     maxClicksPerUser: number;
-    showOnPages: string[]; // ['home', 'products', 'cart']
-    deviceTypes: string[]; // ['desktop', 'mobile', 'tablet']
+    showOnPages: string[];
+    deviceTypes: string[];
   };
   analytics: {
     views: number;
@@ -437,8 +435,8 @@ export interface Campaign {
     conversions: number;
     revenue: number;
   };
-  banners: string[]; // banner IDs
-  emailCampaigns: string[]; // email campaign IDs
-  pushNotifications: string[]; // notification IDs
+  banners: string[];
+  emailCampaigns: string[];
+  pushNotifications: string[];
   discountCodes: string[];
 }

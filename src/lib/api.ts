@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Product, User } from '@/types';
 
-// Configure axios with security defaults
+
 const apiClient = axios.create({
   baseURL: '/api',
   timeout: 10000,
@@ -10,7 +10,7 @@ const apiClient = axios.create({
   },
 });
 
-// Request interceptor for logging
+
 apiClient.interceptors.request.use(
   (config) => {
     if (process.env.NODE_ENV === 'development') {
@@ -23,7 +23,7 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Response interceptor for error handling
+
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -34,7 +34,7 @@ apiClient.interceptors.response.use(
   }
 );
 
-// Product API functions
+
 export const fetchProducts = async (): Promise<Product[]> => {
   const response = await apiClient.get('/products');
   return response.data;
@@ -64,7 +64,7 @@ export const deleteProduct = async (id: number): Promise<void> => {
   await apiClient.delete(`/products/${id}`);
 };
 
-// Wishlist API functions
+
 export const fetchWishlist = async () => {
   const response = await apiClient.get('/wishlist');
   return response.data;
@@ -79,13 +79,13 @@ export const removeFromWishlist = async (productId: number) => {
   await apiClient.delete(`/wishlist/${productId}`);
 };
 
-// Orders API functions
+
 export const fetchOrders = async () => {
   const response = await apiClient.get('/orders');
   return response.data;
 };
 
-// User API functions
+
 export const registerUser = async (userData: {
   email: string;
   password: string;
@@ -95,7 +95,7 @@ export const registerUser = async (userData: {
   return response.data;
 };
 
-// Payment API functions
+
 export const createPaymentIntent = async (items: Array<{
   productId: number;
   quantity: number;
@@ -118,7 +118,7 @@ export const confirmPayment = async (paymentIntentId: string, userId: string, it
   return response.data;
 };
 
-// File upload function
+
 export const uploadFile = async (file: File) => {
   const formData = new FormData();
   formData.append('file', file);
@@ -131,7 +131,7 @@ export const uploadFile = async (file: File) => {
   return response.data;
 };
 
-// Email API functions
+
 export const sendEmail = async (emailData: {
   email: string;
   orderData: Record<string, unknown>;
@@ -140,27 +140,27 @@ export const sendEmail = async (emailData: {
   return response.data;
 };
 
-// Legacy functions for backward compatibility (will be removed)
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+
 export const fetchProductsByCategory = async (_category: string): Promise<Product[]> => {
-  // This would need to be implemented with category filtering in the database
+
   const products = await fetchProducts();
-  return products; // For now, return all products
+  return products;
 };
 
 export const fetchCategories = async (): Promise<string[]> => {
-  // This would need to be implemented with a categories table
-  return ['electronics', 'clothing', 'books']; // Mock categories
+
+  return ['electronics', 'clothing', 'books'];
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export const login = async (_username: string, _password: string) => {
-  // This is handled by NextAuth now, keeping for compatibility
+
   throw new Error('Use NextAuth signIn instead');
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export const fetchUserById = async (_id: number): Promise<User> => {
-  // This would need to be implemented if needed
+
   throw new Error('Not implemented - use session data instead');
 };

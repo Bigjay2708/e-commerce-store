@@ -35,7 +35,7 @@ export async function POST(request: Request) {
         name,
         description,
         price: parseFloat(price),
-        imageUrl: imageUrl || 'https://via.placeholder.com/300',
+        imageUrl: imageUrl || 'https:
       },
     });
 

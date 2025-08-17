@@ -37,7 +37,7 @@ export default function LoyaltyPage() {
   const availableRewards = getAvailableRewards(userId);
   const transactions = getUserTransactions(userId);
 
-  // Demo: Add welcome points for new users
+
   useEffect(() => {
     if (userLoyalty.totalPoints === 0) {
       addPoints(userId, 100, 'Welcome bonus');
@@ -65,7 +65,7 @@ export default function LoyaltyPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
-        {/* Header */}
+        
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center">
             <FaCrown className="mr-3 text-yellow-500" />
@@ -76,10 +76,10 @@ export default function LoyaltyPage() {
           </p>
         </div>
 
-        {/* Loyalty Overview Card */}
+        
         <div className={`bg-gradient-to-r ${tierColors[userLoyalty.tier]} rounded-2xl p-8 mb-8 text-white shadow-2xl`}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Tier Status */}
+            
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start mb-2">
                 <span className="text-4xl mr-3">{tierIcons[userLoyalty.tier]}</span>
@@ -90,7 +90,7 @@ export default function LoyaltyPage() {
               </div>
             </div>
 
-            {/* Points Balance */}
+            
             <div className="text-center">
               <div className="text-4xl font-bold mb-1">{userLoyalty.availablePoints.toLocaleString()}</div>
               <p className="text-white/80">Available Points</p>
@@ -99,7 +99,7 @@ export default function LoyaltyPage() {
               </p>
             </div>
 
-            {/* Tier Progress */}
+            
             <div className="text-center md:text-right">
               <div className="mb-2">
                 <span className="text-sm text-white/80">Progress to Next Tier</span>
@@ -120,7 +120,7 @@ export default function LoyaltyPage() {
           </div>
         </div>
 
-        {/* Navigation Tabs */}
+        
         <div className="flex space-x-1 bg-white dark:bg-gray-800 rounded-lg p-1 mb-8 shadow-lg">
           {[
             { id: 'overview', label: 'Overview', icon: FaTrophy },
@@ -142,10 +142,10 @@ export default function LoyaltyPage() {
           ))}
         </div>
 
-        {/* Tab Content */}
+        
         {activeTab === 'overview' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Stats Cards */}
+            
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
               <div className="flex items-center">
                 <FaStar className="text-2xl text-yellow-500 mr-3" />
@@ -313,7 +313,7 @@ export default function LoyaltyPage() {
           </div>
         )}
 
-        {/* Call to Action */}
+        
         <div className="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">Start Earning More Points!</h2>
           <p className="text-blue-100 mb-6">

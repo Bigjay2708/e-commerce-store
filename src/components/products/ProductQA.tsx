@@ -61,8 +61,8 @@ export default function ProductQA({ productId }: ProductQAProps) {
       userName: session?.user?.name || 'Anonymous User',
       userAvatar: session?.user?.image ?? undefined,
       answer: answerText,
-      isExpert: Math.random() > 0.7, // Simulate expert answers
-      isSeller: Math.random() > 0.8   // Simulate seller answers
+      isExpert: Math.random() > 0.7,
+      isSeller: Math.random() > 0.8
     });
 
     setAnswerForms({ ...answerForms, [questionId]: '' });
@@ -91,7 +91,7 @@ export default function ProductQA({ productId }: ProductQAProps) {
         </Button>
       </div>
 
-      {/* Question Form */}
+      
       {showQuestionForm && (
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 mb-8">
           <h4 className="text-lg font-semibold mb-4">Ask Your Question</h4>
@@ -123,7 +123,7 @@ export default function ProductQA({ productId }: ProductQAProps) {
         </div>
       )}
 
-      {/* Questions List */}
+      
       <div className="space-y-6">
         {questions.length === 0 ? (
           <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -141,7 +141,7 @@ export default function ProductQA({ productId }: ProductQAProps) {
               key={question.id}
               className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700"
             >
-              {/* Question */}
+              
               <div className="mb-4">
                 <div className="flex items-start space-x-3 mb-3">
                   <Link href={`/users/${question.userId || ''}`} className="flex items-center space-x-3 group">
@@ -183,7 +183,7 @@ export default function ProductQA({ productId }: ProductQAProps) {
                 </div>
               </div>
 
-              {/* Answers */}
+              
               {question.answers.length > 0 && (
                 <div className="ml-11 space-y-4 mb-4">
                   {question.answers.map((answer) => (
@@ -245,7 +245,7 @@ export default function ProductQA({ productId }: ProductQAProps) {
                 </div>
               )}
 
-              {/* Answer Form */}
+              
               <div className="ml-11">
                 <div className="flex space-x-2">
                   <input

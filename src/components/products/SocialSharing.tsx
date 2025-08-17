@@ -33,23 +33,23 @@ export default function SocialSharing({ product }: SocialSharingProps) {
   const socialPlatforms: SocialShare[] = [
     {
       platform: 'facebook',
-      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`,
+      url: `https:
       text: shareText
     },
     {
       platform: 'twitter',
-      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(productUrl)}`,
+      url: `https:
       text: shareText,
       hashtags: ['shopping', 'deals', 'ecommerce']
     },
     {
       platform: 'pinterest',
-      url: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(productUrl)}&media=${encodeURIComponent(product.image)}&description=${encodeURIComponent(shareText)}`,
+      url: `https:
       text: shareText
     },
     {
       platform: 'whatsapp',
-      url: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${productUrl}`)}`,
+      url: `https:
       text: shareText
     },
     {
@@ -107,7 +107,7 @@ export default function SocialSharing({ product }: SocialSharingProps) {
         <span>Share</span>
       </Button>
 
-      {/* Share Modal */}
+      
       {showShareModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full">
@@ -123,7 +123,7 @@ export default function SocialSharing({ product }: SocialSharingProps) {
               </button>
             </div>
 
-            {/* Product Preview */}
+            
             <div className="flex items-center space-x-3 mb-6 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <Image
                 src={product.image}
@@ -142,7 +142,7 @@ export default function SocialSharing({ product }: SocialSharingProps) {
               </div>
             </div>
 
-            {/* Social Platform Buttons */}
+            
             <div className="grid grid-cols-2 gap-3 mb-6">
               {socialPlatforms.map((platform) => (
                 <button
@@ -158,7 +158,7 @@ export default function SocialSharing({ product }: SocialSharingProps) {
               ))}
             </div>
 
-            {/* Copy Link */}
+            
             <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
               <div className="flex items-center space-x-2">
                 <input

@@ -9,12 +9,12 @@ export async function POST(request: NextRequest) {
   try {
     const { items, customerId } = await request.json();
 
-    // Calculate total amount
+
     const totalAmount = items.reduce((sum: number, item: { price: number; quantity: number }) => {
-      return sum + (item.price * item.quantity * 100); // Convert to cents
+      return sum + (item.price * item.quantity * 100);
     }, 0);
 
-    // Create payment intent
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalAmount,
       currency: 'usd',

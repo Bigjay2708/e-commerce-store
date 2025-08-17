@@ -15,7 +15,7 @@ export default function PromotionalBanner({ location, className = '' }: Promotio
   const { banners, trackBannerView, trackBannerClick } = useMarketingStore()
   const [dismissedBanners, setDismissedBanners] = useState<Set<string>>(new Set())
 
-  // Get active banners for this location
+
   const activeBanners = banners.filter(banner => 
     banner.displayRules.showOnPages.includes(location) && 
     banner.isActive &&
@@ -24,7 +24,7 @@ export default function PromotionalBanner({ location, className = '' }: Promotio
     !dismissedBanners.has(banner.id)
   )
 
-  // Track banner views on mount
+
   useEffect(() => {
     activeBanners.forEach(banner => {
       trackBannerView(banner.id)
@@ -48,7 +48,7 @@ export default function PromotionalBanner({ location, className = '' }: Promotio
       {activeBanners.map((banner) => (
         <div key={banner.id} className="relative bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg overflow-hidden">
           <div className="flex items-center justify-between p-4 text-white">
-            {/* Banner Content */}
+            
             <div className="flex-1 flex items-center space-x-4">
               {banner.imageUrl && (
                 <div className="flex-shrink-0">
@@ -78,7 +78,7 @@ export default function PromotionalBanner({ location, className = '' }: Promotio
               )}
             </div>
 
-            {/* Dismiss Button */}
+            
             <button
               onClick={() => handleDismiss(banner.id)}
               className="flex-shrink-0 ml-4 p-1 hover:bg-white/20 rounded-full transition-colors"

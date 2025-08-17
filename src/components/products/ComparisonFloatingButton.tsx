@@ -16,7 +16,7 @@ export default function ComparisonFloatingButton() {
 
   return (
     <>
-      {/* Floating Button */}
+      
       <div className="fixed bottom-6 right-6 z-40">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 max-w-sm">
           <div className="flex items-center justify-between mb-3">
@@ -58,7 +58,7 @@ export default function ComparisonFloatingButton() {
         </div>
       </div>
 
-      {/* Comparison Modal */}
+      
       {showComparison && (
         <ProductComparison
           products={items}

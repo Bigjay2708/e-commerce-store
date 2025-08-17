@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from 'react'
 import { vi } from 'vitest'
 import { Product, User, CartItem } from '@/types'
 
-// Custom render function that includes providers
+
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   initialProps?: Record<string, unknown>;
 }
@@ -19,14 +19,14 @@ export const customRender = (
   return render(ui, { wrapper: Wrapper, ...options })
 }
 
-// Mock data generators
+
 export const createMockProduct = (overrides?: Partial<Product>): Product => ({
   id: 1,
   title: 'Test Product',
   price: 29.99,
   description: 'A great test product',
   category: 'electronics',
-  image: 'https://example.com/image.jpg',
+  image: 'https:
   rating: {
     rate: 4.5,
     count: 100,
@@ -73,7 +73,7 @@ export const createMockCartItem = (overrides?: Partial<CartItem>): CartItem => (
   price: 29.99,
   description: 'A great test product',
   category: 'electronics',
-  image: 'https://example.com/image.jpg',
+  image: 'https:
   rating: {
     rate: 4.5,
     count: 100,
@@ -82,7 +82,7 @@ export const createMockCartItem = (overrides?: Partial<CartItem>): CartItem => (
   ...overrides,
 })
 
-// Test utilities
+
 export const waitForLoadingToFinish = () =>
   new Promise((resolve) => setTimeout(resolve, 0))
 
@@ -94,6 +94,6 @@ export const mockConsoleError = () => {
   }
 }
 
-// Re-export testing library utilities
+
 export * from '@testing-library/react'
 export { userEvent } from '@testing-library/user-event'

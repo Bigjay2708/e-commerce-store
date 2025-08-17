@@ -4,7 +4,7 @@ import { createMockProduct } from '@/test/utils'
 
 describe('Wishlist Store', () => {
   beforeEach(() => {
-    // Reset the store before each test
+
     useWishlistStore.setState({
       items: [],
     })
@@ -27,7 +27,7 @@ describe('Wishlist Store', () => {
       const { addToWishlist } = useWishlistStore.getState()
 
       addToWishlist(product)
-      addToWishlist(product) // Try to add again
+      addToWishlist(product)
 
       const items = useWishlistStore.getState().items
       expect(items).toHaveLength(1)
@@ -63,7 +63,7 @@ describe('Wishlist Store', () => {
       const { addToWishlist, removeFromWishlist } = useWishlistStore.getState()
 
       addToWishlist(product)
-      removeFromWishlist(999) // Non-existent product
+      removeFromWishlist(999)
 
       const items = useWishlistStore.getState().items
       expect(items).toHaveLength(1)

@@ -42,10 +42,10 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-2 sm:px-4">
-      {/* Push Notifications */}
+      
       <PushNotificationDisplay className="mb-6" />
       
-      {/* Promotional Banners */}
+      
       <PromotionalBanner location="homepage" className="mb-6" />
       
       <section className="hero-section py-8 sm:py-12 md:py-20 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg mb-8 sm:mb-12 mx-2 sm:mx-0">
@@ -93,7 +93,7 @@ export default function Home() {
               </Button>
             ))}
             
-            {/* Mobile dropdown for categories */}
+            
             <div className="sm:hidden relative">
               <select 
                 value={selectedCategory}

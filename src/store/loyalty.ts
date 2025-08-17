@@ -3,24 +3,24 @@ import { persist } from 'zustand/middleware';
 import { LoyaltyTransaction, LoyaltyReward, UserLoyalty } from '@/types';
 
 interface LoyaltyStore {
-  userLoyalty: Record<string, UserLoyalty>; // userId -> loyalty data
+  userLoyalty: Record<string, UserLoyalty>;
   rewards: LoyaltyReward[];
   transactions: LoyaltyTransaction[];
   
-  // User loyalty actions
+
   getUserLoyalty: (userId: string) => UserLoyalty;
   addPoints: (userId: string, points: number, description: string, orderId?: string) => void;
   spendPoints: (userId: string, points: number, description: string, rewardId?: string) => boolean;
   updateTier: (userId: string) => void;
   
-  // Rewards actions
+
   getAvailableRewards: (userId: string) => LoyaltyReward[];
   redeemReward: (userId: string, rewardId: string) => boolean;
   
-  // Transaction history
+
   getUserTransactions: (userId: string) => LoyaltyTransaction[];
   
-  // Analytics
+
   getTotalPointsDistributed: () => number;
   getMostPopularRewards: () => LoyaltyReward[];
 }
@@ -115,7 +115,7 @@ export const useLoyaltyStore = create<LoyaltyStore>()(
           description,
           orderId,
           date: new Date().toISOString(),
-          expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString() // 1 year
+          expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
         };
 
         set((state) => {
@@ -136,7 +136,7 @@ export const useLoyaltyStore = create<LoyaltyStore>()(
           return newState;
         });
 
-        // Update tier after adding points
+
         get().updateTier(userId);
       },
 
@@ -144,7 +144,7 @@ export const useLoyaltyStore = create<LoyaltyStore>()(
         const currentLoyalty = get().getUserLoyalty(userId);
         
         if (currentLoyalty.availablePoints < points) {
-          return false; // Insufficient points
+          return false;
         }
 
         const transaction: LoyaltyTransaction = {

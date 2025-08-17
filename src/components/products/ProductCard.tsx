@@ -16,23 +16,23 @@ interface ProductCardProps {
   product: Product | DbProduct;
 }
 
-// Helper function to normalize product data
+
 const normalizeProduct = (product: Product | DbProduct): Product => {
   if ('title' in product) {
-    // It's already a legacy Product
+
     return product;
   }
   
-  // Convert DbProduct to Product format
+
   return {
     id: product.id,
     title: product.name,
     price: product.price,
     description: product.description || '',
-    category: 'general', // Default category for database products
+    category: 'general',
     image: product.imageUrl || '/placeholder-image.jpg',
     rating: {
-      rate: 4.5, // Default rating until we implement review aggregation
+      rate: 4.5,
       count: 0
     }
   };
@@ -43,11 +43,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [flyoutOpen, setFlyoutOpen] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
 
-  // Normalize the product to ensure consistent structure
+
   const normalizedProduct = normalizeProduct(product);
 
   const handleAddToCart = () => {
-    // Animation: clone image and animate to cart icon
+
     const img = imgRef.current?.querySelector('img');
     if (img) {
       const cartIcon = document.querySelector('[href="/cart"]');

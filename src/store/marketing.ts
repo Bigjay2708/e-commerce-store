@@ -11,44 +11,44 @@ import {
 } from '@/types';
 
 interface MarketingStore {
-  // Email Marketing
+
   emailCampaigns: EmailCampaign[];
   emailTemplates: EmailTemplate[];
   emailSubscriptions: EmailSubscription[];
   
-  // Push Notifications
+
   pushNotifications: PushNotification[];
   userNotificationSettings: Record<string, UserNotificationSettings>;
   
-  // Promotional Banners
+
   banners: PromotionalBanner[];
   campaigns: Campaign[];
   
-  // Email actions
+
   createEmailCampaign: (campaign: Omit<EmailCampaign, 'id'>) => string;
   deleteEmailCampaign: (campaignId: string) => void;
   sendEmailCampaign: (campaignId: string) => void;
   subscribeToEmail: (userId: string, email: string, preferences?: Partial<EmailSubscription['preferences']>) => void;
   unsubscribeFromEmail: (userId: string) => void;
   
-  // Push notification actions
+
   createPushNotification: (notification: Omit<PushNotification, 'id' | 'sentDate' | 'clickCount'>) => string;
   deletePushNotification: (notificationId: string) => void;
   sendPushNotification: (notificationId: string) => void;
   updateNotificationSettings: (userId: string, settings: Partial<UserNotificationSettings>) => void;
   
-  // Banner actions
+
   createBanner: (banner: Omit<PromotionalBanner, 'id' | 'analytics'>) => string;
   deleteBanner: (bannerId: string) => void;
   getActiveBanners: (page: string, userTier?: string) => PromotionalBanner[];
   trackBannerView: (bannerId: string) => void;
   trackBannerClick: (bannerId: string) => void;
   
-  // Campaign actions
+
   createCampaign: (campaign: Omit<Campaign, 'id' | 'actualMetrics'>) => string;
   getCampaignAnalytics: (campaignId: string) => Campaign['actualMetrics'];
   
-  // Analytics
+
   getEmailMetrics: () => {
     totalSubscribers: number;
     totalCampaigns: number;
@@ -111,7 +111,7 @@ const sampleBanners: PromotionalBanner[] = [
     priority: 1,
     isActive: true,
     startDate: new Date().toISOString(),
-    endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days
+    endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
     targetAudience: {
       all: true,
       newUsers: false,
@@ -144,7 +144,7 @@ export const useMarketingStore = create<MarketingStore>()(
       banners: sampleBanners,
       campaigns: [],
 
-      // Email Marketing Functions
+
       createEmailCampaign: (campaignData) => {
         const campaign: EmailCampaign = {
           ...campaignData,
@@ -209,7 +209,7 @@ export const useMarketingStore = create<MarketingStore>()(
         }));
       },
 
-      // Push Notification Functions
+
       createPushNotification: (notificationData) => {
         const notification: PushNotification = {
           ...notificationData,
@@ -261,7 +261,7 @@ export const useMarketingStore = create<MarketingStore>()(
         }));
       },
 
-      // Banner Functions
+
       createBanner: (bannerData) => {
         const banner: PromotionalBanner = {
           ...bannerData,
@@ -286,15 +286,15 @@ export const useMarketingStore = create<MarketingStore>()(
 
         return state.banners
           .filter(banner => {
-            // Check if banner is active and within date range
+
             if (!banner.isActive) return false;
             if (new Date(banner.startDate) > now) return false;
             if (new Date(banner.endDate) < now) return false;
 
-            // Check page targeting
+
             if (!banner.displayRules.showOnPages.includes(page)) return false;
 
-            // Check tier targeting
+
             if (userTier && banner.targetAudience.tierLevels.length > 0) {
               if (!banner.targetAudience.tierLevels.includes(userTier)) return false;
             }
@@ -330,7 +330,7 @@ export const useMarketingStore = create<MarketingStore>()(
         }));
       },
 
-      // Campaign Functions
+
       createCampaign: (campaignData) => {
         const campaign: Campaign = {
           ...campaignData,
@@ -356,7 +356,7 @@ export const useMarketingStore = create<MarketingStore>()(
         return campaign?.actualMetrics || { views: 0, clicks: 0, conversions: 0, revenue: 0 };
       },
 
-      // Analytics Functions
+
       getEmailMetrics: () => {
         const state = get();
         const totalSubscribers = state.emailSubscriptions.filter(sub => sub.isSubscribed).length;

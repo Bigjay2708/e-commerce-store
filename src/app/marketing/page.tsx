@@ -93,7 +93,7 @@ export default function MarketingPage() {
   }
 
   const handleCreateBanner = () => {
-    // Convert simple targetAudience to complex object structure
+
     const targetAudienceObj = {
       all: newBanner.targetAudience === 'all',
       newUsers: newBanner.targetAudience === 'new',
@@ -139,13 +139,13 @@ export default function MarketingPage() {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-lg shadow">
-          {/* Header */}
+          
           <div className="border-b border-gray-200 px-6 py-4">
             <h1 className="text-2xl font-bold text-gray-900">Marketing Dashboard</h1>
             <p className="text-gray-600">Manage your email campaigns, push notifications, and promotional banners</p>
           </div>
 
-          {/* Tabs */}
+          
           <div className="border-b border-gray-200">
             <nav className="flex space-x-8 px-6" aria-label="Tabs">
               {tabs.map((tab) => (
@@ -171,7 +171,7 @@ export default function MarketingPage() {
           </div>
 
           <div className="p-6">
-            {/* Create Button */}
+            
             <div className="mb-6">
               <Button
                 onClick={() => setShowCreateForm(!showCreateForm)}
@@ -181,7 +181,7 @@ export default function MarketingPage() {
               </Button>
             </div>
 
-            {/* Create Forms */}
+            
             {showCreateForm && (
               <div className="mb-8 bg-gray-50 rounded-lg p-6">
                 {activeTab === 'campaigns' && (
@@ -360,7 +360,7 @@ export default function MarketingPage() {
               </div>
             )}
 
-            {/* Content Lists */}
+            
             {activeTab === 'campaigns' && (
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-gray-900">Email Campaigns</h3>

@@ -20,7 +20,7 @@ export default function CartPage() {
       </h1>
 
       <div className="w-full max-w-6xl">
-        {/* Promotional Banners */}
+        
         <PromotionalBanner location="cart" className="mb-6" />
         
         {cart.items.length > 0 ? (

@@ -42,7 +42,7 @@ export async function POST(
       );
     }
 
-    // Get user from database
+
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     });
@@ -54,7 +54,7 @@ export async function POST(
       );
     }
 
-    // Check if product exists
+
     const product = await prisma.product.findUnique({
       where: { id: productId },
     });
@@ -66,7 +66,7 @@ export async function POST(
       );
     }
 
-    // Check if user already reviewed this product
+
     const existingReview = await prisma.review.findFirst({
       where: {
         productId: productId,
@@ -81,7 +81,7 @@ export async function POST(
       );
     }
 
-    // Create review
+
     const review = await prisma.review.create({
       data: {
         productId: productId,

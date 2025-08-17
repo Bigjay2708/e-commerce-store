@@ -5,8 +5,8 @@ export const useOrderSummary = (): OrderSummary => {
   const { cart } = useCartStore();
   
   const subtotal = cart.totalPrice;
-  const shipping = 0; // Free shipping
-  const tax = subtotal * 0.1; // Tax: 10%
+  const shipping = 0;
+  const tax = subtotal * 0.1;
   const total = subtotal + shipping + tax;
   
   return {

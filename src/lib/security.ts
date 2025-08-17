@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 
-// CSRF Token Generation and Validation
+
 export function generateCSRFToken(): string {
   const array = new Uint8Array(32);
   crypto.getRandomValues(array);
@@ -8,26 +8,26 @@ export function generateCSRFToken(): string {
 }
 
 export function validateCSRFToken(token: string, sessionToken: string): boolean {
-  // In production, store CSRF tokens in a secure session store
+
   return token === sessionToken && token.length === 64;
 }
 
-// Input Sanitization
+
 export function sanitizeInput(input: string): string {
   return input
-    .replace(/[<>]/g, '') // Remove potential HTML tags
-    .replace(/javascript:/gi, '') // Remove javascript: protocol
-    .replace(/on\w+=/gi, '') // Remove event handlers
+    .replace(/[<>]/g, '')
+    .replace(/javascript:/gi, '')
+    .replace(/on\w+=/gi, '')
     .trim();
 }
 
-// Email validation
+
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email) && email.length <= 254;
 }
 
-// Password strength validation
+
 export function validatePasswordStrength(password: string): {
   isValid: boolean;
   errors: string[];
@@ -60,7 +60,7 @@ export function validatePasswordStrength(password: string): {
   };
 }
 
-// Secure random string generation
+
 export function generateSecureToken(length: number = 32): string {
   const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const array = new Uint8Array(length);
@@ -69,7 +69,7 @@ export function generateSecureToken(length: number = 32): string {
   return Array.from(array, byte => charset[byte % charset.length]).join('');
 }
 
-// IP Address extraction
+
 export function getClientIP(request: NextRequest): string {
   const forwarded = request.headers.get('x-forwarded-for');
   const realIp = request.headers.get('x-real-ip');
@@ -82,7 +82,7 @@ export function getClientIP(request: NextRequest): string {
   return 'unknown';
 }
 
-// Request logging for security monitoring
+
 export function logSecurityEvent(
   event: string,
   details: Record<string, unknown>,
@@ -95,7 +95,7 @@ export function logSecurityEvent(
     details,
   };
   
-  // In production, send to proper logging service (e.g., Sentry, LogRocket)
+
   if (process.env.NODE_ENV === 'production') {
     console.warn('Security Event:', JSON.stringify(logEntry));
   } else {
@@ -103,7 +103,7 @@ export function logSecurityEvent(
   }
 }
 
-// Environment variable validation
+
 export function validateRequiredEnvVars(): void {
   const requiredVars = [
     'NEXTAUTH_SECRET',
@@ -116,7 +116,7 @@ export function validateRequiredEnvVars(): void {
     throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
   }
   
-  // Validate NEXTAUTH_SECRET strength
+
   if (process.env.NEXTAUTH_SECRET && process.env.NEXTAUTH_SECRET.length < 32) {
     throw new Error('NEXTAUTH_SECRET must be at least 32 characters long');
   }

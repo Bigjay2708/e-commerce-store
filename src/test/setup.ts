@@ -3,7 +3,7 @@ import { cleanup } from '@testing-library/react'
 import { afterEach, beforeEach, vi } from 'vitest'
 import React from 'react'
 
-// Mock axios globally
+
 vi.mock('axios', () => ({
   default: {
     get: vi.fn(),
@@ -19,12 +19,12 @@ vi.mock('axios', () => ({
   },
 }))
 
-// Cleanup after each test case
+
 afterEach(() => {
   cleanup()
 })
 
-// Mock Next.js router
+
 vi.mock('next/navigation', () => ({
   useRouter: () => ({
     push: vi.fn(),
@@ -38,14 +38,14 @@ vi.mock('next/navigation', () => ({
   useSearchParams: () => new URLSearchParams(),
 }))
 
-// Mock Next.js Image component
+
 vi.mock('next/image', () => ({
   default: vi.fn((props) => {
     return React.createElement('img', props)
   }),
 }))
 
-// Mock NextAuth
+
 vi.mock('next-auth/react', () => ({
   useSession: () => ({
     data: null,
@@ -55,7 +55,7 @@ vi.mock('next-auth/react', () => ({
   signOut: vi.fn(),
 }))
 
-// Mock react-hot-toast
+
 vi.mock('react-hot-toast', () => ({
   toast: {
     success: vi.fn(),
@@ -64,22 +64,22 @@ vi.mock('react-hot-toast', () => ({
   },
 }))
 
-// Mock window.matchMedia
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
   })),
 })
 
-// Mock localStorage
+
 const localStorageMock = {
   getItem: vi.fn(),
   setItem: vi.fn(),
@@ -91,12 +91,12 @@ Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
 })
 
-// Mock sessionStorage
+
 Object.defineProperty(window, 'sessionStorage', {
   value: localStorageMock,
 })
 
-// Reset all mocks before each test
+
 beforeEach(() => {
   vi.clearAllMocks()
 })

@@ -22,7 +22,7 @@ export default function WishlistPage() {
   };
 
   const handleShareWishlist = () => {
-    // For demo: encode wishlist in URL (in production, use backend)
+
     const id = generateWishlistShareId();
     const encoded = encodeURIComponent(btoa(JSON.stringify(items.map(i => i.id))));
     const url = `${window.location.origin}/wishlist/shared?id=${id}&items=${encoded}`;

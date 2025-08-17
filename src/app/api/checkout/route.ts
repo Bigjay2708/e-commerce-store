@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get user from database
+
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     });
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate products and calculate total
+
     let totalAmount = 0;
     const validatedItems = [];
 
@@ -62,11 +62,11 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Create payment intent with Stripe
+
     const paymentResult = await createPaymentIntent({
-      amount: Math.round(totalAmount * 100), // Convert to cents
+      amount: Math.round(totalAmount * 100),
       currency: 'usd',
-      customerId: undefined, // Can be implemented later
+      customerId: undefined,
       metadata: {
         userId: user.id.toString(),
         items: JSON.stringify(validatedItems),

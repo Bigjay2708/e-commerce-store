@@ -14,7 +14,7 @@ import { useSocialStore } from "@/store/social";
 export default function SocialCommerceDashboard() {
   const { reviews, questions, influencers, influencerPosts } = useSocialStore();
 
-  // Calculate social commerce metrics
+
   const totalReviews = reviews.length;
   const averageRating = totalReviews > 0 
     ? reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews 
@@ -96,7 +96,7 @@ export default function SocialCommerceDashboard() {
         </div>
       </div>
 
-      {/* Metrics Grid */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {socialMetrics.map((metric, index) => (
           <div
@@ -122,7 +122,7 @@ export default function SocialCommerceDashboard() {
         ))}
       </div>
 
-      {/* Top Performing Products */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
@@ -170,7 +170,7 @@ export default function SocialCommerceDashboard() {
           </div>
         </div>
 
-        {/* Recent Activity */}
+        
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
             <FaHeart className="text-red-500 mr-2" />

@@ -39,13 +39,13 @@ export default function ProductsPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
-      {/* Promotional Banners */}
+      
       <PromotionalBanner location="product" className="mb-6" />
       
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center sm:text-left">All Products</h1>
       
       <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 mb-6 sm:mb-8">
-        {/* Mobile Category Dropdown */}
+        
         <div className="lg:hidden">
           <label htmlFor="category-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Filter by Category
@@ -65,7 +65,7 @@ export default function ProductsPage() {
           </select>
         </div>
 
-        {/* Desktop Category Sidebar */}
+        
         <div className="hidden lg:block w-64 space-y-4">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Categories</h2>
           <div className="flex flex-col space-y-2">

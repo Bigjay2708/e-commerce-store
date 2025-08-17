@@ -53,7 +53,7 @@ export default function ProductComparison({ products, onRemoveProductAction, onC
   const getFeatureComparison = (products: Product[]) => {
     const allFeatures = new Set<string>();
     
-    // Extract common features from product descriptions
+
     products.forEach(product => {
       const features = extractFeatures(product.description);
       features.forEach(feature => allFeatures.add(feature));
@@ -63,7 +63,7 @@ export default function ProductComparison({ products, onRemoveProductAction, onC
   };
 
   const extractFeatures = (description: string): string[] => {
-    // Simple feature extraction - you can make this more sophisticated
+
     const features: string[] = [];
     
     if (description.toLowerCase().includes('cotton')) features.push('Cotton Material');
@@ -119,7 +119,7 @@ export default function ProductComparison({ products, onRemoveProductAction, onC
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map((product) => (
               <div key={product.id} className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                {/* Product Header */}
+                
                 <div className="relative p-4 bg-gray-50 dark:bg-gray-700">
                   <button
                     onClick={() => onRemoveProductAction(product.id)}
@@ -175,7 +175,7 @@ export default function ProductComparison({ products, onRemoveProductAction, onC
                   </div>
                 </div>
 
-                {/* Product Details */}
+                
                 <div className="p-4 space-y-4">
                   <div>
                     <h4 className="font-semibold mb-2">Category</h4>

@@ -9,7 +9,7 @@ import { useSocialStore } from "@/store/social";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import Button from "@/components/ui/Button";
-// import { Review, ReviewReply } from "@/types";
+
 
 interface ProductReviewsProps {
   productId: number;
@@ -55,7 +55,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
       title: reviewForm.title,
       comment: reviewForm.comment,
       images: reviewForm.images,
-      verifiedPurchase: Math.random() > 0.3 // Simulate verified purchases
+      verifiedPurchase: Math.random() > 0.3
     });
 
     setReviewForm({ rating: 5, title: '', comment: '', images: [] });
@@ -150,7 +150,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
 
       {reviews.length > 0 && renderRatingStats()}
 
-      {/* Review Form */}
+      
       {showReviewForm && (
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 mb-8">
           <h4 className="text-lg font-semibold mb-4">Write Your Review</h4>
@@ -210,7 +210,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
         </div>
       )}
 
-      {/* Reviews List */}
+      
       <div className="space-y-6">
         {reviews.length === 0 ? (
           <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -300,7 +300,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
                 </div>
               </div>
 
-              {/* Replies Section */}
+              
               {showReplies[review.id] && (
                 <div className="mt-4 pl-4 border-l-2 border-gray-200 dark:border-gray-600">
                   {review.replies.map((reply) => (
@@ -328,7 +328,7 @@ export default function ProductReviews({ productId }: ProductReviewsProps) {
                     </div>
                   ))}
                   
-                  {/* Reply Form */}
+                  
                   <div className="mt-4 ml-8">
                     <div className="flex space-x-2">
                       <input

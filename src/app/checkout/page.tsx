@@ -15,7 +15,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-  // Check cart
+
   useEffect(() => {
     if (cart.items.length === 0 && !isComplete) {
       router.push('/cart');
@@ -26,10 +26,10 @@ export default function CheckoutPage() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Process order
+
     await new Promise(resolve => setTimeout(resolve, 1500));
     
-    // Clear cart and show success
+
     clearCart();
     setIsComplete(true);
     setIsSubmitting(false);
@@ -62,7 +62,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
-      {/* Promotional Banners */}
+      
       <PromotionalBanner location="checkout" className="mb-6" />
       
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center sm:text-left">Checkout</h1>

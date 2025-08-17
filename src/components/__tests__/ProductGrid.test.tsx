@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import ProductGrid from '@/components/products/ProductGrid';
 import { mockProducts } from '@/test/utils';
 
-// Mock the ProductCard component
+
 vi.mock('@/components/products/ProductCard', () => ({
   default: ({ product }: { product: { id: number; title: string } }) => (
     <div data-testid="product-card" data-product-id={product.id}>
@@ -130,7 +130,7 @@ describe('ProductGrid Component', () => {
     
     const grid = screen.getByTestId('product-grid');
     
-    // Check for responsive grid classes
+
     const hasResponsiveClasses = grid.className.includes('grid-cols') || 
                                 grid.className.includes('lg:') || 
                                 grid.className.includes('md:') || 

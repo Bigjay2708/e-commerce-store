@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { FaUsers, FaShare, FaCopy, FaEnvelope, FaWhatsapp, FaTwitter, FaFacebook, FaCheck, FaGift } from 'react-icons/fa';
 import { useReferralStore } from '@/store/referral';
-// import { useLoyaltyStore } from '@/store/loyalty'; // Reserved for future integration
+
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/ui/Button';
@@ -16,7 +16,7 @@ export default function ReferralPage() {
     getReferralStats,
     getActiveProgram
   } = useReferralStore();
-  // const { addPoints } = useLoyaltyStore(); // Reserved for future integration
+
 
   const [email, setEmail] = useState('');
   const [copied, setCopied] = useState(false);
@@ -30,10 +30,10 @@ export default function ReferralPage() {
 
   const referralLink = typeof window !== 'undefined' 
     ? `${window.location.origin}/register?ref=${referralCode}`
-    : `https://yourstore.com/register?ref=${referralCode}`;
+    : `https:
 
   useEffect(() => {
-    // Demo: Add some sample referrals for demonstration
+
     if (referrals.length === 0) {
       createReferral(userId, 'friend1@example.com');
       createReferral(userId, 'friend2@example.com');
@@ -71,9 +71,9 @@ export default function ReferralPage() {
     const url = referralLink;
 
     const shareUrls = {
-      twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-      whatsapp: `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`
+      twitter: `https:
+      facebook: `https:
+      whatsapp: `https:
     };
 
     if (typeof window !== 'undefined') {
@@ -92,7 +92,7 @@ export default function ReferralPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
-        {/* Header */}
+        
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center">
             <FaUsers className="mr-3 text-blue-500" />
@@ -103,7 +103,7 @@ export default function ReferralPage() {
           </p>
         </div>
 
-        {/* Program Info */}
+        
         {program && (
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 mb-8 text-white">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -129,7 +129,7 @@ export default function ReferralPage() {
           </div>
         )}
 
-        {/* Stats Cards */}
+        
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg text-center">
             <FaUsers className="text-3xl text-blue-500 mx-auto mb-3" />
@@ -153,13 +153,13 @@ export default function ReferralPage() {
           </div>
         </div>
 
-        {/* Share Section */}
+        
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
             Share Your Referral Link
           </h2>
 
-          {/* Share Method Tabs */}
+          
           <div className="flex space-x-2 mb-6 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
             {[
               { id: 'link', label: 'Copy Link', icon: FaShare },
@@ -181,7 +181,7 @@ export default function ReferralPage() {
             ))}
           </div>
 
-          {/* Share Content */}
+          
           {shareMethod === 'link' && (
             <div className="space-y-4">
               <div>
@@ -266,7 +266,7 @@ export default function ReferralPage() {
           )}
         </div>
 
-        {/* Referral History */}
+        
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             Your Referrals
@@ -330,7 +330,7 @@ export default function ReferralPage() {
           )}
         </div>
 
-        {/* How it Works */}
+        
         <div className="mt-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 text-white">
           <h2 className="text-2xl font-bold mb-6 text-center">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

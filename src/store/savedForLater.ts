@@ -31,7 +31,7 @@ export const useSavedForLaterStore = create<SavedForLaterStore>()(
       
       addToSaved: (product: Product, reason = 'consider_later', customReason, notes) => 
         set((state) => {
-          // Remove if already exists and re-add with updated timestamp
+
           const existingIndex = state.items.findIndex(item => item.id === product.id);
           const newItem: SavedItem = {
             ...product,
@@ -88,7 +88,7 @@ export const useSavedForLaterStore = create<SavedForLaterStore>()(
       moveToCart: (productId: number) => {
         const item = get().getSavedItem(productId);
         if (item) {
-          // Import cart store dynamically to avoid circular dependency
+
           import('./cart').then(({ useCartStore }) => {
             useCartStore.getState().addToCart(item);
           });
@@ -99,7 +99,7 @@ export const useSavedForLaterStore = create<SavedForLaterStore>()(
       moveToWishlist: (productId: number) => {
         const item = get().getSavedItem(productId);
         if (item) {
-          // Import wishlist store dynamically to avoid circular dependency
+
           import('./wishlist').then(({ useWishlistStore }) => {
             useWishlistStore.getState().addToWishlist(item);
           });

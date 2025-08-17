@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach, type MockedFunction } from 'vitest';
 
-// Mock axios before any imports
+
 vi.mock('axios', () => {
   const mockInstance = {
     interceptors: {
@@ -24,13 +24,13 @@ vi.mock('axios', () => {
   };
 });
 
-// Import API functions after mocking axios
+
 import { fetchProducts, fetchProductById } from '@/lib/api';
 import axios from 'axios';
 
-// Get the mocked axios instance
+
 const mockedAxios = vi.mocked(axios);
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const mockAxiosInstance = (mockedAxios.create as any)();
 
 describe('API Functions', () => {
@@ -180,11 +180,11 @@ describe('API Functions', () => {
 
   describe('Error Handling', () => {
     it('handles different types of errors', async () => {
-      // Network error
+
       mockAxiosInstance.get.mockRejectedValueOnce(new Error('Network error'));
       await expect(fetchProducts()).rejects.toThrow('Network error');
 
-      // Server error
+
       mockAxiosInstance.get.mockRejectedValueOnce({
         response: { status: 500, statusText: 'Server Error' },
       });

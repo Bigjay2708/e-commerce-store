@@ -13,7 +13,7 @@ export async function GET() {
       );
     }
 
-    // Get user ID from email
+
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     });
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get user ID from email
+
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     });
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if already in wishlist
+
     const existingItem = await prisma.wishlist.findUnique({
       where: {
         userId_productId: {

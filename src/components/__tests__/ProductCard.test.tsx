@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { customRender, screen, createMockProduct } from '@/test/utils'
 import ProductCard from '../products/ProductCard'
 
-// Mock the stores
+
 const mockAddToCart = vi.fn()
 const mockAddToWishlist = vi.fn()
 const mockRemoveFromWishlist = vi.fn()
@@ -22,7 +22,7 @@ vi.mock('@/store/wishlist', () => ({
   }),
 }))
 
-// Mock child components that cause issues
+
 vi.mock('react-hot-toast', () => ({
   toast: {
     success: vi.fn(),
@@ -62,7 +62,7 @@ describe('ProductCard Component', () => {
     id: 1,
     title: 'Test Product',
     price: 29.99,
-    image: 'https://example.com/image.jpg',
+    image: 'https:
     rating: { rate: 4.5, count: 100 },
   })
 
@@ -145,10 +145,10 @@ describe('ProductCard Component', () => {
   it('should display correct rating stars', () => {
     customRender(<ProductCard product={mockProduct} />)
     
-    // Should display the rating value
+
     expect(screen.getByText('4.5')).toBeInTheDocument()
     
-    // Should have star SVG icon (check for the yellow star class)
+
     const container = screen.getByText('4.5').closest('div')
     expect(container?.querySelector('.text-yellow-500')).toBeInTheDocument()
   })
@@ -178,6 +178,6 @@ describe('ProductCard Component', () => {
     
     const titleElement = screen.getByText(/This is a very long product title/)
     expect(titleElement).toBeInTheDocument()
-    expect(titleElement).toHaveClass('line-clamp-2') // Assuming this class is used for truncation
+    expect(titleElement).toHaveClass('line-clamp-2')
   })
 })

@@ -18,7 +18,7 @@ const authOptions: AuthOptions = {
         }
 
         try {
-          // Find user in database
+
           const user = await prisma.user.findUnique({
             where: { email: credentials.email },
           });
@@ -27,7 +27,7 @@ const authOptions: AuthOptions = {
             return null;
           }
 
-          // Verify password
+
           const isValidPassword = await bcrypt.compare(
             credentials.password,
             user.password
@@ -37,7 +37,7 @@ const authOptions: AuthOptions = {
             return null;
           }
 
-          // Return user data
+
           return {
             id: user.id.toString(),
             name: user.name,
@@ -52,7 +52,7 @@ const authOptions: AuthOptions = {
   ],
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60,
   },
   pages: {
     signIn: "/login",
@@ -67,7 +67,7 @@ const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       if (session.user) {
-        // Set type
+
         interface ExtendedUser {
           id?: string;
           name?: string | null;

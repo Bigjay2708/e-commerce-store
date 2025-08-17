@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify payment intent with Stripe
+
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
     
     if (paymentIntent.status !== 'succeeded') {
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get user from database
+
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     });
@@ -50,11 +50,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Parse items from payment intent metadata
+
     const items = JSON.parse(paymentIntent.metadata.items || '[]');
     const total = parseFloat((paymentIntent.amount / 100).toFixed(2));
 
-    // Create order in database
+
     const order = await prisma.order.create({
       data: {
         userId: user.id,
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Send order confirmation email
+
     try {
       await sendOrderConfirmationEmail(user.email, {
         orderId: order.id,
@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
       });
     } catch (emailError) {
       console.error('Order confirmation email failed:', emailError);
-      // Don't fail the order if email fails
+
     }
 
     return NextResponse.json({

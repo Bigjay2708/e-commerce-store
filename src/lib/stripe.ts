@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 
-// Initialize Stripe
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-02-24.acacia',
 });
@@ -18,7 +18,7 @@ export interface OrderItem {
   price: number;
 }
 
-// Create payment intent
+
 export async function createPaymentIntent(data: PaymentIntentData) {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
@@ -42,7 +42,7 @@ export async function createPaymentIntent(data: PaymentIntentData) {
   }
 }
 
-// Verify payment status
+
 export async function verifyPayment(paymentIntentId: string) {
   try {
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
@@ -61,7 +61,7 @@ export async function verifyPayment(paymentIntentId: string) {
   }
 }
 
-// Create Stripe customer
+
 export async function createStripeCustomer(email: string, name?: string) {
   try {
     const customer = await stripe.customers.create({
@@ -82,9 +82,9 @@ export async function createStripeCustomer(email: string, name?: string) {
   }
 }
 
-// Calculate order total in cents
+
 export function calculateOrderTotal(items: OrderItem[]): number {
   return items.reduce((sum, item) => {
-    return sum + (item.price * item.quantity * 100); // Convert to cents
+    return sum + (item.price * item.quantity * 100);
   }, 0);
 }

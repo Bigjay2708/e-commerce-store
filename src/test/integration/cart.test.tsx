@@ -4,7 +4,7 @@ import { useCartStore } from '@/store/cart'
 import { useWishlistStore } from '@/store/wishlist'
 import ProductCard from '@/components/products/ProductCard'
 
-// Mock the API calls
+
 vi.mock('@/lib/api', () => ({
   fetchProducts: vi.fn(() => Promise.resolve([
     createMockProduct({ id: 1, title: 'Product 1', price: 29.99 }),
@@ -17,7 +17,7 @@ vi.mock('@/lib/api', () => ({
 
 describe('Shopping Cart Integration', () => {
   beforeEach(() => {
-    // Reset stores before each test
+
     useCartStore.setState({
       cart: {
         items: [],
@@ -39,11 +39,11 @@ describe('Shopping Cart Integration', () => {
     const { userEvent } = await import('@testing-library/user-event')
     const user = userEvent.setup()
     
-    // Click add to cart button
+
     const addToCartButton = screen.getByText('Add to cart')
     await user.click(addToCartButton)
     
-    // Check cart state
+
     const cartState = useCartStore.getState().cart
     expect(cartState.items).toHaveLength(1)
     expect(cartState.items[0]).toEqual({
@@ -63,16 +63,16 @@ describe('Shopping Cart Integration', () => {
     const { userEvent } = await import('@testing-library/user-event')
     const user = userEvent.setup()
     
-    // Add first product
+
     const addToCartButton1 = screen.getByText('Add to cart')
     await user.click(addToCartButton1)
     
-    // Render second product and add to cart
+
     rerender(<ProductCard product={product2} />)
     const addToCartButton2 = screen.getByText('Add to cart')
     await user.click(addToCartButton2)
     
-    // Check cart state
+
     const cartState = useCartStore.getState().cart
     expect(cartState.items).toHaveLength(2)
     expect(cartState.totalItems).toBe(2)
@@ -89,12 +89,12 @@ describe('Shopping Cart Integration', () => {
     
     const addToCartButton = screen.getByText('Add to cart')
     
-    // Add product multiple times
+
     await user.click(addToCartButton)
     await user.click(addToCartButton)
     await user.click(addToCartButton)
     
-    // Check cart state
+
     const cartState = useCartStore.getState().cart
     expect(cartState.items).toHaveLength(1)
     expect(cartState.items[0].quantity).toBe(3)
@@ -110,20 +110,20 @@ describe('Shopping Cart Integration', () => {
     const { userEvent } = await import('@testing-library/user-event')
     const user = userEvent.setup()
     
-    // Add to wishlist first
+
     const wishlistButton = screen.getByLabelText(/add to wishlist/i)
     await user.click(wishlistButton)
     
-    // Check wishlist state
+
     let wishlistState = useWishlistStore.getState()
     expect(wishlistState.items).toHaveLength(1)
     expect(wishlistState.items[0]).toEqual(product)
     
-    // Then add to cart
+
     const addToCartButton = screen.getByText('Add to cart')
     await user.click(addToCartButton)
     
-    // Check both states
+
     const cartState = useCartStore.getState().cart
     wishlistState = useWishlistStore.getState()
     
@@ -136,18 +136,18 @@ describe('Shopping Cart Integration', () => {
   it('should remove product from cart correctly', async () => {
     const product = createMockProduct({ id: 1, title: 'Test Product', price: 29.99 })
     
-    // Add product to cart programmatically
+
     const { addToCart, removeFromCart } = useCartStore.getState()
     addToCart(product)
     
-    // Verify it was added
+
     let cartState = useCartStore.getState().cart
     expect(cartState.items).toHaveLength(1)
     
-    // Remove from cart
+
     removeFromCart(product.id)
     
-    // Verify it was removed
+
     cartState = useCartStore.getState().cart
     expect(cartState.items).toHaveLength(0)
     expect(cartState.totalItems).toBe(0)
@@ -157,14 +157,14 @@ describe('Shopping Cart Integration', () => {
   it('should update quantity correctly', async () => {
     const product = createMockProduct({ id: 1, title: 'Test Product', price: 29.99 })
     
-    // Add product to cart programmatically
+
     const { addToCart, updateQuantity } = useCartStore.getState()
     addToCart(product)
     
-    // Update quantity
+
     updateQuantity(product.id, 5)
     
-    // Check cart state
+
     const cartState = useCartStore.getState().cart
     expect(cartState.items[0].quantity).toBe(5)
     expect(cartState.totalItems).toBe(5)
@@ -175,19 +175,19 @@ describe('Shopping Cart Integration', () => {
     const product1 = createMockProduct({ id: 1, title: 'Product 1', price: 29.99 })
     const product2 = createMockProduct({ id: 2, title: 'Product 2', price: 39.99 })
     
-    // Add products to cart programmatically
+
     const { addToCart, clearCart } = useCartStore.getState()
     addToCart(product1)
     addToCart(product2)
     
-    // Verify products were added
+
     let cartState = useCartStore.getState().cart
     expect(cartState.items).toHaveLength(2)
     
-    // Clear cart
+
     clearCart()
     
-    // Verify cart is empty
+
     cartState = useCartStore.getState().cart
     expect(cartState.items).toHaveLength(0)
     expect(cartState.totalItems).toBe(0)

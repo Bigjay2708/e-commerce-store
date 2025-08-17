@@ -24,7 +24,7 @@ const Navbar = () => {
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
-  // Handle click outside to close menu
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
@@ -41,7 +41,7 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  // Handle escape key to close menu
+
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && mobileMenuOpen) {
@@ -58,7 +58,7 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  // Animated Hamburger Icon Component
+
   const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => (
     <div className="relative w-6 h-6 flex flex-col justify-center items-center">
       <span 
@@ -86,7 +86,7 @@ const Navbar = () => {
           <span className="inline-block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">ShopEase</span>
         </Link>
         
-        {/* Desktop Navigation */}
+        
         <nav className="hidden md:flex items-center gap-8 text-base font-medium">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
           <Link href="/products" className="hover:text-primary transition-colors">Products</Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
           <Link href="/about" className="hover:text-primary transition-colors">About</Link>
         </nav>
 
-        {/* Desktop Icons */}
+        
         <div className="hidden md:flex items-center gap-3">
           <button
             aria-label="Toggle theme"
@@ -150,7 +150,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Icons */}
+        
         <div className="flex md:hidden items-center gap-2">
           <button
             aria-label="Toggle theme"
@@ -178,7 +178,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown Window */}
+      
       <div
         ref={mobileMenuRef}
         className={`md:hidden absolute top-full right-4 w-80 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl z-50 mobile-dropdown-menu transform transition-all duration-200 ease-out origin-top-right ${
@@ -187,7 +187,7 @@ const Navbar = () => {
             : 'scale-95 opacity-0 -translate-y-2 pointer-events-none'
         }`}
       >
-        {/* Menu Header */}
+        
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Menu</h3>
           <button
@@ -199,9 +199,9 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Menu Content */}
+        
         <nav className="p-4 space-y-1 max-h-[70vh] overflow-y-auto mobile-menu-scroll">
-          {/* Navigation Links */}
+          
           <div className="space-y-1">
             <Link 
               href="/" 
@@ -287,10 +287,10 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Divider */}
+          
           <div className="border-t border-gray-200 dark:border-gray-700 my-3"></div>
 
-          {/* User Section */}
+          
           <div className="space-y-1">
             {session ? (
               <>
@@ -325,7 +325,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Cart Summary */}
+          
           {cart.totalItems > 0 && (
             <>
               <div className="border-t border-gray-200 dark:border-gray-700 my-3"></div>
@@ -353,7 +353,7 @@ const Navbar = () => {
           )}
         </nav>
 
-        {/* Menu Footer */}
+        
         <div className="border-t border-gray-200 dark:border-gray-700 p-4">
           <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
             <span>ShopEase</span>
