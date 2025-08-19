@@ -33,23 +33,23 @@ export default function SocialSharing({ product }: SocialSharingProps) {
   const socialPlatforms: SocialShare[] = [
     {
       platform: 'facebook',
-      url: `https:
+      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`,
       text: shareText
     },
     {
       platform: 'twitter',
-      url: `https:
+      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(productUrl)}`,
       text: shareText,
       hashtags: ['shopping', 'deals', 'ecommerce']
     },
     {
       platform: 'pinterest',
-      url: `https:
+      url: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(productUrl)}&description=${encodeURIComponent(shareText)}`,
       text: shareText
     },
     {
       platform: 'whatsapp',
-      url: `https:
+      url: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${productUrl}`)}`,
       text: shareText
     },
     {

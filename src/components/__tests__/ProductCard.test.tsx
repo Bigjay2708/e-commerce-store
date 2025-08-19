@@ -62,7 +62,7 @@ describe('ProductCard Component', () => {
     id: 1,
     title: 'Test Product',
     price: 29.99,
-    image: 'https:
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
     rating: { rate: 4.5, count: 100 },
   })
 
@@ -85,7 +85,7 @@ describe('ProductCard Component', () => {
     
     const image = screen.getByAltText('Test Product')
     expect(image).toBeInTheDocument()
-    expect(image).toHaveAttribute('src', expect.stringContaining('image.jpg'))
+    expect(image).toHaveAttribute('src', expect.stringContaining('unsplash.com'))
   })
 
   it('should have correct link to product detail page', () => {

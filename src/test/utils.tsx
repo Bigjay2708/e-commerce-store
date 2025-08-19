@@ -26,7 +26,7 @@ export const createMockProduct = (overrides?: Partial<Product>): Product => ({
   price: 29.99,
   description: 'A great test product',
   category: 'electronics',
-  image: 'https:
+  image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
   rating: {
     rate: 4.5,
     count: 100,
@@ -73,7 +73,7 @@ export const createMockCartItem = (overrides?: Partial<CartItem>): CartItem => (
   price: 29.99,
   description: 'A great test product',
   category: 'electronics',
-  image: 'https:
+  image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
   rating: {
     rate: 4.5,
     count: 100,
