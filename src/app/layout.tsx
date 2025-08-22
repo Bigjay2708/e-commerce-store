@@ -21,11 +21,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ShopEase - Modern E-Commerce Store",
   description: "A modern e-commerce store built with Next.js and Tailwind CSS",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

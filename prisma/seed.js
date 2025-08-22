@@ -36,19 +36,19 @@ async function main() {
       name: 'Wireless Headphones',
       description: 'High-quality wireless headphones with noise cancellation',
       price: 199.99,
-      imageUrl: 'https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
     },
     {
       name: 'Smartphone',
       description: 'Latest model smartphone with advanced features',
       price: 699.99,
-      imageUrl: 'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879_.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400',
     },
     {
       name: 'Laptop',
       description: 'Powerful laptop for work and gaming',
       price: 1299.99,
-      imageUrl: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400',
     },
   ];
 
