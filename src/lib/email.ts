@@ -159,7 +159,7 @@ export async function sendWelcomeEmail(email: string, name: string) {
       </div>
       
       <div style="text-align: center; margin: 30px 0;">
-        <a href="${process.env.NEXTAUTH_URL || 'http:
+        <a href="${process.env.NEXTAUTH_URL || 'http://localhost:3000'
            style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">
           Start Shopping
         </a>

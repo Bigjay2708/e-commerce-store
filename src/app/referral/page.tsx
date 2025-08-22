@@ -30,7 +30,7 @@ export default function ReferralPage() {
 
   const referralLink = typeof window !== 'undefined' 
     ? `${window.location.origin}/register?ref=${referralCode}`
-    : `https:
+    : `https://localhost:3000/register?ref=${referralCode}`;
 
   useEffect(() => {
 
@@ -71,9 +71,9 @@ export default function ReferralPage() {
     const url = referralLink;
 
     const shareUrls = {
-      twitter: `https:
-      facebook: `https:
-      whatsapp: `https:
+      twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+      whatsapp: `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`,
     };
 
     if (typeof window !== 'undefined') {

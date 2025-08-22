@@ -16,7 +16,7 @@ async function mockUpload(file: File): Promise<UploadResult> {
   
 
   const timestamp = Date.now();
-  const mockUrl = `https:
+  const mockUrl = `https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400`
   const mockPublicId = `sample_${timestamp}`;
   
   console.log('🔄 Mock file upload:', {
@@ -142,10 +142,10 @@ export function getOptimizedImageUrl(publicId: string, options: {
   } = options;
 
   if (process.env.NODE_ENV === 'development') {
-    return `https:
+    return `https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400`
   }
 
 
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME || 'demo';
-  return `https:
+  return `https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400`
 }

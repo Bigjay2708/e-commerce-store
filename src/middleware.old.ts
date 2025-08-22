@@ -49,12 +49,12 @@ export function middleware(request: NextRequest) {
 
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:
-    "style-src 'self' 'unsafe-inline' https:
-    "font-src 'self' https:
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:",
+    "style-src 'self' 'unsafe-inline' https:",
+    "font-src 'self' https:",
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' https:
-    "frame-src https:
+    "connect-src 'self' https:",
+    "frame-src https:",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
@@ -78,7 +78,7 @@ export function middleware(request: NextRequest) {
   }
   
 
-  const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http:
+  const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'];
   const origin = request.headers.get('origin');
   
   if (origin && allowedOrigins.includes(origin)) {

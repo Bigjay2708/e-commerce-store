@@ -35,7 +35,7 @@ export async function POST(request: Request) {
         name,
         description,
         price: parseFloat(price),
-        imageUrl: imageUrl || 'https:
+        imageUrl: imageUrl || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400'
       },
     });
 

@@ -22,7 +22,7 @@ export const useUserStore = create<UserStore>()(
           email: 'alex@example.com',
           username: 'alexchen',
           name: { firstname: 'Alex', lastname: 'Chen' },
-          avatar: 'https:
+          avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b789?w=400',
           bio: 'Outdoor enthusiast. Coffee lover. Product reviewer.',
           address: {
             city: 'New York',
@@ -42,7 +42,7 @@ export const useUserStore = create<UserStore>()(
           email: 'sarah@example.com',
           username: 'sarahj',
           name: { firstname: 'Sarah', lastname: 'Johnson' },
-          avatar: 'https:
+          avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b789?w=400',
           bio: 'Fashion & lifestyle influencer. Sharing daily outfits.',
           address: {
             city: 'Los Angeles',
